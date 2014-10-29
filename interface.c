@@ -54,8 +54,8 @@ void Display_clinical_tools_menu()
 void Display_confirm_continue()
 {
   printf("Press any key to continue");
-  getchar();
-  getchar();
+  getchar(); // the first consumes the '\n'
+  getchar(); // the second waits for user.
   system("clear");
 }
 
