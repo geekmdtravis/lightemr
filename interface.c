@@ -49,6 +49,7 @@ void Display_clinical_tools_menu()
 {
   system("clear");
   printf("\n[ Clinical Tools (%s) ]\n\n", APP_VER);
+  printf("\n 1. Anion Gap.\n\n");
 }
 
 void Display_confirm_continue()
