@@ -1,0 +1,63 @@
+====================================================================
+LightEMR: Development Notes
+====================================================================
+PURPOSE: LightEMR is intended to be an ultra-light-weight EMR
+that can be run on devices such as the Raspberry Pi. It is 
+intended to be run in developing countries, so HIPAA compliance
+and the advanced methods to protect PHI is not a current focus. 
+The hope is that for a relatively low overhead and very low 
+energy requirements that a local or aid clinician will be able
+to utilize this tool to provide faster, more complete care and 
+allow for a simple method by which one might collect and utilize
+structured data. 
+
+====================================================================
+
+GOALS: 
+1. This is going to be completely CLI based
+2. No unnecessary pages or keystrokes. 
+3. C is the preferred language for simplicity,
+   portability, and efficiency. Modules in 
+   other languages will be considered, however,
+   where appropriate. Python as a 4GL will likely
+   have some utility with regard to creating an
+   intelligent note-writing tool.
+4. Initial focus is for outpatient setting.
+5. Modularize the program in such a way that simple
+   command lines can also be run directly from a 
+   shell prompt to quickly input and retrieve patient
+   information. E.g. ./note --find-last --patient-id 
+   5555555555. Or ./note --search --patient-id --keyword 
+   CHF.
+
+====================================================================
+
+Table of Contents
+SECTION A: Description of major modules
+   1. Patient lookup
+   2. Patient add
+   3. Patient remove
+   4. Help
+   5. Clinical tools
+   6. Billing
+   7. Exit
+   
+SECTION B: Patient Object
+ 
+
+Section A: Topic 1 - Patient Lookup
+-----------------------------------
+For this section, a clinician should be able to lookup a patient by 
+(a) name, (b) dob, (c) person identification number. From this point
+a located patient can have basic  clinical documentation input and 
+extracted from the EMR. Medical history, prior notes, lab values, 
+vital signs, medications are all things that should be associated with
+the patient and which a clinician can add or update. 
+
+Section A: Topic 2 - Patient add
+Section A: Topic 3 - Patient remove
+Section A: Topic 4 - Help
+Section A: Topic 5 - Clinical Tools
+Section A: Topic 6 - Billing
+Section A: Topic 7 - Exit
+
