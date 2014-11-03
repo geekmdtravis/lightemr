@@ -26,7 +26,9 @@ typedef struct Birthdate {
 } Birthdate;
 
 typedef struct Contact {
-  long int phone;
+  long int phone_h;
+  long int phone_c;
+  long int phone_w;
   char email[MAX_ADDR];
 } Contact;
 
