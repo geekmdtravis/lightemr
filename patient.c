@@ -69,10 +69,10 @@ BOOL Patient_update_address(Patient *p,
 			    char *f1, char *f2, char *f3, char *f4)
 {
   if(p) {
-    strcpy(p->addr.field1, "Field 1");
-    strcpy(p->addr.field2, "Field 2");
-    strcpy(p->addr.field3, "Field 3");
-    strcpy(p->addr.field4, "Field 4");
+    strcpy(p->addr.field1, f1);
+    strcpy(p->addr.field2, f2);
+    strcpy(p->addr.field3, f3);
+    strcpy(p->addr.field4, f4);
 
     return TRUE;
   } else {
@@ -123,7 +123,7 @@ BOOL Patient_update_emergency(Emergency_contact *ec, char *full_name, int home, 
   }
 }
 
-Name Get_name(char *first, char *middle, char *last)
+Name Set_name(char *first, char *middle, char *last)
 {
   Name new_n;
 
@@ -134,7 +134,7 @@ Name Get_name(char *first, char *middle, char *last)
   return new_n;
 }
 
-Birthdate Get_birthdate(int month, int day, int year)
+Birthdate Set_birthdate(int month, int day, int year)
 {
   Birthdate new_b;
 
@@ -145,7 +145,7 @@ Birthdate Get_birthdate(int month, int day, int year)
   return new_b;
 }
 
-Address Get_address(char *f1, char *f2, char *f3, char *f4)
+Address Set_address(char *f1, char *f2, char *f3, char *f4)
 {
   Address new_a;
 
@@ -157,7 +157,7 @@ Address Get_address(char *f1, char *f2, char *f3, char *f4)
   return new_a;
 }
 
-Contact Get_contact(long int phone_h, long int phone_c,
+Contact Set_contact(long int phone_h, long int phone_c,
 		    long int phone_w, char *email)
 {
   Contact new_c;
@@ -171,7 +171,7 @@ Contact Get_contact(long int phone_h, long int phone_c,
   return new_c;
 }
 
-Emergency_contact Get_emergency_contact(char *full_name, char *relationship,
+Emergency_contact Set_emergency_contact(char *full_name, char *relationship,
 					long int phone_h, long int phone_c,
 					long int phone_w, char *email)
 {

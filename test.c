@@ -7,16 +7,15 @@ int main()
   Patient *p1 = Patient_create();
   BOOL rc;
 
-  Name n1 = Get_name("Joe", "B.", "Schmoe");
-  Birthdate b1 = Get_birthdate(12, 30, 1990);
-  Address a1 = Get_address("1234 Rodeo Dr.", "Hollywood, CA",
-			   "90210", "");
-  Contact c1 = Get_contact(5556667777, 5558886666, 3332221111,
+  Name n1 = Set_name("Joe", "B.", "Schmoe");
+  Birthdate b1 = Set_birthdate(12, 30, 1990);
+  Address a1 = Set_address("1234 Rodeo Dr.", "Hollywood, CA", "90210", "");
+  Contact c1 = Set_contact(5556667777, 5558886666, 3332221111,
 			   "joebschmoe@gmail.com");
-  Emergency_contact ec1 = Get_emergency_contact("Jan schmoe","wife",
+  Emergency_contact ec1 = Set_emergency_contact("Jan schmoe","wife",
 						5556667777, 5558889999,
 						0, "janaschmoe@hotmail.com");
-  Emergency_contact ec2 = Get_emergency_contact("James Schmoe", "Son",
+  Emergency_contact ec2 = Set_emergency_contact("James Schmoe", "Son",
 						5556667777, 5558889990,
 						5554442222, "janaschmoe@hotmail.com");
   int pid = 111223333;
