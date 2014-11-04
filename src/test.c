@@ -21,7 +21,7 @@ int main()
   int pid = 111223333;
   int mrn = 1234567890;
 
-  Patient_populate(p1, &n1, &b1, &a1, &c1, &ec1, &ec2, pid, mrn);
+  p1->init(p1, &n1, &b1, &a1, &c1, &ec1, &ec2, pid, mrn);
 
   Patient_print_info(p1);
   

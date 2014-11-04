@@ -17,6 +17,7 @@ Patient *Patient_create()
 			   "No contact given", 0, 0, 0,"No@Email.Given");
   Patient_update_emergency(&new_patient->emerg2,
 			   "No contact given", 0, 0, 0, "No@Email.Given");
+  new_patient->init = Patient_populate;
   
   return ((new_patient) ? new_patient : NULL);
 }
