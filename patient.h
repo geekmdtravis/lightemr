@@ -43,7 +43,7 @@ typedef struct Emergency_contact {
   Contact contact;
 } Emergency_contact;
   
-
+n
 typedef struct Patient {
   Name name;
   Birthdate dob;
