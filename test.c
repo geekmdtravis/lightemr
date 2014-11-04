@@ -4,24 +4,21 @@
 
 int main()
 {
-  Patient p1;
-  strcpy(p1.name.first, "Joe");
-  strcpy(p1.name.middle, "B");
-  strcpy(p1.name.last, "Schmoe");
-  p1.dob.month = 4;
-  p1.dob.day = 21;
-  p1.dob.year = 1942;
-  strcpy(p1.addr.field1, "1 Glenhurst");
-  strcpy(p1.addr.field2, "Irvine, CA");
-  strcpy(p1.addr.field3, "92604");
-  strcpy(p1.addr.field4, "United States of America");
-  strcpy(p1.contact.email, "joebschmoe@gmail.com");
-  p1.contact.phone_h = 5555555555;
-  p1.contact.phone_c = 5556665555;
-  p1.contact.phone_w = 5557775555;
-  p1.pid = 333221234;
-  p1.mrn = 1234567890;
+  Patient *p1 = Patient_create();
+  BOOL rc;
 
+  Name n1;
+  Birthdate b1;
+  Address a1;
+  Contact c1;
+  Emergency_contact ec1;
+  int pid = 111223333;
+  int mrn = 1234567890;
+
+  Patient_populate(p1, NULL, NULL, NULL, NULL, NULL, NULL, pid, mrn);
+
+  printf("\n\n");
+  
   printf("Full name: %s %s %s\n"
 	 "DOB: %d/%d/%d\n"
 	 "Address:\n"
@@ -34,23 +31,29 @@ int main()
 	 "Cell Phone: %ld\n"
 	 "Work Phone: %ld\n"
 	 "Personal ID: %d\n"
-	 "MRN: %d\n",
-	 p1.name.first,
-	 p1.name.middle,
-	 p1.name.last,
-	 p1.dob.month,
-	 p1.dob.day,
-	 p1.dob.year,
-	 p1.addr.field1,
-	 p1.addr.field2,
-	 p1.addr.field3,
-	 p1.addr.field4,
-	 p1.contact.email,
-	 p1.contact.phone_h,
-	 p1.contact.phone_c,
-	 p1.contact.phone_w,
-	 p1.pid,
-	 p1.mrn);
+	 "MRN: %d\n"
+	 "Emergency Conact: %s\n"
+	 "Emergency Number: %ld\n",
+	 p1->name.first,
+	 p1->name.middle,
+	 p1->name.last,
+	 p1->dob.month,
+	 p1->dob.day,
+	 p1->dob.year,
+	 p1->addr.field1,
+	 p1->addr.field2,
+	 p1->addr.field3,
+	 p1->addr.field4,
+	 p1->contact.email,
+	 p1->contact.phone_h,
+	 p1->contact.phone_c,
+n	 p1->contact.phone_w,
+	 p1->pid,
+	 p1->mrn,
+	 p1->emerg1.full_name,
+	 p1->emerg1.contact.phone_h);
   
-  return 0;
+  rc = Patient_destroy(p1);
+  
+  return (rc) ? 0 : 1;
 }
