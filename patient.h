@@ -67,36 +67,18 @@ BOOL Patient_update_name(Patient *p, char *first, char *middle, char *last);
 BOOL Patient_update_address(Patient *p, char *f1, char *f2, char *f3, char *f4);
 BOOL Patient_update_dob(Patient *p, int month, int day, int year);
 BOOL Patient_update_contact(Patient *p, int home, int cell, int work, char *email);
-void Patient_update_emergency(Patient *p);
+BOOL Patient_update_emergency(Emergency_contact *ec, char *full_name,
+			      int home, int cell, int work, char *email);
+Name Get_name(char *first, char *middle, char *last);
+Birthdate Get_birthdate(int month, int day, int year);
+Address Get_address(char *f1, char *f2, char *f3, char *f4);
+Contact Get_contact(long int phone_h, long int phone_c,
+		    long int phone_w, char *email);
+Emergency_contact Get_emergency_contact(char *full_name, char *relationship,
+					long int phone_h, long int phone_c,
+					long int phone_w, char *email);
+void Patient_print_info(Patient *p);
 
 #endif
 
-/*  USAGE EXAMPLE
-    
-  Patient p1;
-  strcpy(p1.name.first, "Joe");
-  strcpy(p1.name.middle, "B");
-  strcpy(p1.name.last, "Schmoe");
-  p1.dob.month = 4;
-  p1.dob.day = 21;
-  p1.dob.year = 1942;
-  strcpy(p1.addr.field1, "1 Street");
-  strcpy(p1.addr.field2, "Romona, CA");
-  strcpy(p1.addr.field3, "92688");
-  strcpy(p1.addr.field4, "United States of America");
-  strcpy(p1.contact.email, "joebschmoe@gmail.com");
-  p1.contact.phone_h = 5555555555;
-  p1.contact.phone_c = 5556665555;
-  p1.contact.phone_w = 5557775555;
-  p1.pid = 333221234;
-  p1.mrn = 1234567890;
-  strcpy(p1.emerg1.full_name, "Jan Schmoe");
-  strcpy(p1.emerg1.relationship, "Wife");
-  p1.emerg1.contact.phone_h = 5555555559;
-  p1.emerg1.contact.phone_c = 5556665550;
-  p1.emerg1.contact.phone_w = 5557775551;
-  strcpy(p1.emerg1.contact.email, "janaschmoe@yahoo.com");
-
-*/
-
-// eof: patienet.h
+// eof: patient.h
