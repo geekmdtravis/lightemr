@@ -10,7 +10,7 @@
 
 void trim(char *s);
 ssize_t modgetl(char *s, size_t *n);
-ssize_t modgetlatoi(long unsigned int *i, size_t *n);
+ssize_t modgetlatoi(int *i, size_t *n);
 
 int Add_patient()
 {
@@ -34,7 +34,7 @@ int Add_patient()
   printf("Year: ");
   mr = modgetlatoi(&p->dob.year, &nbytes);
   printf("Personal ID (e.g. US Social Security): ");
-  mr = modgetlatoi(&p->pid, &nbytes);
+  mr = modgetl(p->pid, &nbytes);
 
   printf("\nADDRESS\n");
   printf("Field 1 (of 4): ");
@@ -50,11 +50,11 @@ int Add_patient()
   printf("Email address: ");
   mr = modgetl(p->contact.email, &nbytes);
   printf("Home phone: ");
-  mr = modgetlatoi(&p->contact.phone_h, &nbytes);
+  mr = modgetl(p->contact.phone_h, &nbytes);
   printf("Work phone: ");
-  mr = modgetlatoi(&p->contact.phone_w, &nbytes);
+  mr = modgetl(p->contact.phone_w, &nbytes);
   printf("Cell phone: ");
-  mr = modgetlatoi(&p->contact.phone_c, &nbytes);
+  mr = modgetl(p->contact.phone_c, &nbytes);
 
   printf("\nWould you like to add an emergency contact? (y/n)");
   char *selection = malloc(sizeof(char) * 2);
@@ -64,16 +64,33 @@ int Add_patient()
     printf("Name (full): ");
     mr = modgetl(p->emerg1.full_name, &nbytes);
     printf("Relationship: ");
-    mr = modgetl(p->emerg1.relationship, &nbytes);    
-  }
-
-  printf("\nWould you like to add an another emergency contact? (y/n)");
-  if (selection[0] == 'y' || selection[0] == 'Y') {
-    printf("\nEMERGENCY CONTACT #2\n");
-    printf("Name (full): ");
-    mr = modgetl(p->emerg2.full_name, &nbytes);
-    printf("Relationship: ");
-    mr = modgetl(p->emerg2.relationship, &nbytes);    
+    mr = modgetl(p->emerg1.relationship, &nbytes);  
+    printf("Email address: ");
+    mr = modgetl(p->emerg1.contact.email, &nbytes);
+    printf("Home phone: ");
+    mr = modgetl(p->emerg1.contact.phone_h, &nbytes);
+    printf("Work phone: ");
+    mr = modgetl(p->emerg1.contact.phone_w, &nbytes);
+    printf("Cell phone: ");
+    mr = modgetl(p->emerg1.contact.phone_c, &nbytes);  
+    
+	printf("\nWould you like to add an another emergency contact? (y/n)");
+	mr = modgetl(selection, &nbytes);
+	if (selection[0] == 'y' || selection[0] == 'Y') {
+		printf("\nEMERGENCY CONTACT #2\n");
+		printf("Name (full): ");
+		mr = modgetl(p->emerg2.full_name, &nbytes);
+		printf("Relationship: ");
+		mr = modgetl(p->emerg2.relationship, &nbytes);  
+		printf("Email address: ");
+        mr = modgetl(p->emerg2.contact.email, &nbytes);
+        printf("Home phone: ");
+        mr = modgetl(p->emerg2.contact.phone_h, &nbytes);
+        printf("Work phone: ");
+        mr = modgetl(p->emerg2.contact.phone_w, &nbytes);
+        printf("Cell phone: ");
+        mr = modgetl(p->emerg2.contact.phone_c, &nbytes);   
+	}
   }
   free(selection);
   
@@ -98,14 +115,15 @@ ssize_t modgetl(char *s, size_t *n)
 	return mr;
 }
 
-ssize_t modgetlatoi(long unsigned int *i, size_t *n)
+ssize_t modgetlatoi(int *i, size_t *n)
 {
 	ssize_t mr;
 	char *tempstr = malloc(sizeof(char) * MAX_DATA);
 	
     mr = getline(&tempstr, n, stdin);
+    trim(tempstr);
     *i = atoi(tempstr);
-
+    
     free(tempstr);
 	
 	return mr;
