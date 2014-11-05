@@ -2,49 +2,52 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "patient.h"
 #include "patient_add.h"
 
 #define MAX_DATA 100
 
+void trim(char *s);
+ssize_t modgetl(char *s, size_t *n);
+
 int Add_patient()
 {
-  int rc;
   Patient *p = Patient_create();
+  size_t nbytes = MAX_DATA;
+  ssize_t mr;
   
-  printf("First name: ");
-  fscanf(stdin, "%s", p->name.first);
-  getchar();
-  printf("Middle name: ");
-  fscanf(stdin, "%s", p->name.middle);
-  getchar();
-  printf("Last name: ");
-  fscanf(stdin, "%s", p->name.last);
-  getchar();
-  /*  printf("Month of birth: ");
-  fscanf(stdin, "%d", p->dob.month);
-  printf("Day of birth: ");
-  fscanf(stdin, "%d", p->dob.day);
-  printf("Year of birth: ");
-  fscanf(stdin, "%d", p->dob.year);*/
-  printf("Address field (1/4): ");
-  fscanf(stdin, "%s", p->addr.field1);
-  getchar();
-  printf("Address field (2/4): ");
-  fscanf(stdin, "%s", p->addr.field2);
-  getchar();
-  printf("Address field (3/4): ");
-  fscanf(stdin, "%s", p->addr.field3);
-  getchar();
-  printf("Address field (4/4): ");
-  fscanf(stdin, "%s", p->addr.field4);
-  getchar();
-
-  Patient_print_info(p);
-
+  printf("Patients name:\n");
+  printf("First: ");
+  mr = modgetl(p->name.first, &nbytes);
+  printf("Middle: ");
+  mr = modgetl(p->name.middle, &nbytes);
+  printf("Last: ");
+  mr = modgetl(p->name.last, &nbytes);
+  
+  if (mr && mr != EOF) {
+	Patient_print_info(p);
+  }
+  
   Patient_destroy(p);
   
   return 0;
 }
 
+ssize_t modgetl(char *s, size_t *n)
+{
+	ssize_t mr;
+	
+    mr = getline(&s, n, stdin);
+    trim(s);
+	
+	return mr;
+}
+
+void trim(char *s)
+{
+	if(s){
+		s[strlen(s) - 1] = '\0';
+	}
+}
 // eof: patient_add.c

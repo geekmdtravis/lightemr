@@ -12,16 +12,16 @@ typedef int BOOL;
 #define TRUE  1;
 
 typedef struct Name {
-  char first[MAX_NAME];
-  char middle[MAX_NAME];
-  char last[MAX_NAME];
+  char *first;
+  char *middle;
+  char *last;
 } Name;
 
 typedef struct Address {
-  char field1[MAX_ADDR];
-  char field2[MAX_ADDR];
-  char field3[MAX_ADDR];
-  char field4[MAX_ADDR];
+  char *field1;
+  char *field2;
+  char *field3;
+  char *field4;
 } Address;
 
 typedef struct Birthdate {
@@ -34,12 +34,12 @@ typedef struct Contact {
   long int phone_h;
   long int phone_c;
   long int phone_w;
-  char email[MAX_ADDR];
+  char *email;
 } Contact;
 
 typedef struct Emergency_contact {
-  char full_name[MAX_NAME + MAX_NAME]; //first + last
-  char relationship[MAX_DATA];
+  char *full_name; 
+  char *relationship;
   Contact contact;
 } Emergency_contact;
   

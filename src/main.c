@@ -8,20 +8,21 @@ typedef int BOOL;
 
 int main()
 {
-  int rc;
-  char selection;
+  ssize_t rc;
+  size_t nbytes = 2;
   BOOL EXIT = FALSE;
+  char *selection = malloc(sizeof(char) * 2);
 
   do {
     Display_main_menu();
 
-    rc = fscanf(stdin, "%c", &selection);
+    rc = getline(&selection, &nbytes, stdin);
 
     check(rc != 0, "Error acquiring input.\n"
 	  "Was your input a numeric digit?\n"
 	  "The program will now exit.\n");
     
-    switch(selection) {
+    switch(selection[0]) {
     case '1':
       Display_patient_lookup_menu();
       break;
@@ -50,13 +51,15 @@ int main()
       break;
       
     default:
-      Display_default_warning(selection);
+      Display_default_warning(*selection);
       break;
     }
     
     Display_confirm_continue();
     
   } while (!EXIT);
+  
+  free(selection);
   
  error:
   return -1;

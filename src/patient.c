@@ -6,7 +6,21 @@
 Patient *Patient_create()
 {
   Patient *new_patient = malloc(sizeof(Patient));
-
+  new_patient->name.first = malloc(sizeof(char) * MAX_NAME);
+  new_patient->name.middle = malloc(sizeof(char) * MAX_NAME);
+  new_patient->name.last = malloc(sizeof(char) * MAX_NAME);
+  new_patient->addr.field1 = malloc(sizeof(char) * MAX_ADDR);
+  new_patient->addr.field2 = malloc(sizeof(char) * MAX_ADDR);
+  new_patient->addr.field3 = malloc(sizeof(char) * MAX_ADDR);
+  new_patient->addr.field4 = malloc(sizeof(char) * MAX_ADDR);
+  new_patient->contact.email = malloc(sizeof(char) * MAX_DATA);
+  new_patient->emerg1.full_name = malloc(sizeof(char) * MAX_NAME * 2);
+  new_patient->emerg1.relationship = malloc(sizeof(char) * MAX_DATA);
+  new_patient->emerg1.contact.email = malloc(sizeof(char) * MAX_DATA);
+  new_patient->emerg2.full_name = malloc(sizeof(char) * MAX_NAME * 2);
+  new_patient->emerg2.relationship = malloc(sizeof(char) * MAX_DATA);
+  new_patient->emerg2.contact.email = malloc(sizeof(char) * MAX_DATA);
+  
   Patient_update_name(new_patient,
 		      "First", "Middle", "Last");
   Patient_update_address(new_patient,
@@ -24,6 +38,21 @@ Patient *Patient_create()
 
 BOOL Patient_destroy(Patient *p)
 {
+  if(p->name.first) free(p->name.first);
+  if(p->name.middle) free(p->name.middle);
+  if(p->name.last) free(p->name.last);
+  if(p->addr.field1) free(p->addr.field1);
+  if(p->addr.field2) free(p->addr.field2);
+  if(p->addr.field3) free(p->addr.field3);
+  if(p->addr.field4) free(p->addr.field4);
+  if(p->contact.email) free(p->contact.email);
+  if(p->emerg1.full_name) free(p->emerg1.full_name);
+  if(p->emerg1.relationship) free(p->emerg1.relationship);
+  if(p->emerg1.contact.email) free(p->emerg1.contact.email);
+  if(p->emerg2.full_name) free(p->emerg2.full_name);
+  if(p->emerg2.relationship) free(p->emerg2.relationship);
+  if(p->emerg2.contact.email) free(p->emerg2.contact.email);
+
   if(p) {
     free(p);
     return TRUE; // return 1
@@ -112,11 +141,11 @@ BOOL Patient_update_emergency(Emergency_contact *ec, char *full_name, int home, 
 			      int work, char *email)
 {
   if (ec) {
+    strcpy(ec->contact.email, email);
     strcpy(ec->full_name, full_name);
     ec->contact.phone_h = home;
     ec->contact.phone_c = cell;
     ec->contact.phone_w = work;
-    strcpy(ec->contact.email, email);
     
     return TRUE;
   } else {

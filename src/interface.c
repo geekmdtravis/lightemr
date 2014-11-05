@@ -55,8 +55,7 @@ void Display_clinical_tools_menu()
 void Display_confirm_continue()
 {
   printf("Press any key to continue");
-  getchar(); // the first consumes the '\n'
-  getchar(); // the second waits for user.
+  getchar();
   system("clear");
 }
 
@@ -67,7 +66,6 @@ int Display_confirm_exit()
   system("clear");
   printf("\n\nWARNING: You are about to exit %s.\n\n"
 	 "Are you sure you'd like to exit (y/n)?  ", APP_VER);
-  selection = getchar();
   selection = getchar();
   
   return ((selection == 'y' || selection == 'Y') ? 1 : 0);
