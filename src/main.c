@@ -45,6 +45,10 @@ int main()
       break;
       
     case '6':
+      Display_billing_menu();
+      break;
+      
+    case '7':
       EXIT = Display_confirm_exit();
       Evaluate_exit_signal(EXIT);
       if(EXIT) return 0;

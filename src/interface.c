@@ -13,7 +13,8 @@ void Display_main_menu()
 	 "3. Remove Patient\n"
 	 "4. Help\n"
 	 "5. Clinical Tools\n"
-	 "6. Exit\n"
+	 "6. Billing\n"
+	 "7. Exit\n"
 	 "\n"
 	 "Please enter you selection: ", APP_VER);
 }
@@ -52,9 +53,15 @@ void Display_clinical_tools_menu()
   printf("\n 1. Anion Gap.\n\n");
 }
 
+void Display_billing_menu()
+{
+  system("clear");
+  printf("\n[ Billing (%s) ]\n\n", APP_VER);
+}
+
 void Display_confirm_continue()
 {
-  printf("Press any key to continue");
+  printf("Press RETURN to continue");
   getchar();
   system("clear");
 }

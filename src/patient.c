@@ -28,9 +28,9 @@ Patient *Patient_create()
   Patient_update_dob(new_patient, 0, 0, 0);
   Patient_update_contact(new_patient, 0, 0, 0, "No@Email.Given");
   Patient_update_emergency(&new_patient->emerg1,
-			   "No contact given", 0, 0, 0,"No@Email.Given");
+			   "No contact given", 0, 0, 0, "None", "No@Email.Given");
   Patient_update_emergency(&new_patient->emerg2,
-			   "No contact given", 0, 0, 0, "No@Email.Given");
+			   "No contact given", 0, 0, 0, "None", "No@Email.Given");
   new_patient->init = Patient_populate;
   
   return ((new_patient) ? new_patient : NULL);
@@ -123,7 +123,7 @@ BOOL Patient_update_dob(Patient *p, int month, int day, int year)
   }
 }
 
-BOOL Patient_update_contact(Patient *p, int home, int work, int cell, char *email)
+BOOL Patient_update_contact(Patient *p, int home, int work, int cell,  char *email)
 {
   if (p) {
     p->contact.phone_h = home;
@@ -138,11 +138,12 @@ BOOL Patient_update_contact(Patient *p, int home, int work, int cell, char *emai
 }
 
 BOOL Patient_update_emergency(Emergency_contact *ec, char *full_name, int home, int cell,
-			      int work, char *email)
+			      int work, char *relationship, char *email)
 {
   if (ec) {
     strcpy(ec->contact.email, email);
     strcpy(ec->full_name, full_name);
+    strcpy(ec->relationship, relationship);
     ec->contact.phone_h = home;
     ec->contact.phone_c = cell;
     ec->contact.phone_w = work;
@@ -221,29 +222,29 @@ void Patient_print_info(Patient *p)
 {
     
   printf("Full name: %s %s %s\n"
-	 " DOB: %d/%d/%d\n"
+	 " DOB: %lu/%lu/%lu\n"
 	 " Address:\n"
 	 "  %s\n"
 	 "  %s\n"
 	 "  %s\n"
 	 "  %s\n"
 	 " Email: %s\n"
-	 " Home Phone: %ld\n"
-	 " Cell Phone: %ld\n"
-	 " Work Phone: %ld\n"
-	 " Personal ID: %d\n"
-	 " MRN: %d\n\n"
+	 " Home Phone: %lu\n"
+	 " Cell Phone: %lu\n"
+	 " Work Phone: %lu\n"
+	 " Personal ID: %lu\n"
+	 " MRN: %lu\n\n"
 	 "Emergency Contact 1: %s\n"
 	 " Relationship: %s\n"
-	 " Phone: %ld\n"
-	 " Cell: %ld\n"
-	 " Work: %ld\n"
+	 " Phone: %lu\n"
+	 " Cell: %lu\n"
+	 " Work: %lu\n"
 	 " Email: %s\n\n"
-	 "Emergency Contact 1: %s\n"
+	 "Emergency Contact 2: %s\n"
 	 " Relationship: %s\n"
-	 " Phone: %ld\n"
-	 " Cell: %ld\n"
-	 " Work: %ld\n"
+	 " Phone: %lu\n"
+	 " Cell: %lu\n"
+	 " Work: %lu\n"
 	 " Email: %s\n",
 	 p->name.first,
 	 p->name.middle,

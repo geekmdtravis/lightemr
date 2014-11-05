@@ -25,15 +25,15 @@ typedef struct Address {
 } Address;
 
 typedef struct Birthdate {
-  int month;
-  int day;
-  int year;
+  long unsigned int month;
+  long unsigned int day;
+  long unsigned int year;
 } Birthdate;
 
 typedef struct Contact {
-  long int phone_h;
-  long int phone_c;
-  long int phone_w;
+  long unsigned int phone_h;
+  long unsigned int phone_c;
+  long unsigned int phone_w;
   char *email;
 } Contact;
 
@@ -51,8 +51,8 @@ typedef struct Patient {
   Contact contact;
   Emergency_contact emerg1;
   Emergency_contact emerg2;
-  int pid;
-  int mrn;
+  long unsigned int pid;
+  long unsigned int mrn;
   BOOL (*init)(struct Patient *self, Name *name, Birthdate *dob, Address *addr,
 		      Contact *contact, Emergency_contact *emerg1,
 		      Emergency_contact *emerg2,
@@ -71,8 +71,8 @@ BOOL Patient_update_name(Patient *p, char *first, char *middle, char *last);
 BOOL Patient_update_address(Patient *p, char *f1, char *f2, char *f3, char *f4);
 BOOL Patient_update_dob(Patient *p, int month, int day, int year);
 BOOL Patient_update_contact(Patient *p, int home, int cell, int work, char *email);
-BOOL Patient_update_emergency(Emergency_contact *ec, char *full_name,
-			      int home, int cell, int work, char *email);
+BOOL Patient_update_emergency(Emergency_contact *ec, char *full_name, 
+			      int home, int cell, int work, char *relationship, char *email);
 Name Set_name(char *first, char *middle, char *last);
 Birthdate Set_birthdate(int month, int day, int year);
 Address Set_address(char *f1, char *f2, char *f3, char *f4);
