@@ -26,9 +26,9 @@ GOALS:
 5. Modularize the program in such a way that simple
    command lines can also be run directly from a 
    shell prompt to quickly input and retrieve patient
-   information. E.g. ./note --find-last --patient-id 
-   5555555555. Or ./note --search --patient-id --keyword 
-   CHF.
+   information. E.g. "./note --find-last --patient-id 
+   5555555555". Or "./note --search --patient-id 5555555555
+   --keyword CHF".
 
 ====================================================================
 
