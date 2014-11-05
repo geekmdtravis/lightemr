@@ -1,4 +1,5 @@
 #include "interface.h"
+#include "patient_add.h"
 
 #define TRUE  1
 #define FALSE 0
@@ -27,6 +28,7 @@ int main()
       
     case '2':
       Display_patient_add_menu();
+      Add_patient();
       break;
       
     case '3':
