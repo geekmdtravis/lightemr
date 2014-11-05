@@ -52,12 +52,46 @@ For this section, a clinician should be able to lookup a patient by
 a located patient can have basic  clinical documentation input and 
 extracted from the EMR. Medical history, prior notes, lab values, 
 vital signs, medications are all things that should be associated with
-the patient and which a clinician can add or update. 
+the patient and which a clinician can add or update.  This is basically
+the main module through which a clinician will interact with a patients
+health record.
 
 Section A: Topic 2 - Patient add
+-----------------------------------
+This will be a very simple screen at first. Literally for every field
+available under the pateint object struct, there will be a one-line
+prompt. On initial implementation, a patient will be added to the 
+database and then the user will return to the main screen. 
+
+Alternatively, might include a prompt which effectively does the
+"patient lookup" equivalent action and takes the user to a place
+where he can document patient data for the patient just entered.
+
 Section A: Topic 3 - Patient remove
+-----------------------------------
+Very simple, remove from the database and return to the main screen. 
+Future iterations may have the ability to remove the "active" patient
+but first iteration will require that the patinet be searched for and 
+removed by entering the last name and then the MRN.
+
 Section A: Topic 4 - Help
+-----------------------------------
+Text-based teaching module which walks the user through each of
+the program modules.
+
 Section A: Topic 5 - Clinical Tools
+-----------------------------------
+This is a simple way to calculate stuff like anion gap, wells criteria,
+ransons, etc. Tests will be categorized by specialty, organ system, and 
+by name in the end. First iteration will likely just be name. 
+
 Section A: Topic 6 - Billing
+-----------------------------------
+Not yet implemented. But, this will be a very simple leger and nothing 
+more. There will be no support for credit card transactions, insurance
+adjustments, etc. 
+
 Section A: Topic 7 - Exit
+-----------------------------------
+Exit.
 
