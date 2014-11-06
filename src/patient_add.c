@@ -17,7 +17,7 @@ ssize_t modgetl(char *s, size_t *n);
 ssize_t modgetlatoi(int *i, size_t *n);
 
 // Create patient, populate the fields.
-int Add_patient()
+Patient *Add_patient()
 {
   Patient *p = Patient_create();
   size_t nbytes = MAX_DATA;
@@ -62,7 +62,7 @@ int Add_patient()
   printf("Cell phone: ");
   mr = modgetl(p->contact.phone_c, &nbytes);
   // Get emergency contact information
-  printf("\nWould you like to add an emergency contact? (y/n)");
+  printf("\nWould you like to add an emergency contact (y/n)? ");
   char *selection = malloc(sizeof(char) * 2);
   mr = modgetl(selection, &nbytes);
   if (selection[0] == 'y' || selection[0] == 'Y') {
@@ -80,7 +80,7 @@ int Add_patient()
     printf("Cell phone: ");
     mr = modgetl(p->emerg1.contact.phone_c, &nbytes);  
     
-	printf("\nWould you like to add an another emergency contact? (y/n)");
+	printf("\nWould you like to add an another emergency contact (y/n)? ");
 	mr = modgetl(selection, &nbytes);
 	if (selection[0] == 'y' || selection[0] == 'Y') {
 		printf("\nEMERGENCY CONTACT #2\n");
@@ -100,15 +100,7 @@ int Add_patient()
   }
   free(selection);
   
-
-  if (mr && mr != EOF) {
-    system("clear");
-	Patient_print_info(p);
-  }
-  
-  Patient_destroy(p);
-  
-  return 0;
+  return p;
 }
 
 ssize_t modgetl(char *s, size_t *n)

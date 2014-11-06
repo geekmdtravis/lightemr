@@ -307,7 +307,10 @@ Emergency_contact Set_emergency_contact(char *full_name, char *relationship,
 void Patient_print_info(Patient *p)
 {
     
-  printf("Full name: %s %s %s\n"
+  printf("-------------------\n"
+	 "PATIENT INFORMATION\n"
+	 "===================\n"
+	 " Name: %s %s %s\n"
 	 " DOB: %d/%d/%d\n"
 	 " Address:\n"
 	 "  %s\n"
@@ -320,18 +323,24 @@ void Patient_print_info(Patient *p)
 	 " Work Phone: %s\n"
 	 " Personal ID: %s\n"
 	 " MRN: %s\n\n"
-	 "Emergency Contact 1: %s\n"
+	 "-------------------\n"
+	 "EMERGENCY CONTACT 1\n"
+	 "===================\n"
+	 " Name: %s\n"
 	 " Relationship: %s\n"
 	 " Phone: %s\n"
 	 " Cell: %s\n"
 	 " Work: %s\n"
 	 " Email: %s\n\n"
-	 "Emergency Contact 2: %s\n"
+	 "-------------------\n"
+	 "EMERGENCY CONTACT 2\n"
+	 "===================\n"
+	 " Name: %s\n"
 	 " Relationship: %s\n"
 	 " Phone: %s\n"
 	 " Cell: %s\n"
 	 " Work: %s\n"
-	 " Email: %s\n",
+	 " Email: %s\n\n",
 	 p->name.first,
 	 p->name.middle,
 	 p->name.last,
