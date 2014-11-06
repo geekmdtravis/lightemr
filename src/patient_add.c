@@ -8,16 +8,22 @@
 
 #define MAX_DATA 100
 
+// remove last \n and replace it with \0
 void trim(char *s);
+// getline() and trim(); note this takes a
+// string instead of a string pointer
 ssize_t modgetl(char *s, size_t *n);
+// getline() and atoi() the result
 ssize_t modgetlatoi(int *i, size_t *n);
 
+// Create patient, populate the fields.
 int Add_patient()
 {
   Patient *p = Patient_create();
   size_t nbytes = MAX_DATA;
   ssize_t mr;
-  
+
+  // Get patients name
   printf("PATIENTS NAME\n");
   printf("First: ");
   mr = modgetl(p->name.first, &nbytes);
@@ -25,7 +31,7 @@ int Add_patient()
   mr = modgetl(p->name.middle, &nbytes);
   printf("Last: ");
   mr = modgetl(p->name.last, &nbytes);
-  
+  // Get patients date of birth
   printf("\nDATE OF BIRTH (Entered as decimal number)\n");
   printf("Month: ");
   mr = modgetlatoi(&p->dob.month, &nbytes);
@@ -35,7 +41,7 @@ int Add_patient()
   mr = modgetlatoi(&p->dob.year, &nbytes);
   printf("Personal ID (e.g. US Social Security): ");
   mr = modgetl(p->pid, &nbytes);
-
+  // Get patients address
   printf("\nADDRESS\n");
   printf("Field 1 (of 4): ");
   mr = modgetl(p->addr.field1, &nbytes);
@@ -45,7 +51,7 @@ int Add_patient()
   mr = modgetl(p->addr.field3, &nbytes);
   printf("Field 4 (of 4): ");
   mr = modgetl(p->addr.field4, &nbytes);
-
+  // Get patients contact information
   printf("\nCONTACT INFORMATION\n");
   printf("Email address: ");
   mr = modgetl(p->contact.email, &nbytes);
@@ -55,7 +61,7 @@ int Add_patient()
   mr = modgetl(p->contact.phone_w, &nbytes);
   printf("Cell phone: ");
   mr = modgetl(p->contact.phone_c, &nbytes);
-
+  // Get emergency contact information
   printf("\nWould you like to add an emergency contact? (y/n)");
   char *selection = malloc(sizeof(char) * 2);
   mr = modgetl(selection, &nbytes);
