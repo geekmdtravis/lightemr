@@ -3,58 +3,67 @@
 #include <stdlib.h>
 #include "patient.h"
 
+// Create and return a patient object
 Patient *Patient_create()
 {
   Patient *new_patient = malloc(sizeof(Patient));
-  
+
+  // Gain heap space for pid and mrn
   new_patient->pid = malloc(sizeof(char) * MAX_DATA);
   strcpy(new_patient->pid, "");
   new_patient->mrn = malloc(sizeof(char) * MAX_DATA);
   strcpy(new_patient->mrn, "");
-  
+  // Gain heap space for name
   new_patient->name.first = malloc(sizeof(char) * MAX_NAME);
   new_patient->name.middle = malloc(sizeof(char) * MAX_NAME);
   new_patient->name.last = malloc(sizeof(char) * MAX_NAME);
-  
+  // Gain heap space for address
   new_patient->addr.field1 = malloc(sizeof(char) * MAX_ADDR);
   new_patient->addr.field2 = malloc(sizeof(char) * MAX_ADDR);
   new_patient->addr.field3 = malloc(sizeof(char) * MAX_ADDR);
   new_patient->addr.field4 = malloc(sizeof(char) * MAX_ADDR);
-  
+  // Gain heap space for contact info
   new_patient->contact.email = malloc(sizeof(char) * MAX_DATA);
   new_patient->contact.phone_c = malloc(sizeof(char) * MAX_DATA);
   new_patient->contact.phone_h = malloc(sizeof(char) * MAX_DATA);
   new_patient->contact.phone_w = malloc(sizeof(char) * MAX_DATA);
-  
+  // Gain heap space for emergency contact
   new_patient->emerg1.full_name = malloc(sizeof(char) * MAX_NAME * 2);
   new_patient->emerg1.relationship = malloc(sizeof(char) * MAX_DATA);
   new_patient->emerg1.contact.email = malloc(sizeof(char) * MAX_DATA);
   new_patient->emerg1.contact.phone_h = malloc(sizeof(char) * MAX_DATA);
   new_patient->emerg1.contact.phone_c = malloc(sizeof(char) * MAX_DATA);
   new_patient->emerg1.contact.phone_w = malloc(sizeof(char) * MAX_DATA);
-  
+  // Gain heap space for emergency contact
   new_patient->emerg2.full_name = malloc(sizeof(char) * MAX_NAME * 2);
   new_patient->emerg2.relationship = malloc(sizeof(char) * MAX_DATA);
   new_patient->emerg2.contact.email = malloc(sizeof(char) * MAX_DATA);
   new_patient->emerg2.contact.phone_h = malloc(sizeof(char) * MAX_DATA);
   new_patient->emerg2.contact.phone_c = malloc(sizeof(char) * MAX_DATA);
   new_patient->emerg2.contact.phone_w = malloc(sizeof(char) * MAX_DATA);
-  
+
+  // Give place-holder values to name, address, contact
+  // and emergency contact fields
   Patient_update_name(new_patient,
 		      "First", "Middle", "Last");
   Patient_update_address(new_patient,
-			 "Field 1", "Field 2", "Field 3", "Field 4");
+		      "Field 1", "Field 2", "Field 3", "Field 4");
   Patient_update_dob(new_patient, 0, 0, 0);
-  Patient_update_contact(new_patient, "", "", "", "No@Email.Given");
+  Patient_update_contact(new_patient,
+		      "", "", "", "No@Email.Given");
   Patient_update_emergency(&new_patient->emerg1,
-			   "No contact given", "", "", "", "None", "No@Email.Given");
+		      "No contact given", "", "", "", "None", "No@Email.Given");
   Patient_update_emergency(&new_patient->emerg2,
-			   "No contact given", "", "", "", "None", "No@Email.Given");
+		      "No contact given", "", "", "", "None", "No@Email.Given");
   new_patient->init = Patient_populate;
   
   return ((new_patient) ? new_patient : NULL);
 }
 
+
+// Look to see if each field that shoud have heap
+// spaces does, and then free it.
+// RETURN VALUE: TRUE(1) for success, FALSE(0) for failure
 BOOL Patient_destroy(Patient *p)
 {
   if(p->pid) free(p->pid);
@@ -96,8 +105,18 @@ BOOL Patient_destroy(Patient *p)
   }
 }
 
-BOOL Patient_populate(Patient *self, Name *name, Birthdate *dob, Address *addr,
-		      Contact *contact, Emergency_contact *emerg1,
+// This is most likely useful only in tests, however this allows
+// a patient object to be populated by passing pointers to
+// structure objects and reassingning the patient objects pointers
+// Because it's accepting these structures and there isn't anywhere
+// that users are working with the granularized forms of these 
+// structures, it's likely that this would be receiving pointers to
+// variables located in stack space. So, this is likely to only be 
+// used in tests.
+// RETURN: TRUE(1) for success, FALSE(0) for failure
+BOOL Patient_populate(Patient *self, Name *name, Birthdate *dob,
+		      Address *addr, Contact *contact,
+		      Emergency_contact *emerg1,
 		      Emergency_contact *emerg2,
 		      char *pid, char *mrn)
 {
@@ -117,6 +136,11 @@ BOOL Patient_populate(Patient *self, Name *name, Birthdate *dob, Address *addr,
   }
 
 }
+
+// Take a pointer to a patient object and then copy strings
+// to the name fields. 
+// TO DO: There needs to be a way to update individual name fields.
+// RETURN: TRUE(1) for success, and FALSE(0) for failure
 BOOL Patient_update_name(Patient *p, char *first, char *middle, char *last)
 {
   if(p) {
@@ -130,6 +154,9 @@ BOOL Patient_update_name(Patient *p, char *first, char *middle, char *last)
   }
 }
 
+// Take a pointer to a patient object and then copy strings
+// to the address fields. 
+// RETURN: TRUE(1) for success, and FALSE(0) for failure
 BOOL Patient_update_address(Patient *p,
 			    char *f1, char *f2, char *f3, char *f4)
 {
@@ -145,6 +172,10 @@ BOOL Patient_update_address(Patient *p,
   }
 }
 
+// Take a pointer to a patient object and update the date of
+// birth fields.
+// TO DO: There needs to be a way to update individual fields.
+// RETURN: TRUE(1) for success, and FALSE(0) for failure
 BOOL Patient_update_dob(Patient *p, int month, int day, int year)
 {
   if (p) {
@@ -158,6 +189,10 @@ BOOL Patient_update_dob(Patient *p, int month, int day, int year)
   }
 }
 
+// Take a pointer to a patient object and update the contact
+// information fields.
+// TO DO: There needs to be a way to update individual fields.
+// RETURN: TRUE(1) for success and FALSE(0) for failure
 BOOL Patient_update_contact(Patient *p, char *home, char *work, char *cell,  char *email)
 {
   if (p) {
@@ -172,6 +207,10 @@ BOOL Patient_update_contact(Patient *p, char *home, char *work, char *cell,  cha
   }
 }
 
+// Take a pointer to a patient objet and update the 
+// emergency contact information.
+// TO DO: There needs to be a way to update individual fields.
+// RETURN: TRUE(1) for success and FALSE(0) for failure
 BOOL Patient_update_emergency(Emergency_contact *ec, char *full_name, char *home, char *cell,
 			      char *work, char *relationship, char *email)
 {
@@ -189,6 +228,8 @@ BOOL Patient_update_emergency(Emergency_contact *ec, char *full_name, char *home
   }
 }
 
+// Likely only to be used for internal tests. INitialize
+// a local Name object with values;
 Name Set_name(char *first, char *middle, char *last)
 {
   Name new_n;
@@ -200,6 +241,8 @@ Name Set_name(char *first, char *middle, char *last)
   return new_n;
 }
 
+// Likely only to be used for internal tests. Initialize
+// a local Birthdate object with values.
 Birthdate Set_birthdate(int month, int day, int year)
 {
   Birthdate new_b;
@@ -211,6 +254,8 @@ Birthdate Set_birthdate(int month, int day, int year)
   return new_b;
 }
 
+// Likely to be used for internal tests. Initialize a
+// local Address object with values.
 Address Set_address(char *f1, char *f2, char *f3, char *f4)
 {
   Address new_a;
@@ -223,6 +268,8 @@ Address Set_address(char *f1, char *f2, char *f3, char *f4)
   return new_a;
 }
 
+// LIkely to be used for internal tests. Initialize a
+// local Contact object with values.
 Contact Set_contact(char *phone_h, char *phone_c,
 		    char *phone_w, char *email)
 {
@@ -236,6 +283,8 @@ Contact Set_contact(char *phone_h, char *phone_c,
   return new_c;
 }
 
+// LIkely to be used for internal tests. Initialize a 
+// local Emergency_contact object with values.
 Emergency_contact Set_emergency_contact(char *full_name, char *relationship,
 					char *phone_h, char *phone_c,
 					char *phone_w, char *email)
@@ -252,6 +301,9 @@ Emergency_contact Set_emergency_contact(char *full_name, char *relationship,
   return new_ec;
 }
 
+// A rudimentary patient information display function. It is 
+// ugly but exhaustive in that it shows all available fields in 
+// a patient object.
 void Patient_print_info(Patient *p)
 {
     
