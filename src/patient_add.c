@@ -25,113 +25,87 @@ Patient *Add_patient()
   ssize_t mr;
 
   // Get patients name
-  printf("PATIENTS NAME\n");
-  printf("First: ");
+  printf("PATIENTS NAME\n"
+	 "First: ");
   mr = modgetl(p->name.first, &nbytes);
-  check(mr > 0, "Failed to acquire input.");
   printf("Middle: ");
   mr = modgetl(p->name.middle, &nbytes);
-  check(mr > 0, "Failed to acquire input.");
   printf("Last: ");
   mr = modgetl(p->name.last, &nbytes);
-  check(mr > 0, "Failed to acquire input.");
   
   // Get patients date of birth
-  printf("\nDATE OF BIRTH (Entered as decimal number)\n");
-  printf("Month: ");
+  printf("\nDATE OF BIRTH (Entered as decimal number)\n"
+	 "Month: ");
   mr = modgetlatoi(&p->dob.month, &nbytes);
-  check(mr > 0, "Failed to acquire input.");
   printf("Day: ");
   mr = modgetlatoi(&p->dob.day, &nbytes);
-  check(mr > 0, "Failed to acquire input.");
   printf("Year: ");
   mr = modgetlatoi(&p->dob.year, &nbytes);
-  check(mr > 0, "Failed to acquire input.");
   printf("Personal ID (e.g. US Social Security): ");
   mr = modgetl(p->pid, &nbytes);
-  check(mr > 0, "Failed to acquire input.");
   
   // Get patients address
   printf("\nADDRESS\n");
-  printf("Field 1 (of 4): ");
+  printf("1/4: ");
   mr = modgetl(p->addr.field1, &nbytes);
-  check(mr > 0, "Failed to acquire input.");
-  printf("Field 2 (of 4): ");
+  printf("2/4: ");
   mr = modgetl(p->addr.field2, &nbytes);
-  check(mr > 0, "Failed to acquire input.");
-  printf("Field 3 (of 4): ");
+  printf("3/4: ");
   mr = modgetl(p->addr.field3, &nbytes);
-  check(mr > 0, "Failed to acquire input.");
-  printf("Field 4 (of 4): ");
+  printf("4/4: ");
   mr = modgetl(p->addr.field4, &nbytes);
-  check(mr > 0, "Failed to acquire input.");
   
   // Get patients contact information
-  printf("\nCONTACT INFORMATION\n");
-  printf("Email address: ");
+  printf("\nCONTACT INFORMATION\n"
+	 "Email address: ");
   mr = modgetl(p->contact.email, &nbytes);
-  check(mr > 0, "Failed to acquire input.");
   printf("Home phone: ");
   mr = modgetl(p->contact.phone_h, &nbytes);
-  check(mr > 0, "Failed to acquire input.");
   printf("Work phone: ");
   mr = modgetl(p->contact.phone_w, &nbytes);
-  check(mr > 0, "Failed to acquire input.");
   printf("Cell phone: ");
   mr = modgetl(p->contact.phone_c, &nbytes);
-  check(mr > 0, "Failed to acquire input.");
   
   // Get emergency contact information
   printf("\nWould you like to add an emergency contact (y/n)? ");
   char *selection = malloc(sizeof(char) * 2);
   mr = modgetl(selection, &nbytes);
-  check(mr > 0, "Failed to acquire input.");
   if (selection[0] == 'y' || selection[0] == 'Y') {
     printf("\nEMERGENCY CONTACT #1\n");
     printf("Name (full): ");
     mr = modgetl(p->emerg1.full_name, &nbytes);
-    check(mr > 0, "Failed to acquire input.");
     printf("Relationship: ");
     mr = modgetl(p->emerg1.relationship, &nbytes);
-    check(mr > 0, "Failed to acquire input.");
     printf("Email address: ");
     mr = modgetl(p->emerg1.contact.email, &nbytes);
-    check(mr > 0, "Failed to acquire input.");
     printf("Home phone: ");
     mr = modgetl(p->emerg1.contact.phone_h, &nbytes);
-    check(mr > 0, "Failed to acquire input.");
     printf("Work phone: ");
     mr = modgetl(p->emerg1.contact.phone_w, &nbytes);
-    check(mr > 0, "Failed to acquire input.");
     printf("Cell phone: ");
     mr = modgetl(p->emerg1.contact.phone_c, &nbytes);
-    check(mr > 0, "Failed to acquire input.");
 
     printf("\nWould you like to add an another emergency contact (y/n)? ");
     mr = modgetl(selection, &nbytes);
-    check(mr > 0, "Failed to acquire input.");
     if (selection[0] == 'y' || selection[0] == 'Y') {
       printf("\nEMERGENCY CONTACT #2\n");
       printf("Name (full): ");
       mr = modgetl(p->emerg2.full_name, &nbytes);
-      check(mr > 0, "Failed to acquire input.");
       printf("Relationship: ");
       mr = modgetl(p->emerg2.relationship, &nbytes);
-      check(mr > 0, "Failed to acquire input.");
       printf("Email address: ");
       mr = modgetl(p->emerg2.contact.email, &nbytes);
-      check(mr > 0, "Failed to acquire input.");
       printf("Home phone: ");
       mr = modgetl(p->emerg2.contact.phone_h, &nbytes);
-      check(mr > 0, "Failed to acquire input.");
       printf("Work phone: ");
       mr = modgetl(p->emerg2.contact.phone_w, &nbytes);
-      check(mr > 0, "Failed to acquire input.");
       printf("Cell phone: ");
       mr = modgetl(p->emerg2.contact.phone_c, &nbytes);
-      check(mr > 0, "Failed to acquire input.");
     }
   }
+
+  check(mr > 0, "Failed to acquire input.");
+
   free(selection);
   
   return p;
@@ -146,8 +120,13 @@ ssize_t modgetl(char *s, size_t *n)
 	
     mr = getline(&s, n, stdin);
     trim(s);
-	
-	return mr;
+    
+    check(mr > 0, "Failed to acquire input.");
+    
+    return mr;
+
+ error:
+    return -1;
 }
 
 ssize_t modgetlatoi(int *i, size_t *n)
@@ -160,8 +139,13 @@ ssize_t modgetlatoi(int *i, size_t *n)
     *i = atoi(tempstr);
     
     free(tempstr);
+
+    check(mr > 0, "Failed to acquire input.");
 	
-	return mr;
+    return mr;
+
+ error:
+    return -1;
 }
 
 void trim(char *s)

@@ -76,6 +76,11 @@ void Display_confirm_continue()
   system("clear");
 }
 
+// Prompts the user for confirmation of exit. If yes,
+// return TRUE which can be passed to calling routine
+// and in the case of our main program, allows for
+// exit of program.
+// RETURN: TRUE(1) if user wants to exit, FALSE(0) if not.
 BOOL Display_confirm_exit()
 {
   char selection;
@@ -88,17 +93,20 @@ BOOL Display_confirm_exit()
   return ((selection == 'y' || selection == 'Y') ? TRUE : FALSE);
 }
 
-void Evaluate_exit_signal(int exit)
+// Look at the users decision to exit or not and
+// show that the command was understood.
+void Evaluate_exit_signal(BOOL exit)
 {
   system("clear");
-  if(!exit){
-    printf("\nYou will head "
-	   "back to main menu.\n\n");
-  } else {
+
+  if(exit) {
     printf("\n\n[ EXITING ]\n\n"
 	   "Thank you for using %s.\n\n"
 	   " - %s\n\n",
 	   APP_VER, APP_AUTHOR);
+  } else {
+    printf("\nYou will head "
+	   "back to main menu.\n\n");
   }
 }
 
