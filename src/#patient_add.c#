@@ -1,8 +1,6 @@
 // file: patient_add.c
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "patient.h"
 #include "patient_add.h"
 #include "modstring.h"
