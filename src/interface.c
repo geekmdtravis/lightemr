@@ -1,5 +1,15 @@
 #include "interface.h"
 
+typedef int BOOL;
+
+#ifndef TRUE
+#define TRUE 1
+#endif
+
+#ifndef FALSE
+#define FALSE 0
+#endif
+
 void Display_main_menu()
 {
   system("clear");
@@ -66,7 +76,7 @@ void Display_confirm_continue()
   system("clear");
 }
 
-int Display_confirm_exit()
+BOOL Display_confirm_exit()
 {
   char selection;
 
@@ -75,7 +85,7 @@ int Display_confirm_exit()
 	 "Are you sure you'd like to exit (y/n)?  ", APP_VER);
   selection = getchar();
   
-  return ((selection == 'y' || selection == 'Y') ? 1 : 0);
+  return ((selection == 'y' || selection == 'Y') ? TRUE : FALSE);
 }
 
 void Evaluate_exit_signal(int exit)
