@@ -1,10 +1,8 @@
 // file: dbtest.c
 
-// TO DO: Create a function which uses
-// strcat(dest, src) to integrate user input
-// or other data into an SQL query.
-// E.g. "INSERT INTO %s VALUES (%s, %s, ..., %s)
-// where %s can be some user input value.
+// TO DO: resolve issue where I need to input 28 (not 27) values
+// the problem is that the first value is an auto-incrementing value.
+// perhaps just specifying accepting values is the only fix?
 
 #include <stdio.h>
 #include <string.h>
@@ -16,12 +14,15 @@
 int Table_create(sqlite3 *db);
 void Database_validate(int rc);
 void Patient_data_input(Patient *p);
+char *Create_add_user_query(Patient *p);
 
 int main()
 {
   Patient *p = Patient_create();
   sqlite3 *db;
-  char *sqlError = "Sqlite3 ERROR.";
+  char *error = "Sqlite3 ERROR.";
+  char sql[1000];
+  char *rq;
   int rc;
 
   Patient_data_input(p);
@@ -31,6 +32,12 @@ int main()
   Database_validate(rc);
 
   Table_create(db);
+
+  rq = Create_add_user_query(p);
+  strcpy(sql, rq);
+  printf("%s\n%s\n", sql, rq);
+  rc = sqlite3_exec(db, sql, NULL, 0, &error);
+  free(rq);
   
   sqlite3_close(db);
 
@@ -102,18 +109,18 @@ void Patient_data_input(Patient *p)
   p->init = Patient_populate;
   Name n = {.first = "Travis", .middle = "Robert", .last = "Nesbit" };
   Birthdate b = {.month = 6, .day = 29, .year = 1983};
-  Address a = {.field1 = "1 Glenhurst",
-	       .field2 = "Irvine, CA",
-	       .field3 = "92604-9042",
-	       .field4 = "United States of America" };
+  Address a = {.field1 = "field1",
+	       .field2 = "field2",
+	       .field3 = "field3",
+	       .field4 = "field4" };
   Contact c = {.phone_h = "9518138895", .phone_c = "9518138895",
-	       .phone_w = "7144567890", .email = "tnesbit450@gmail.com" };
+	       .phone_w = "7144567890", .email = "tnesbit450ATgmail.com" };
   Emergency_contact ec1 = { .full_name = "Jennifer T. Baker-Nesbit",
 			   .relationship = "Wife",
 			   .contact.phone_h = "9512970019",
 			   .contact.phone_c = "9512970019",
 			   .contact.phone_w = "",
-			   .contact.email = "cashewsmama@gmail.com" };
+			   .contact.email = "cashewsmamaATgmail.com" };
    Emergency_contact ec2 = { .full_name = "Jennifer T. Baker-Nesbit",
 			   .relationship = "Wife",
 			   .contact.phone_h = "9512970019",
@@ -122,6 +129,76 @@ void Patient_data_input(Patient *p)
 			   .contact.email = "cashewsmama@gmail.com" };
    p->init(p, &n, &b, &a, &c, &ec1, &ec2, "111222333", "1234567890");
   
+}
+
+char *Create_add_user_query(Patient *p)
+{
+  char *query = malloc(sizeof(char) * 1000);
+  char day[2];
+  sprintf(day, "%d", p->dob.day);
+  char month[2];
+  sprintf(month, "%d", p->dob.month);
+  char year[4];
+  sprintf(year, "%d", p->dob.year);
+
+  query[0] = '\0';
+  strcat(query, "INSERT INTO PATIENTS VALUES('");
+  strcat(query, p->name.first);
+  strcat(query, "', '");
+  strcat(query, p->name.middle);
+  strcat(query, "', '");
+  strcat(query, p->name.last);
+  strcat(query, "', '");
+  strcat(query, month);
+  strcat(query, "', '");
+  strcat(query, day);
+  strcat(query, "', '");
+  strcat(query, year);
+  strcat(query, "', '");
+  strcat(query, p->addr.field1);
+  strcat(query, "', '");
+  strcat(query, p->addr.field2);
+  strcat(query, "', '");
+  strcat(query, p->addr.field3);
+  strcat(query, "', '");
+  strcat(query, p->addr.field4);
+  strcat(query, "', '");
+  strcat(query, p->contact.phone_h);
+  strcat(query, "', '");
+  strcat(query, p->contact.phone_w);
+  strcat(query, "', '");
+  strcat(query, p->contact.phone_c);
+  strcat(query, "', '");
+  strcat(query, p->contact.email);
+  strcat(query, "', '");
+  strcat(query, p->emerg1.full_name);
+  strcat(query, "', '");
+  strcat(query, p->emerg1.relationship);
+  strcat(query, "', '");
+  strcat(query, p->emerg1.contact.phone_h);
+  strcat(query, "', '");
+  strcat(query, p->emerg1.contact.phone_w);
+  strcat(query, "', '");
+  strcat(query, p->emerg1.contact.phone_c);
+  strcat(query, "', '");
+  strcat(query, p->emerg1.contact.email);
+  strcat(query, "', '");
+  strcat(query, p->emerg2.full_name);
+  strcat(query, "', '");
+  strcat(query, p->emerg2.relationship);
+  strcat(query, "', '");
+  strcat(query, p->emerg2.contact.phone_h);
+  strcat(query, "', '");
+  strcat(query, p->emerg2.contact.phone_w);
+  strcat(query, "', '");
+  strcat(query, p->emerg2.contact.phone_c);
+  strcat(query, "', '");
+  strcat(query, p->emerg2.contact.email);
+  strcat(query, "', '");
+  strcat(query, p->pid);
+  strcat(query, "');");
+
+  return query;
 }
 
 // eof: dbtest.c
