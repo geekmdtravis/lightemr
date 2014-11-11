@@ -35,9 +35,8 @@ int main()
 
   rq = Create_add_user_query(p);
   strcpy(sql, rq);
-  printf("%s\n%s\n", sql, rq);
-  rc = sqlite3_exec(db, sql, NULL, 0, &error);
   free(rq);
+  rc = sqlite3_exec(db, sql, NULL, 0, &error);
   
   sqlite3_close(db);
 
@@ -142,7 +141,8 @@ char *Create_add_user_query(Patient *p)
   sprintf(year, "%d", p->dob.year);
 
   query[0] = '\0';
-  strcat(query, "INSERT INTO PATIENTS VALUES('");
+  strcat(query, "INSERT INTO PATIENTS VALUES(");
+  strcat(query, "NULL, '");
   strcat(query, p->name.first);
   strcat(query, "', '");
   strcat(query, p->name.middle);
