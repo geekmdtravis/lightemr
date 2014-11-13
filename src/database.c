@@ -134,4 +134,24 @@ char *Create_add_user_query(Patient *p)
   return query;
 }
 
+Patient *Patient_lookup_mrn(char  *mrn, sqlite3 *db)
+{
+  Patient *pt = NULL;
+  char sql[100];
+  char *error = "Sqlite3 ERROR.";
+  int rc;
+  
+  sql[0] = '\0';
+  strcat(sql, "SELECT * FROM PATIENTS WHERE mrn = '");
+  strcat(sql, mrn);
+  strcat(sql, "';");
+
+  rc = sqlite3_exec(db, sql, NULL, 0, &error);
+
+  // do something with rc here
+  
+
+  return pt;
+}
+
 // eof: database.c

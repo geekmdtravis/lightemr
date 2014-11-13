@@ -29,6 +29,12 @@ int main()
   strcpy(sql, rq);
   free(rq);
   rc = sqlite3_exec(db, sql, NULL, 0, &error);
+
+  Patient_destroy(p);
+
+  p = Patient_lookup_mrn("1", db);
+
+  Patient_destroy(p);
   
   sqlite3_close(db);
 
