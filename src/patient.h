@@ -31,26 +31,26 @@ typedef struct Birthdate {
 } Birthdate;
 
 typedef struct Contact {
-  char* phone_h;
-  char* phone_c;
-  char* phone_w;
+  char *phone_h;
+  char *phone_c;
+  char *phone_w;
   char *email;
 } Contact;
 
 typedef struct Emergency_contact {
   char *full_name; 
   char *relationship;
-  Contact contact;
+  Contact *contact;
 } Emergency_contact;
   
 
 typedef struct Patient {
-  Name name;
-  Birthdate dob;
-  Address addr;
-  Contact contact;
-  Emergency_contact emerg1;
-  Emergency_contact emerg2;
+  Name *name;
+  Birthdate *dob;
+  Address *addr;
+  Contact *contact;
+  Emergency_contact *emerg1;
+  Emergency_contact *emerg2;
   char *pid;
   char *mrn;
   BOOL (*init)(struct Patient *self, Name *name,
@@ -82,13 +82,13 @@ BOOL Patient_update_emergency(Emergency_contact *ec,
 		      char *full_name, char *home,
 		      char *cell, char *work,
 		      char *relationship, char *email);
-Name Set_name(char *first, char *middle, char *last);
-Birthdate Set_birthdate(int month, int day, int year);
-Address Set_address(char *f1, char *f2,
+Name *Set_name(char *first, char *middle, char *last);
+Birthdate *Set_birthdate(int month, int day, int year);
+Address *Set_address(char *f1, char *f2,
 		      char *f3, char *f4);
-Contact Set_contact(char *phone_h, char *phone_c,
+Contact *Set_contact(char *phone_h, char *phone_c,
 		      char *phone_w, char *email);
-Emergency_contact Set_emergency_contact(char *full_name,
+Emergency_contact *Set_emergency_contact(char *full_name,
 		      char *relationship,
 		      char *phone_h, char *phone_c,
 		      char *phone_w, char *email);

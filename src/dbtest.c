@@ -17,8 +17,8 @@ int main()
   char *rq;
   int rc;
 
-  Patient_data_input(p);
-  // Patient_print_info(p);
+  // Patient_data_input(p);
+  Patient_print_info(p);
 
   rc = sqlite3_open("patient.db", &db);
   Database_validate(rc);
@@ -30,8 +30,6 @@ int main()
   free(rq);
   rc = sqlite3_exec(db, sql, NULL, 0, &error);
 
-  Patient_destroy(p);
-
   p = Patient_lookup_mrn("1", db);
 
   Patient_destroy(p);
@@ -42,7 +40,7 @@ int main()
 }
 
 
-
+/*
 void Patient_data_input(Patient *p)
 {
   p->init = Patient_populate;
@@ -68,7 +66,7 @@ void Patient_data_input(Patient *p)
 			   .contact.email = "mary.houx@gmail.com" };
    p->init(p, &n, &b, &a, &c, &ec1, &ec2, "111222333", "1234567890");
   
-}
+   }*/
 
 
 // eof: dbtest.c
