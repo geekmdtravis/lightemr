@@ -46,7 +46,7 @@ int Patient_demographics_table_create(sqlite3 *db)
   } else {
     fprintf(stdout, "Table created.\n");
   }
-  
+
     
     
   return rc;
@@ -146,13 +146,24 @@ Patient *Patient_lookup_mrn(char  *mrn, sqlite3 *db)
   strcat(sql, mrn);
   strcat(sql, "';\0");
 
-  rc = sqlite3_exec(db, sql, NULL, 0, &error);
+  rc = sqlite3_exec(db, sql, Patient_find_callback, 0, &error);
 
   // do something with rc here
   if (rc == 0) rc = 0;
   
 
   return pt;
+}
+
+static int Patient_find_callback(void *udp, int c_num, char *c_vals[], char *c_names[])
+{
+  int i = 0;
+
+  while(i < c_num) {
+    printf(((i == 0) ? "%s\t": "%s "), c_vals[i]);
+    i++;
+  }
+  return 0;
 }
 
 // eof: database.c
