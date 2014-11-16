@@ -11,17 +11,19 @@
 // RETURN: same as getline()
 ssize_t modgetl(char *s, size_t *n)
 {
-	ssize_t mr;
-	
+  ssize_t mr; // same return type as getline
+
+  if(s) {
     mr = getline(&s, n, stdin);
     trim(s);
-    
     check(mr > 0, "Failed to acquire input.");
-    
     return mr;
-
+  } else {
+    goto error;
+  }
+  
  error:
-    return -1;
+  return -1;
 }
 
 // Like above, except that it passes a pointer from
@@ -31,21 +33,22 @@ ssize_t modgetl(char *s, size_t *n)
 // RETURN: same as getline()
 ssize_t modgetlatoi(int *i, size_t *n)
 {
-	ssize_t mr;
-	char *tempstr = malloc(sizeof(char) * MAX_DATA);
-	
+  ssize_t mr;
+  char *tempstr = malloc(sizeof(char) * MAX_DATA);
+
+  if(i) {
     mr = getline(&tempstr, n, stdin);
     trim(tempstr);
     *i = atoi(tempstr);
-    
-    free(tempstr);
-
     check(mr > 0, "Failed to acquire input.");
-	
+    free(tempstr);
     return mr;
-
+  } else {
+    goto error;
+  }
+  
  error:
-    return -1;
+  return -1;
 }
 
 // makes the last character in a string a
@@ -55,9 +58,9 @@ ssize_t modgetlatoi(int *i, size_t *n)
 // displayed. 
 void trim(char *s)
 {
-	if(s){
-		s[strlen(s) - 1] = '\0';
-	}
+  if(s){
+    s[strlen(s) - 1] = '\0';
+  }
 }
 
 // eof: modstring.c

@@ -53,13 +53,10 @@ Patient *Patient_create()
 
   // Give place-holder values to name, address, contact
   // and emergency contact fields
-  Patient_update_name(new_patient,
-		      "First", "Middle", "Last");
-  Patient_update_address(new_patient,
-		      "Field 1", "Field 2", "Field 3", "Field 4");
+  Patient_update_name(new_patient,"First", "Middle", "Last");
+  Patient_update_address(new_patient,"Field 1", "Field 2", "Field 3", "Field 4");
   Patient_update_dob(new_patient, 0, 0, 0);
-  Patient_update_contact(new_patient,
-		      "", "", "", "No@Email.Given");
+  Patient_update_contact(new_patient, "", "", "", "No@Email.Given");
   Patient_update_emergency(new_patient->emerg1,
 		      "No contact given", "", "", "", "None", "No@Email.Given");
   Patient_update_emergency(new_patient->emerg2,
@@ -77,27 +74,32 @@ BOOL Patient_destroy(Patient *p)
 {
   if(!p) return FALSE;
 
+  // free memory for pid, mrn, dob
   if(p->pid) free(p->pid);
   if(p->mrn) free(p->mrn);
   if(p->dob) free(p->dob);
 
+  // free memory for each name and name pointer
   if(p->name->first) free(p->name->first);
   if(p->name->middle) free(p->name->middle);
   if(p->name->last) free(p->name->last);
   if(p->name) free(p->name);
-  
+
+  // free memory for each field of address and address pointer
   if(p->addr->field1) free(p->addr->field1);
   if(p->addr->field2) free(p->addr->field2);
   if(p->addr->field3) free(p->addr->field3);
   if(p->addr->field4) free(p->addr->field4);
   if(p->addr) free(p->addr);
-  
+
+  // free memory for each field of contact and contact pointer
   if(p->contact->email) free(p->contact->email);
   if(p->contact->phone_c) free(p->contact->phone_c);
   if(p->contact->phone_h) free(p->contact->phone_h);
   if(p->contact->phone_w) free(p->contact->phone_w);
   if(p->contact) free(p->contact);
-  
+
+  // free memory for each field of emergency contact and the ec pointer
   if(p->emerg1->full_name) free(p->emerg1->full_name);
   if(p->emerg1->relationship) free(p->emerg1->relationship);
   if(p->emerg1->contact->email) free(p->emerg1->contact->email);
@@ -106,7 +108,8 @@ BOOL Patient_destroy(Patient *p)
   if(p->emerg1->contact->phone_w) free(p->emerg1->contact->phone_w);
   if(p->emerg1->contact) free(p->emerg1->contact);
   if(p->emerg1) free(p->emerg1);
-  
+
+  // same as above
   if(p->emerg2->full_name) free(p->emerg2->full_name);
   if(p->emerg2->relationship) free(p->emerg2->relationship);
   if(p->emerg2->contact->email) free(p->emerg2->contact->email);
@@ -116,42 +119,11 @@ BOOL Patient_destroy(Patient *p)
   if(p->emerg2->contact) free(p->emerg2->contact);
   if(p->emerg2) free(p->emerg2);
 
+  // free the patient object from memory
   free(p);
   p = NULL;
   
   return TRUE;
-}
-
-// This is most likely useful only in tests, however this allows
-// a patient object to be populated by passing pointers to
-// structure objects and reassingning the patient objects pointers
-// Because it's accepting these structures and there isn't anywhere
-// that users are working with the granularized forms of these 
-// structures, it's likely that this would be receiving pointers to
-// variables located in stack space. So, this is likely to only be 
-// used in tests.
-// RETURN: TRUE(1) for success, FALSE(0) for failure
-BOOL Patient_populate(Patient *self, Name *name, Birthdate *dob,
-		      Address *addr, Contact *contact,
-		      Emergency_contact *emerg1,
-		      Emergency_contact *emerg2,
-		      char *pid, char *mrn)
-{
-  if (self) {
-    if (name) self->name = name;
-    if (dob) self->dob = dob;
-    if (addr) self->addr = addr;
-    if (contact) self->contact = contact;
-    if (emerg1) self->emerg1 = emerg1;
-    if (emerg2) self->emerg2 = emerg2;
-    if (pid) self->pid = pid;
-    if (mrn) self->mrn = mrn;
-    
-    return TRUE;
-  } else {
-    return FALSE;
-  }
-
 }
 
 // Take a pointer to a patient object and then copy strings
@@ -316,6 +288,39 @@ Emergency_contact *Set_emergency_contact(char *full_name, char *relationship,
   strcpy(new_ec->contact->email, email);
 
   return new_ec;
+}
+
+
+// This is most likely useful only in tests, however this allows
+// a patient object to be populated by passing pointers to
+// structure objects and reassingning the patient objects pointers
+// Because it's accepting these structures and there isn't anywhere
+// that users are working with the granularized forms of these 
+// structures, it's likely that this would be receiving pointers to
+// variables located in stack space. So, this is likely to only be 
+// used in tests.
+// RETURN: TRUE(1) for success, FALSE(0) for failure
+BOOL Patient_populate(Patient *self, Name *name, Birthdate *dob,
+		      Address *addr, Contact *contact,
+		      Emergency_contact *emerg1,
+		      Emergency_contact *emerg2,
+		      char *pid, char *mrn)
+{
+  if (self) {
+    if (name) self->name = name;
+    if (dob) self->dob = dob;
+    if (addr) self->addr = addr;
+    if (contact) self->contact = contact;
+    if (emerg1) self->emerg1 = emerg1;
+    if (emerg2) self->emerg2 = emerg2;
+    if (pid) self->pid = pid;
+    if (mrn) self->mrn = mrn;
+    
+    return TRUE;
+  } else {
+    return FALSE;
+  }
+
 }
 
 // A rudimentary patient information display function. It is 

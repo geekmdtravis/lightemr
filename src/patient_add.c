@@ -15,6 +15,8 @@ Patient *Add_patient()
   size_t nbytes = MAX_DATA;
   ssize_t mr;
 
+  check(p != NULL, "Patient was not created.");
+  
   // Get patients name
   printf("PATIENTS NAME\n"
 	 "First: ");
