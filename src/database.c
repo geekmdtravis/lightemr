@@ -136,7 +136,7 @@ char *Create_add_user_query(Patient *p)
 
 Patient *Patient_lookup_mrn(char  *mrn, sqlite3 *db)
 {
-  Patient *pt = NULL;
+  Patient *pt = Patient_create();
   char sql[100];
   char *error = "Sqlite3 ERROR.";
   int rc;
@@ -146,18 +146,22 @@ Patient *Patient_lookup_mrn(char  *mrn, sqlite3 *db)
   strcat(sql, mrn);
   strcat(sql, "';\0");
 
-  rc = sqlite3_exec(db, sql, Patient_find_callback, 0, &error);
+  // the 4th argument (pt) is provided to callback as the first
+  // argument 'void *upd'. This is how we pass patient information
+  // to a patient from the SQL query return.
+  rc = sqlite3_exec(db, sql, Patient_find_callback, pt, &error);
 
   // do something with rc here
   if (rc == 0) rc = 0;
   
-
   return pt;
 }
 
 static int Patient_find_callback(void *udp, int c_num, char *c_vals[], char *c_names[])
 {
   int i = 0;
+
+  printf("Patient_find_callback: %p\n", (Patient*)udp);
 
   while(i < c_num) {
     printf(((i == 0) ? "%s\t": "%s "), c_vals[i]);
