@@ -144,7 +144,7 @@ Patient *Patient_lookup_mrn(char  *mrn, sqlite3 *db)
   sql[0] = '\0';
   strcat(sql, "SELECT * FROM PATIENTS WHERE mrn = '");
   strcat(sql, mrn);
-  strcat(sql, "';");
+  strcat(sql, "';\0");
 
   rc = sqlite3_exec(db, sql, NULL, 0, &error);
 

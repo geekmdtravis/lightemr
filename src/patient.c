@@ -13,6 +13,8 @@ Patient *Patient_create()
   strcpy(new_patient->pid, "");
   new_patient->mrn = malloc(sizeof(char) * MAX_DATA);
   strcpy(new_patient->mrn, "");
+  // Gain heap space for dob
+  new_patient->dob = malloc(sizeof(Birthdate));
   // Gain heap space for name
   new_patient->name = malloc(sizeof(Name));
   new_patient->name->first = malloc(sizeof(char) * MAX_NAME);
@@ -73,44 +75,51 @@ Patient *Patient_create()
 // RETURN VALUE: TRUE(1) for success, FALSE(0) for failure
 BOOL Patient_destroy(Patient *p)
 {
-  /*
+  if(!p) return FALSE;
+
   if(p->pid) free(p->pid);
   if(p->mrn) free(p->mrn);
+  if(p->dob) free(p->dob);
+
+  if(p->name->first) free(p->name->first);
+  if(p->name->middle) free(p->name->middle);
+  if(p->name->last) free(p->name->last);
+  if(p->name) free(p->name);
   
-  if(p->name.first) free(p->name.first);
-  if(p->name.middle) free(p->name.middle);
-  if(p->name.last) free(p->name.last);
+  if(p->addr->field1) free(p->addr->field1);
+  if(p->addr->field2) free(p->addr->field2);
+  if(p->addr->field3) free(p->addr->field3);
+  if(p->addr->field4) free(p->addr->field4);
+  if(p->addr) free(p->addr);
   
-  if(p->addr.field1) free(p->addr.field1);
-  if(p->addr.field2) free(p->addr.field2);
-  if(p->addr.field3) free(p->addr.field3);
-  if(p->addr.field4) free(p->addr.field4);
+  if(p->contact->email) free(p->contact->email);
+  if(p->contact->phone_c) free(p->contact->phone_c);
+  if(p->contact->phone_h) free(p->contact->phone_h);
+  if(p->contact->phone_w) free(p->contact->phone_w);
+  if(p->contact) free(p->contact);
   
-  if(p->contact.email) free(p->contact.email);
-  if(p->contact.phone_c) free(p->contact.phone_c);
-  if(p->contact.phone_h) free(p->contact.phone_h);
-  if(p->contact.phone_w) free(p->contact.phone_w);
+  if(p->emerg1->full_name) free(p->emerg1->full_name);
+  if(p->emerg1->relationship) free(p->emerg1->relationship);
+  if(p->emerg1->contact->email) free(p->emerg1->contact->email);
+  if(p->emerg1->contact->phone_h) free(p->emerg1->contact->phone_h);
+  if(p->emerg1->contact->phone_c) free(p->emerg1->contact->phone_c);
+  if(p->emerg1->contact->phone_w) free(p->emerg1->contact->phone_w);
+  if(p->emerg1->contact) free(p->emerg1->contact);
+  if(p->emerg1) free(p->emerg1);
   
-  if(p->emerg1.full_name) free(p->emerg1.full_name);
-  if(p->emerg1.relationship) free(p->emerg1.relationship);
-  if(p->emerg1.contact.email) free(p->emerg1.contact.email);
-  if(p->emerg1.contact.phone_h) free(p->emerg1.contact.phone_h);
-  if(p->emerg1.contact.phone_c) free(p->emerg1.contact.phone_c);
-  if(p->emerg1.contact.phone_w) free(p->emerg1.contact.phone_w);
+  if(p->emerg2->full_name) free(p->emerg2->full_name);
+  if(p->emerg2->relationship) free(p->emerg2->relationship);
+  if(p->emerg2->contact->email) free(p->emerg2->contact->email);
+  if(p->emerg2->contact->phone_h) free(p->emerg2->contact->phone_h);
+  if(p->emerg2->contact->phone_c) free(p->emerg2->contact->phone_c);
+  if(p->emerg2->contact->phone_w) free(p->emerg2->contact->phone_w);
+  if(p->emerg2->contact) free(p->emerg2->contact);
+  if(p->emerg2) free(p->emerg2);
+
+  free(p);
+  p = NULL;
   
-  if(p->emerg2.full_name) free(p->emerg2.full_name);
-  if(p->emerg2.relationship) free(p->emerg2.relationship);
-  if(p->emerg2.contact.email) free(p->emerg2.contact.email);
-  if(p->emerg2.contact.phone_h) free(p->emerg2.contact.phone_h);
-  if(p->emerg2.contact.phone_c) free(p->emerg2.contact.phone_c);
-  if(p->emerg2.contact.phone_w) free(p->emerg2.contact.phone_w);
-  */
-  if(p) {
-    free(p);
-    return TRUE; // return 1
-  } else {
-    return FALSE; // return 0
-  }
+  return TRUE;
 }
 
 // This is most likely useful only in tests, however this allows
@@ -315,7 +324,8 @@ Emergency_contact *Set_emergency_contact(char *full_name, char *relationship,
 void Patient_print_info(Patient *p)
 {
     
-  printf("-------------------\n"
+  if(p){
+    printf("-------------------\n"
 	 "PATIENT INFORMATION\n"
 	 "===================\n"
 	 " Name: %s %s %s\n"
@@ -377,4 +387,7 @@ void Patient_print_info(Patient *p)
 	 p->emerg2->contact->phone_c,
 	 p->emerg2->contact->phone_w,
 	 p->emerg2->contact->email);
+  } else {
+    printf("No patient available.\n");
+  }
 }
