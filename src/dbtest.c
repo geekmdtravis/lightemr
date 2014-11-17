@@ -18,26 +18,43 @@ int main()
   char *rq;
   int rc;
 
+  // Populate quickly with sample data
   Patient_data_input(p);
 
+  // Open and validate databse
   rc = sqlite3_open("patient.db", &db);
   Database_validate(rc);
 
+  // Create the table
   Patient_demographics_table_create(db);
 
+  // Create the add user query for above patient
+  // and execute the query.
   rq = Create_add_user_query(p);
   strcpy(sql, rq);
   free(rq);
   rc = sqlite3_exec(db, sql, NULL, 0, &error);
 
+  // Destroy the patient that was created
+  // and lookup a new one
   Patient_destroy(p);
-  
   p = Patient_lookup_mrn("1", db);
-
   Patient_print_info(p);
 
+  // same but by last name
   Patient_destroy(p);
-  
+  p = Patient_lookup_last("Nesbit", db);
+  Patient_print_info(p);
+
+  // same but by first name
+  Patient_destroy(p);
+  p = Patient_lookup_first("Travis", db);
+  Patient_print_info(p);
+
+  // final patient object destroy
+  Patient_destroy(p);
+
+  // close the database
   sqlite3_close(db);
 
   exit(EXIT_SUCCESS);

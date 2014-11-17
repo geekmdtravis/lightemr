@@ -14,9 +14,9 @@ int Patient_demographics_table_create(sqlite3 *db);
 void Database_validate(int rc);
 char *Create_add_user_query(Patient *p);
 Patient *Patient_lookup_mrn(char  *mrn, sqlite3 *db);
+Patient *Patient_lookup_last(char *last, sqlite3 *db);
+Patient *Patient_lookup_first(char *first, sqlite3 *db);
 static int Patient_find_callback(void *upd, int num_c, char *c_vals[], char *c_names[]);
-//Patient *Patient_lookup_last(char *last);
-//Patient *Patient_lookup_first(char *first);
 
 #endif
 

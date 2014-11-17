@@ -10,9 +10,9 @@ Patient *Patient_create()
 
   // Gain heap space for pid and mrn
   new_patient->pid = malloc(sizeof(char) * MAX_DATA);
-  strcpy(new_patient->pid, "");
+  strcpy(new_patient->pid, "\0");
   new_patient->mrn = malloc(sizeof(char) * MAX_DATA);
-  strcpy(new_patient->mrn, "");
+  strcpy(new_patient->mrn, "\0");
   // Gain heap space for dob
   new_patient->dob = malloc(sizeof(Birthdate));
   // Gain heap space for name
