@@ -1,12 +1,14 @@
+#include <string.h>
 #include "interface.h"
 #include "patient.h" 
 #include "patient_add.h"
+#include "database.h"
 
 #ifndef TRUE
 #define TRUE  1
 #endif
 
-#ifndef TRUE
+#ifndef FALSE
 #define FALSE 0
 #endif
 
@@ -18,9 +20,16 @@ int main()
   size_t nbytes = 2; // for two chars max ('n' + '\x')
   BOOL EXIT = FALSE;
   char *selection = malloc(sizeof(char) * 2);
+  sqlite3 *db; 
+  char *query;
+  char *sqlError = "SQLite3 Error!";
   // Plans at present are to only access one patient at
   // any given time. Single pointer will suffice.
-  Patient *pt = NULL; 
+  Patient *pt = NULL;
+
+  rc = sqlite3_open("patients.db", &db);
+  Database_validate(rc);
+  Patient_demographics_table_create(db);
 
   do {
     Display_main_menu();
@@ -35,18 +44,17 @@ int main()
     switch(selection[0]) {
     case '1':
       Display_patient_lookup_menu();
-      // This is only temporary. Clearly not
-      // the final implementation.
-      if(pt) Patient_print_info(pt);
-      else printf("No patient selected.\n\n");
+      if(pt) Patient_destroy(pt);
+      pt = Patient_lookup_mrn("2", db);
+      Patient_print_info(pt);
       break;
       
     case '2':
       Display_patient_add_menu();
       if(pt) Patient_destroy(pt);
       pt = Add_patient();
-      // need to generate MRN
-      // need to save patient to database
+      query = Create_add_user_query(pt);
+      rc = sqlite3_exec(db, query, NULL, 0, &sqlError);
       break;
       
     case '3':
@@ -89,6 +97,7 @@ int main()
       if(EXIT){
 	if(selection) free(selection);
 	if(pt) Patient_destroy(pt);
+	sqlite3_close(db);
 	return 0;
       }
       break;

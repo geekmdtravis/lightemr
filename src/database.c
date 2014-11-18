@@ -205,6 +205,7 @@ Patient *Patient_lookup_first(char  *first, sqlite3 *db)
 
 static int Patient_find_callback(void *udp, int c_num, char *c_vals[], char *c_names[])
 {
+  
   strcpy(((Patient*)udp)->mrn, c_vals[0]);
   strcpy(((Patient*)udp)->name->first, c_vals[1]);
   strcpy(((Patient*)udp)->name->middle, c_vals[2]);

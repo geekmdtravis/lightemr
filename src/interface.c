@@ -26,13 +26,19 @@ void Display_main_menu()
 	 "6. Billing\n"
 	 "7. Exit\n"
 	 "\n"
-	 "Please enter you selection: ", APP_VER);
+	 "Please enter your selection: ", APP_VER);
 }
 
 void Display_patient_lookup_menu()
 {
   system("clear");
   printf("\n[ Patient Look-up (%s) ]\n\n", APP_VER);
+  printf("\t1. Lookup by MRN\n");
+  printf("\t2. Lookup by last name\n");
+  printf("\t3. Lookup by first name\n");
+  printf("\n");
+  printf("Please enter your selection: \n");
+  printf("\n\n");
 }
 
 
