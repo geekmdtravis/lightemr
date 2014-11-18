@@ -37,8 +37,8 @@ void Display_patient_lookup_menu()
   printf("\t2. Lookup by last name\n");
   printf("\t3. Lookup by first name\n");
   printf("\n");
-  printf("Please enter your selection: \n");
-  printf("\n\n");
+  printf("Please enter your selection: ");
+
 }
 
 

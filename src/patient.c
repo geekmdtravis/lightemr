@@ -75,50 +75,74 @@ BOOL Patient_destroy(Patient *p)
   if(!p) return FALSE;
 
   // free memory for pid, mrn, dob
-  if(p->pid) free(p->pid);
-  if(p->mrn) free(p->mrn);
-  if(p->dob) free(p->dob);
+  if(p->pid) free(p->pid); p->pid = NULL;
+  if(p->mrn) free(p->mrn); p->mrn = NULL;
+  if(p->dob) free(p->dob); p->dob = NULL;
 
   // free memory for each name and name pointer
-  if(p->name->first) free(p->name->first);
-  if(p->name->middle) free(p->name->middle);
-  if(p->name->last) free(p->name->last);
-  if(p->name) free(p->name);
+  if(p->name->first) free(p->name->first); p->name->first = NULL;
+  if(p->name->middle) free(p->name->middle); p->name->middle = NULL;
+  if(p->name->last) free(p->name->last); p->name->last = NULL;
+  if(p->name) free(p->name); p->name = NULL;
 
   // free memory for each field of address and address pointer
-  if(p->addr->field1) free(p->addr->field1);
-  if(p->addr->field2) free(p->addr->field2);
-  if(p->addr->field3) free(p->addr->field3);
-  if(p->addr->field4) free(p->addr->field4);
-  if(p->addr) free(p->addr);
+  if(p->addr->field1) free(p->addr->field1); p->addr->field1 = NULL;
+  if(p->addr->field2) free(p->addr->field2); p->addr->field2 = NULL;
+  if(p->addr->field3) free(p->addr->field3); p->addr->field3 = NULL;
+  if(p->addr->field4) free(p->addr->field4); p->addr->field4 = NULL;
+  if(p->addr) free(p->addr); p->addr = NULL;
 
   // free memory for each field of contact and contact pointer
-  if(p->contact->email) free(p->contact->email);
-  if(p->contact->phone_c) free(p->contact->phone_c);
-  if(p->contact->phone_h) free(p->contact->phone_h);
-  if(p->contact->phone_w) free(p->contact->phone_w);
-  if(p->contact) free(p->contact);
+  if(p->contact->email) free(p->contact->email); p->contact->email = NULL;
+  if(p->contact->phone_c) free(p->contact->phone_c); p->contact->phone_c = NULL;
+  if(p->contact->phone_h) free(p->contact->phone_h); p->contact->phone_h = NULL;
+  if(p->contact->phone_w) free(p->contact->phone_w); p->contact->phone_w = NULL;
+  if(p->contact) free(p->contact); p->contact = NULL;
 
   // free memory for each field of emergency contact and the ec pointer
-  if(p->emerg1->full_name) free(p->emerg1->full_name);
-  if(p->emerg1->relationship) free(p->emerg1->relationship);
-  if(p->emerg1->contact->email) free(p->emerg1->contact->email);
-  if(p->emerg1->contact->phone_h) free(p->emerg1->contact->phone_h);
-  if(p->emerg1->contact->phone_c) free(p->emerg1->contact->phone_c);
-  if(p->emerg1->contact->phone_w) free(p->emerg1->contact->phone_w);
-  if(p->emerg1->contact) free(p->emerg1->contact);
-  if(p->emerg1) free(p->emerg1);
+  if(p->emerg1->full_name) free(p->emerg1->full_name); p->emerg1->full_name = NULL;
+  if(p->emerg1->relationship) free(p->emerg1->relationship); p->emerg1->relationship = NULL;
+  if(p->emerg1->contact->email) {
+    free(p->emerg1->contact->email);
+    p->emerg1->contact->email = NULL;
+  }
+  if(p->emerg1->contact->phone_h) {
+    free(p->emerg1->contact->phone_h);
+    p->emerg1->contact->phone_h = NULL;
+  }
+  if(p->emerg1->contact->phone_c) {
+    free(p->emerg1->contact->phone_c);
+    p->emerg1->contact->phone_c = NULL;
+  }
+  if(p->emerg1->contact->phone_w) {
+    free(p->emerg1->contact->phone_w);
+    p->emerg1->contact->phone_w = NULL;
+  }
+  if(p->emerg1->contact) free(p->emerg1->contact); p->emerg1->contact = NULL;
+  if(p->emerg1) free(p->emerg1); p->emerg1 = NULL;
 
   // same as above
-  if(p->emerg2->full_name) free(p->emerg2->full_name);
-  if(p->emerg2->relationship) free(p->emerg2->relationship);
-  if(p->emerg2->contact->email) free(p->emerg2->contact->email);
-  if(p->emerg2->contact->phone_h) free(p->emerg2->contact->phone_h);
-  if(p->emerg2->contact->phone_c) free(p->emerg2->contact->phone_c);
-  if(p->emerg2->contact->phone_w) free(p->emerg2->contact->phone_w);
-  if(p->emerg2->contact) free(p->emerg2->contact);
-  if(p->emerg2) free(p->emerg2);
-
+  if(p->emerg2->full_name) free(p->emerg2->full_name); p->emerg2->full_name = NULL;
+  if(p->emerg2->relationship) free(p->emerg2->relationship); p->emerg2->relationship = NULL;
+  if(p->emerg2->contact->email) {
+    free(p->emerg2->contact->email);
+    p->emerg2->contact->email = NULL;
+  }
+  if(p->emerg2->contact->phone_h) {
+    free(p->emerg2->contact->phone_h);
+    p->emerg2->contact->phone_h = NULL;
+  }
+  if(p->emerg2->contact->phone_c) {
+    free(p->emerg2->contact->phone_c);
+    p->emerg2->contact->phone_c = NULL;
+  }
+  if(p->emerg2->contact->phone_w) {
+    free(p->emerg2->contact->phone_w);
+    p->emerg2->contact->phone_w = NULL;
+  }
+  if(p->emerg2->contact) free(p->emerg2->contact); p->emerg2->contact = NULL;
+  if(p->emerg2) free(p->emerg2); p->emerg2 = NULL;
+  
   // free the patient object from memory
   free(p);
   p = NULL;

@@ -22,7 +22,7 @@ int main()
   /* return values for use with getline() */
   ssize_t rc = 0; // return value
   size_t nbytes = 2; // for two chars max ('n' + '\x')
-  char *selection = malloc(sizeof(char) * 2);
+  char *selection = malloc(sizeof(char) * MAX_DATA);
   
   /* tracking the exit status of the program */
   BOOL EXIT = FALSE;
@@ -64,8 +64,23 @@ int main()
       // Presently the selection is supposed to be for
       // type of lookup. However, it's being input as
       // mrn. FIX THIS
-      pt = Patient_lookup_mrn(selection, db);
-      Patient_print_info(pt);
+      switch(selection[0]) {
+      case '1':
+	printf("Please enter patients MRN: ");
+	rc = getline(&selection, &nbytes, stdin);
+	pt = Patient_lookup_mrn(selection, db);
+	Patient_print_info(pt);
+	break;
+      case '2':
+	printf("Selection 2 not yet implemented\n");
+	break;
+      case '3':
+	printf("Selection 3 not yet implemented\n");
+	break;
+      default:
+	printf("Invalid entry.\n");
+	break;
+      }
       break;
       
     case '2':
