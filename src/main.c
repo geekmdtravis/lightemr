@@ -1,3 +1,6 @@
+// file: main.c
+// TODO: Work on case '1', looking up a patient from a database.
+
 #include <string.h>
 #include "interface.h"
 #include "patient.h" 
@@ -16,21 +19,35 @@ typedef int BOOL;
 
 int main()
 {
+  /* return values for use with getline() */
   ssize_t rc = 0; // return value
   size_t nbytes = 2; // for two chars max ('n' + '\x')
-  BOOL EXIT = FALSE;
   char *selection = malloc(sizeof(char) * 2);
+  
+  /* tracking the exit status of the program */
+  BOOL EXIT = FALSE;
+
+  /* For use with Sqlite3 */
   sqlite3 *db; 
   char *query;
   char *sqlError = "SQLite3 Error!";
-  // Plans at present are to only access one patient at
-  // any given time. Single pointer will suffice.
+
+  /* A single program alone will be in workspace. */
   Patient *pt = NULL;
 
+  /* Establish a database connection. If there is no
+     database file present, one will be created. Then
+     validate. Establish a patient demographics table
+     unless one is already present.
+
+     Likely, this will be moved into it's own function
+     and multiple tables will be created at this point.
+  */
   rc = sqlite3_open("patients.db", &db);
   Database_validate(rc);
   Patient_demographics_table_create(db);
 
+  // MAIN PROGRAM LOOP
   do {
     Display_main_menu();
     rc = getline(&selection, &nbytes, stdin);
@@ -38,14 +55,16 @@ int main()
 	  "Was your input a numeric digit?\n"
 	  "The program will now exit.\n");
 
-    // access the first character only, omiting
-    // any escape characters such as \n in this
-    // two char selection.
-    switch(selection[0]) {
+    switch(selection[0]) { // Select only first character.
     case '1':
       Display_patient_lookup_menu();
       if(pt) Patient_destroy(pt);
-      pt = Patient_lookup_mrn("2", db);
+      rc = getline(&selection, &nbytes, stdin);
+      check(rc != 0, "Input error.");
+      // Presently the selection is supposed to be for
+      // type of lookup. However, it's being input as
+      // mrn. FIX THIS
+      pt = Patient_lookup_mrn(selection, db);
       Patient_print_info(pt);
       break;
       
