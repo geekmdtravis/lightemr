@@ -3,9 +3,11 @@
 #ifndef _patient_h
 #define _patient_h
 
-#define MAX_NAME 40
-#define MAX_ADDR 50
-#define MAX_DATA 100
+#define MAX_NAME  40
+#define MAX_ID    20
+#define MAX_PHONE 15
+#define MAX_ADDR  50
+#define MAX_DATA  100
 
 typedef int BOOL;
 #define FALSE 0;
@@ -59,7 +61,6 @@ typedef struct Patient {
 	      Emergency_contact *emerg2,
 	      char *pid, char *mrn);
 } Patient;
-
 
 Patient *Patient_create(void);
 BOOL Patient_destroy(Patient *p);

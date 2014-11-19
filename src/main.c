@@ -1,4 +1,4 @@
-// file: main.c
+// file: main.cp
 // TODO: Work on case '1', looking up a patient from a database.
 
 #include <string.h>
@@ -7,16 +7,6 @@
 #include "patient_add.h"
 #include "database.h"
 #include "modstring.h"
-
-#ifndef TRUE
-#define TRUE  1
-#endif
-
-#ifndef FALSE
-#define FALSE 0
-#endif
-
-typedef int BOOL;
 
 int main()
 {
@@ -44,7 +34,7 @@ int main()
      Likely, this will be moved into it's own function
      and multiple tables will be created at this point.
   */
-  rc = sqlite3_open("lightemr.data", &db);
+  rc = sqlite3_open("lightemr.data", &db); // 40 byte memleak here?
   Database_validate(rc);
   Patient_demographics_table_create(db);
 
@@ -155,10 +145,16 @@ int main()
       EXIT = Display_confirm_exit();
       Evaluate_exit_signal(EXIT);
       if(EXIT){
-	if(selection) free(selection);
+	if(selection) {
+	  free(selection);
+	  selection = NULL;
+	}
 	if(pt) Patient_destroy(pt);
+	sqlite3_free(sqlError);
+	sqlError = NULL;
 	sqlite3_close(db);
-	return 0;
+	db = NULL;
+	exit(EXIT_SUCCESS);
       }
       break;
       
@@ -172,5 +168,5 @@ int main()
   } while (!EXIT);
   
  error:
-  return -1;
+  exit(EXIT_FAILURE);
 }

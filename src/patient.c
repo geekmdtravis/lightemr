@@ -9,9 +9,9 @@ Patient *Patient_create()
   Patient *new_patient = malloc(sizeof(Patient));
 
   // Gain heap space for pid and mrn
-  new_patient->pid = malloc(sizeof(char) * MAX_DATA);
+  new_patient->pid = malloc(sizeof(char) * MAX_ID);
   strcpy(new_patient->pid, "\0");
-  new_patient->mrn = malloc(sizeof(char) * MAX_DATA);
+  new_patient->mrn = malloc(sizeof(char) * MAX_ID);
   strcpy(new_patient->mrn, "\0");
   // Gain heap space for dob
   new_patient->dob = malloc(sizeof(Birthdate));
@@ -29,43 +29,45 @@ Patient *Patient_create()
   // Gain heap space for contact info
   new_patient->contact = malloc(sizeof(Contact));
   new_patient->contact->email = malloc(sizeof(char) * MAX_DATA);
-  new_patient->contact->phone_c = malloc(sizeof(char) * MAX_DATA);
-  new_patient->contact->phone_h = malloc(sizeof(char) * MAX_DATA);
-  new_patient->contact->phone_w = malloc(sizeof(char) * MAX_DATA);
+  new_patient->contact->phone_c = malloc(sizeof(char) * MAX_PHONE);
+  new_patient->contact->phone_h = malloc(sizeof(char) * MAX_PHONE);
+  new_patient->contact->phone_w = malloc(sizeof(char) * MAX_PHONE);
   // Gain heap space for emergency contact
   new_patient->emerg1 = malloc(sizeof(Emergency_contact));
   new_patient->emerg1->full_name = malloc(sizeof(char) * MAX_NAME * 2);
   new_patient->emerg1->relationship = malloc(sizeof(char) * MAX_DATA);
   new_patient->emerg1->contact = malloc(sizeof(Contact));
-  new_patient->emerg1->contact->email = malloc(sizeof(char) * MAX_DATA);
-  new_patient->emerg1->contact->phone_h = malloc(sizeof(char) * MAX_DATA);
-  new_patient->emerg1->contact->phone_c = malloc(sizeof(char) * MAX_DATA);
-  new_patient->emerg1->contact->phone_w = malloc(sizeof(char) * MAX_DATA);
+  new_patient->emerg1->contact->email = malloc(sizeof(char) * MAX_ADDR);
+  new_patient->emerg1->contact->phone_h = malloc(sizeof(char) * MAX_PHONE);
+  new_patient->emerg1->contact->phone_c = malloc(sizeof(char) * MAX_PHONE);
+  new_patient->emerg1->contact->phone_w = malloc(sizeof(char) * MAX_PHONE);
   // Gain heap space for emergency contact
   new_patient->emerg2 = malloc(sizeof(Emergency_contact));
   new_patient->emerg2->full_name = malloc(sizeof(char) * MAX_NAME * 2);
   new_patient->emerg2->relationship = malloc(sizeof(char) * MAX_DATA);
   new_patient->emerg2->contact = malloc(sizeof(Contact));
   new_patient->emerg2->contact->email = malloc(sizeof(char) * MAX_DATA);
-  new_patient->emerg2->contact->phone_h = malloc(sizeof(char) * MAX_DATA);
-  new_patient->emerg2->contact->phone_c = malloc(sizeof(char) * MAX_DATA);
-  new_patient->emerg2->contact->phone_w = malloc(sizeof(char) * MAX_DATA);
+  new_patient->emerg2->contact->phone_h = malloc(sizeof(char) * MAX_PHONE);
+  new_patient->emerg2->contact->phone_c = malloc(sizeof(char) * MAX_PHONE);
+  new_patient->emerg2->contact->phone_w = malloc(sizeof(char) * MAX_PHONE);
 
   // Give place-holder values to name, address, contact
   // and emergency contact fields
   Patient_update_name(new_patient,"First", "Middle", "Last");
   Patient_update_address(new_patient,"Field 1", "Field 2", "Field 3", "Field 4");
   Patient_update_dob(new_patient, 0, 0, 0);
-  Patient_update_contact(new_patient, "", "", "", "No@Email.Given");
+  Patient_update_contact(new_patient, "5555555555", "5555555555", "5555555555",
+			 "No@Email.Given");
   Patient_update_emergency(new_patient->emerg1,
-		      "No contact given", "", "", "", "None", "No@Email.Given");
+		      "No contact given", "5555555555", "5555555555",
+			   "5555555555", "None", "No@Email.Given");
   Patient_update_emergency(new_patient->emerg2,
-		      "No contact given", "", "", "", "None", "No@Email.Given");
+		      "No contact given", "5555555555", "5555555555",
+			   "5555555555", "None", "No@Email.Given");
   new_patient->init = Patient_populate;
   
   return ((new_patient) ? new_patient : NULL);
 }
-
 
 // Look to see if each field that shoud have heap
 // spaces does, and then free it.
