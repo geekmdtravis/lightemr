@@ -142,9 +142,9 @@ Patient *Patient_lookup_last(char  *last, sqlite3 *db)
   int rc;
   
   sql[0] = '\0';
-  strcat(sql, "SELECT * FROM PATIENTS WHERE last = '");
+  strcat(sql, "SELECT * FROM PATIENTS WHERE LOWER(LAST) = LOWER('");
   strcat(sql, last);
-  strcat(sql, "';\0");
+  strcat(sql, "');\0");
 
   // the 4th argument (pt) is provided to callback as the first
   // argument 'void *upd'. This is how we pass patient information
@@ -188,9 +188,9 @@ Patient *Patient_lookup_first(char  *first, sqlite3 *db)
   int rc;
   
   sql[0] = '\0';
-  strcat(sql, "SELECT * FROM PATIENTS WHERE first = '");
+  strcat(sql, "SELECT * FROM PATIENTS WHERE LOWER(FIRST) = LOWER('");
   strcat(sql, first);
-  strcat(sql, "';\0");
+  strcat(sql, "');\0");
 
   // the 4th argument (pt) is provided to callback as the first
   // argument 'void *upd'. This is how we pass patient information

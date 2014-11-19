@@ -34,8 +34,8 @@ void Display_patient_lookup_menu()
   system("clear");
   printf("\n[ Patient Look-up (%s) ]\n\n", APP_VER);
   printf("\t1. Lookup by MRN\n");
-  printf("\t2. Lookup by last name\n");
-  printf("\t3. Lookup by first name\n");
+  printf("\t2. Lookup by first name\n");
+  printf("\t3. Lookup by last name\n");
   printf("\n");
   printf("Please enter your selection: ");
 

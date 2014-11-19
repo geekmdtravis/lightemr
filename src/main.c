@@ -6,6 +6,7 @@
 #include "patient.h" 
 #include "patient_add.h"
 #include "database.h"
+#include "modstring.h"
 
 #ifndef TRUE
 #define TRUE  1
@@ -61,25 +62,48 @@ int main()
       if(pt) Patient_destroy(pt);
       rc = getline(&selection, &nbytes, stdin);
       check(rc != 0, "Input error.");
-      // Presently the selection is supposed to be for
-      // type of lookup. However, it's being input as
-      // mrn. FIX THIS
+      // Lookup patient
       switch(selection[0]) {
-      case '1':
+      case '1': // Lookup by MRN
 	printf("Please enter patients MRN: ");
 	rc = getline(&selection, &nbytes, stdin);
+	check(rc != 0, "Input error.");
+	trim(selection); // remove escape chars
 	pt = Patient_lookup_mrn(selection, db);
-	Patient_print_info(pt);
+	if(pt != NULL)printf("Found patient %s, %s.\n", pt->name->last, pt->name->first);
 	break;
-      case '2':
-	printf("Selection 2 not yet implemented\n");
+      case '2': // Lookup by first name
+	printf("Please enter patients first name: ");
+	rc = getline(&selection, &nbytes, stdin);
+	check(rc != 0, "Input error.");
+	trim(selection); // remove escape chars
+	pt = Patient_lookup_first(selection, db);
+	if(pt != NULL)printf("Found patient %s, %s.\n", pt->name->last, pt->name->first);
 	break;
-      case '3':
-	printf("Selection 3 not yet implemented\n");
+      case '3': // Lookup by last name
+	printf("Please enter patients last name: ");
+	rc = getline(&selection, &nbytes, stdin);
+	check(rc != 0, "Input error.");
+	trim(selection); // remove escape chars
+	pt = Patient_lookup_last(selection, db);
+	if(pt != NULL)printf("Found patient %s, %s.\n", pt->name->last, pt->name->first);
 	break;
       default:
 	printf("Invalid entry.\n");
 	break;
+      }
+      // Prompt to display patient info
+      printf("Would you like to display patient info (y/n)? ");
+      rc = getline(&selection, &nbytes, stdin);
+      check(rc != 0, "Input error.");
+      trim(selection); // remove escape chars
+      if(pt != NULL && selection[0] == 'y') {
+	Patient_print_info(pt);
+      } else if (pt != NULL && selection[0] == 'n') {
+	printf("Information for patient %s, %s will not be displayed.\n",
+		 pt->name->last, pt->name->first);
+      } else {
+	printf("No patient selected.\n");
       }
       break;
       
