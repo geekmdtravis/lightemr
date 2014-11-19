@@ -44,7 +44,7 @@ int main()
      Likely, this will be moved into it's own function
      and multiple tables will be created at this point.
   */
-  rc = sqlite3_open("patients.db", &db);
+  rc = sqlite3_open("lightemr.data", &db);
   Database_validate(rc);
   Patient_demographics_table_create(db);
 
@@ -93,10 +93,12 @@ int main()
 	break;
       }
       // Prompt to display patient info
-      printf("Would you like to display patient info (y/n)? ");
-      rc = getline(&selection, &nbytes, stdin);
-      check(rc != 0, "Input error.");
-      trim(selection); // remove escape chars
+      if(pt != NULL) {
+	printf("Would you like to display patient info (y/n)? ");
+	rc = getline(&selection, &nbytes, stdin);
+	check(rc != 0, "Input error.");
+	trim(selection); // remove escape chars
+      }
       if(pt != NULL && selection[0] == 'y') {
 	Patient_print_info(pt);
       } else if (pt != NULL && selection[0] == 'n') {

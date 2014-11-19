@@ -16,7 +16,7 @@ char *Create_add_user_query(Patient *p);
 Patient *Patient_lookup_mrn(char  *mrn, sqlite3 *db);
 Patient *Patient_lookup_last(char *last, sqlite3 *db);
 Patient *Patient_lookup_first(char *first, sqlite3 *db);
-static int Patient_find_callback(void *upd, int num_c, char *c_vals[], char *c_names[]);
+int Patient_find_callback(void *upd, int num_c, char *c_vals[], char *c_names[]);
 
 #endif
 

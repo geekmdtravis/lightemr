@@ -151,8 +151,13 @@ Patient *Patient_lookup_last(char  *last, sqlite3 *db)
   // to a patient from the SQL query return.
   rc = sqlite3_exec(db, sql, Patient_find_callback, pt, &error);
 
-  // do something with rc here
-  if (rc == 0) rc = 0;
+  // If the resulting query is still a blank patient, destroy it
+  // and set it to null as the query was unsuccessful.  
+  if (strcmp(pt->mrn, "") == 0 || rc != SQLITE_OK) {
+    Patient_destroy(pt);
+    pt = NULL;
+    printf("Patient not found. ");
+  }
   
   return pt;
 }
@@ -173,10 +178,15 @@ Patient *Patient_lookup_mrn(char  *mrn, sqlite3 *db)
   // argument 'void *upd'. This is how we pass patient information
   // to a patient from the SQL query return.
   rc = sqlite3_exec(db, sql, Patient_find_callback, pt, &error);
-
-  // do something with rc here
-  if (rc == 0) rc = 0;
   
+  // If the resulting query is still a blank patient, destroy it
+  // and set it to null as the query was unsuccessful.  
+  if (strcmp(pt->mrn, "") == 0 || rc != SQLITE_OK) {
+    Patient_destroy(pt);
+    pt = NULL;
+    printf("Patient not found. ");
+  }
+    
   return pt;
 }
 
@@ -196,16 +206,21 @@ Patient *Patient_lookup_first(char  *first, sqlite3 *db)
   // argument 'void *upd'. This is how we pass patient information
   // to a patient from the SQL query return.
   rc = sqlite3_exec(db, sql, Patient_find_callback, pt, &error);
-
-  // do something with rc here
-  if (rc == 0) rc = 0;
   
+  // If the resulting query is still a blank patient, destroy it
+  // and set it to null as the query was unsuccessful.
+  if (strcmp(pt->mrn, "") == 0 || rc != SQLITE_OK) {
+    Patient_destroy(pt);
+    pt = NULL;
+    printf("Patient not found. ");
+  }
+  
+ 
   return pt;
 }
 
-static int Patient_find_callback(void *udp, int c_num, char *c_vals[], char *c_names[])
+int Patient_find_callback(void *udp, int c_num, char *c_vals[], char *c_names[])
 {
-  
   strcpy(((Patient*)udp)->mrn, c_vals[0]);
   strcpy(((Patient*)udp)->name->first, c_vals[1]);
   strcpy(((Patient*)udp)->name->middle, c_vals[2]);

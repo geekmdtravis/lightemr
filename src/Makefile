@@ -5,7 +5,7 @@ SHELL=/bin/sh
 
 CC=gcc
 
-CFLAGS=-Wall
+CFLAGS=-Wall -ggdb
 DEBUGFLAGS=-Wall -Wextra -ggdb
 
 LINK=-l sqlite3
