@@ -21,7 +21,7 @@ int main()
   /* For use with Sqlite3 */
   sqlite3 *db; 
   char *query;
-  char *sqlError = "SQLite3 Error!";
+  char *sqlError;
 
   /* A single program alone will be in workspace. */
   Patient *pt = NULL;
@@ -35,8 +35,9 @@ int main()
      and multiple tables will be created at this point.
   */
   rc = sqlite3_open("lightemr.data", &db); // 40 byte memleak here?
-  Database_validate(rc);
-  Patient_demographics_table_create(db);
+  check(rc == SQLITE_OK, "Could not open database.")
+  rc = Patient_demographics_table_create(db);
+  //  check(rc == SQLITE_OK, "Couldn't create demographics table.");
 
   // MAIN PROGRAM LOOP
   do {
@@ -52,53 +53,9 @@ int main()
       if(pt) Patient_destroy(pt);
       rc = getline(&selection, &nbytes, stdin);
       check(rc != 0, "Input error.");
-      // Lookup patient
-      switch(selection[0]) {
-      case '1': // Lookup by MRN
-	printf("Please enter patients MRN: ");
-	rc = getline(&selection, &nbytes, stdin);
-	check(rc != 0, "Input error.");
-	trim(selection); // remove escape chars
-	pt = Patient_lookup_mrn(selection, db);
-	if(pt != NULL)printf("Found patient %s, %s.\n", pt->name->last, pt->name->first);
-	break;
-      case '2': // Lookup by first name
-	printf("Please enter patients first name: ");
-	rc = getline(&selection, &nbytes, stdin);
-	check(rc != 0, "Input error.");
-	trim(selection); // remove escape chars
-	pt = Patient_lookup_first(selection, db);
-	if(pt != NULL)printf("Found patient %s, %s.\n", pt->name->last, pt->name->first);
-	break;
-      case '3': // Lookup by last name
-	printf("Please enter patients last name: ");
-	rc = getline(&selection, &nbytes, stdin);
-	check(rc != 0, "Input error.");
-	trim(selection); // remove escape chars
-	pt = Patient_lookup_last(selection, db);
-	if(pt != NULL)printf("Found patient %s, %s.\n", pt->name->last, pt->name->first);
-	break;
-      default:
-	printf("Invalid entry.\n");
-	break;
-      }
-      // Prompt to display patient info
-      if(pt != NULL) {
-	printf("Would you like to display patient info (y/n)? ");
-	rc = getline(&selection, &nbytes, stdin);
-	check(rc != 0, "Input error.");
-	trim(selection); // remove escape chars
-      }
-      if(pt != NULL && selection[0] == 'y') {
-	Patient_print_info(pt);
-      } else if (pt != NULL && selection[0] == 'n') {
-	printf("Information for patient %s, %s will not be displayed.\n",
-		 pt->name->last, pt->name->first);
-      } else {
-	printf("No patient selected.\n");
-      }
+      Process_patient_lookup(selection, pt, db);
       break;
-      
+
     case '2':
       Display_patient_add_menu();
       if(pt) Patient_destroy(pt);
@@ -150,8 +107,8 @@ int main()
 	  selection = NULL;
 	}
 	if(pt) Patient_destroy(pt);
-	sqlite3_free(sqlError);
-	sqlError = NULL;
+	// if(sqlError) sqlite3_free(sqlError);
+      	sqlError = NULL;
 	sqlite3_close(db);
 	db = NULL;
 	exit(EXIT_SUCCESS);

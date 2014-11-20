@@ -47,20 +47,9 @@ int Patient_demographics_table_create(sqlite3 *db)
     fprintf(stdout, "Table created.\n");
   }
 
-    
-    
-  return rc;
-}
-
-void Database_validate(int rc)
-{
-  #define RETURN_SUCCESS 0
+  sqlite3_free(error);
   
-  if(rc == RETURN_SUCCESS) {
-    fprintf(stdout, "Opened database successfully.\n");
-  } else {
-    fprintf(stderr, "Could not open database.\n");
-  }
+  return rc;
 }
 
 char *Create_add_user_query(Patient *p)
@@ -158,6 +147,8 @@ Patient *Patient_lookup_last(char  *last, sqlite3 *db)
     pt = NULL;
     printf("Patient not found. ");
   }
+
+  sqlite3_free(error);
   
   return pt;
 }
@@ -186,6 +177,8 @@ Patient *Patient_lookup_mrn(char  *mrn, sqlite3 *db)
     pt = NULL;
     printf("Patient not found. ");
   }
+
+  sqlite3_free(error);
     
   return pt;
 }
@@ -214,7 +207,8 @@ Patient *Patient_lookup_first(char  *first, sqlite3 *db)
     pt = NULL;
     printf("Patient not found. ");
   }
-  
+
+  sqlite3_free(error);
  
   return pt;
 }

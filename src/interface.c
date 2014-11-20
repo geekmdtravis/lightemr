@@ -1,15 +1,5 @@
 #include "interface.h"
 
-typedef int BOOL;
-
-#ifndef TRUE
-#define TRUE 1
-#endif
-
-#ifndef FALSE
-#define FALSE 0
-#endif
-
 void Display_main_menu()
 {
   system("clear");
@@ -38,6 +28,74 @@ void Display_patient_lookup_menu()
   printf("\t3. Lookup by last name\n");
   printf("\n");
   printf("Please enter your selection: ");
+
+}
+
+int Process_patient_lookup(char *selection, Patient *pt, sqlite3 *db)
+{
+  size_t nbytes = 2; // for two chars max ('n' + '\x')
+  ssize_t rc = 0;
+  
+    // Lookup patient
+    switch(selection[0]) {
+      case '1': // Lookup by MRN
+	printf("Please enter patients MRN: ");
+	rc = getline(&selection, &nbytes, stdin);
+	check(rc != 0, "Input error.");
+	trim(selection); // remove escape chars
+	pt = Patient_lookup_mrn(selection, db);
+	if(pt) {
+	  printf("Found patient %s, %s.\n", pt->name->last, pt->name->first);
+	}
+	break;
+	
+      case '2': // Lookup by first name
+	printf("Please enter patients first name: ");
+	rc = getline(&selection, &nbytes, stdin);
+	check(rc != 0, "Input error.");
+	trim(selection); // remove escape chars
+	pt = Patient_lookup_first(selection, db);
+	if(pt) {
+	  printf("Found patient %s, %s.\n", pt->name->last, pt->name->first);
+	}
+	break;
+	
+      case '3': // Lookup by last name
+	printf("Please enter patients last name: ");
+	rc = getline(&selection, &nbytes, stdin);
+	check(rc != 0, "Input error.");
+	trim(selection); // remove escape chars
+	pt = Patient_lookup_last(selection, db);
+	if(pt) {
+	  printf("Found patient %s, %s.\n", pt->name->last, pt->name->first);
+	}
+	break;
+	
+      default:
+	printf("Invalid entry.\n");
+	break;
+      }
+      
+      // Prompt to display patient info
+      if(pt != NULL) {
+	printf("Would you like to display patient info (y/n)? ");
+	rc = getline(&selection, &nbytes, stdin);
+	check(rc != 0, "Input error.");
+	trim(selection); // remove escape chars
+      }
+      if(pt != NULL && selection[0] == 'y') {
+	Patient_print_info(pt);
+      } else if (pt != NULL && selection[0] == 'n') {
+	printf("Information for patient %s, %s will not be displayed.\n",
+		 pt->name->last, pt->name->first);
+      } else {
+	printf("No patient selected.\n");
+      }
+
+      return 0;
+
+ error:
+      exit(EXIT_FAILURE);
 
 }
 

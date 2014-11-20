@@ -10,8 +10,14 @@
 #define MAX_DATA  100
 
 typedef int BOOL;
-#define FALSE 0;
-#define TRUE  1;
+
+#ifndef FALSE
+#define FALSE 0
+#endif
+
+#ifndef TRUE
+#define TRUE  1
+#endif
 
 typedef struct Name {
   char *first;
