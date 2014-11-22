@@ -64,7 +64,7 @@ Patient *Patient_create()
   Patient_update_emergency(new_patient->emerg2,
 		      "No contact given", "5555555555", "5555555555",
 			   "5555555555", "None", "No@Email.Given");
-  new_patient->init = Patient_populate;
+  // new_patient->init = Patient_populate;
   
   return ((new_patient) ? new_patient : NULL);
 }
@@ -256,6 +256,82 @@ Name *Set_name(char *first, char *middle, char *last)
   return new_n;
 }
 
+
+// A rudimentary patient information display function. It is 
+// ugly but exhaustive in that it shows all available fields in 
+// a patient object.
+void Patient_print_info(Patient *p)
+{
+    
+  if(p){
+    printf("-------------------\n"
+	 "PATIENT INFORMATION\n"
+	 "===================\n"
+	 " Name: %s %s %s\n"
+	 " DOB: %d/%d/%d\n"
+	 " Address:\n"
+	 "  %s\n"
+	 "  %s\n"
+	 "  %s\n"
+	 "  %s\n"
+	 " Email: %s\n"
+	 " Home Phone: %s\n"
+	 " Cell Phone: %s\n"
+	 " Work Phone: %s\n"
+	 " Personal ID: %s\n"
+	 " MRN: %s\n\n"
+	 "-------------------\n"
+	 "EMERGENCY CONTACT 1\n"
+	 "===================\n"
+	 " Name: %s\n"
+	 " Relationship: %s\n"
+	 " Phone: %s\n"
+	 " Cell: %s\n"
+	 " Work: %s\n"
+	 " Email: %s\n\n"
+	 "-------------------\n"
+	 "EMERGENCY CONTACT 2\n"
+	 "===================\n"
+	 " Name: %s\n"
+	 " Relationship: %s\n"
+	 " Phone: %s\n"
+	 " Cell: %s\n"
+	 " Work: %s\n"
+	 " Email: %s\n\n",
+	 p->name->first,
+	 p->name->middle,
+	 p->name->last,
+	 p->dob->month,
+	 p->dob->day,
+	 p->dob->year,
+	 p->addr->field1,
+	 p->addr->field2,
+	 p->addr->field3,
+	 p->addr->field4,
+	 p->contact->email,
+	 p->contact->phone_h,
+	 p->contact->phone_c,
+	 p->contact->phone_w,
+	 p->pid,
+	 p->mrn,
+	 p->emerg1->full_name,
+	 p->emerg1->relationship,
+	 p->emerg1->contact->phone_h,
+	 p->emerg1->contact->phone_c,
+	 p->emerg1->contact->phone_w,
+	 p->emerg1->contact->email,
+	 p->emerg2->full_name,
+	 p->emerg2->relationship,
+	 p->emerg2->contact->phone_h,
+	 p->emerg2->contact->phone_c,
+	 p->emerg2->contact->phone_w,
+	 p->emerg2->contact->email);
+  } else {
+    printf("No patient available.\n");
+  }
+}
+
+/*
 // Likely only to be used for internal tests. Initialize
 // a local Birthdate object with values.
 Birthdate *Set_birthdate(int month, int day, int year)
@@ -348,77 +424,5 @@ BOOL Patient_populate(Patient *self, Name *name, Birthdate *dob,
   }
 
 }
+*/
 
-// A rudimentary patient information display function. It is 
-// ugly but exhaustive in that it shows all available fields in 
-// a patient object.
-void Patient_print_info(Patient *p)
-{
-    
-  if(p){
-    printf("-------------------\n"
-	 "PATIENT INFORMATION\n"
-	 "===================\n"
-	 " Name: %s %s %s\n"
-	 " DOB: %d/%d/%d\n"
-	 " Address:\n"
-	 "  %s\n"
-	 "  %s\n"
-	 "  %s\n"
-	 "  %s\n"
-	 " Email: %s\n"
-	 " Home Phone: %s\n"
-	 " Cell Phone: %s\n"
-	 " Work Phone: %s\n"
-	 " Personal ID: %s\n"
-	 " MRN: %s\n\n"
-	 "-------------------\n"
-	 "EMERGENCY CONTACT 1\n"
-	 "===================\n"
-	 " Name: %s\n"
-	 " Relationship: %s\n"
-	 " Phone: %s\n"
-	 " Cell: %s\n"
-	 " Work: %s\n"
-	 " Email: %s\n\n"
-	 "-------------------\n"
-	 "EMERGENCY CONTACT 2\n"
-	 "===================\n"
-	 " Name: %s\n"
-	 " Relationship: %s\n"
-	 " Phone: %s\n"
-	 " Cell: %s\n"
-	 " Work: %s\n"
-	 " Email: %s\n\n",
-	 p->name->first,
-	 p->name->middle,
-	 p->name->last,
-	 p->dob->month,
-	 p->dob->day,
-	 p->dob->year,
-	 p->addr->field1,
-	 p->addr->field2,
-	 p->addr->field3,
-	 p->addr->field4,
-	 p->contact->email,
-	 p->contact->phone_h,
-	 p->contact->phone_c,
-	 p->contact->phone_w,
-	 p->pid,
-	 p->mrn,
-	 p->emerg1->full_name,
-	 p->emerg1->relationship,
-	 p->emerg1->contact->phone_h,
-	 p->emerg1->contact->phone_c,
-	 p->emerg1->contact->phone_w,
-	 p->emerg1->contact->email,
-	 p->emerg2->full_name,
-	 p->emerg2->relationship,
-	 p->emerg2->contact->phone_h,
-	 p->emerg2->contact->phone_c,
-	 p->emerg2->contact->phone_w,
-	 p->emerg2->contact->email);
-  } else {
-    printf("No patient available.\n");
-  }
-}
