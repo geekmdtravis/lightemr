@@ -1,13 +1,28 @@
 // file: modstring.c
 
+// TO DO: Modify modgetlatoi() so that it
+// no longer requires the user to provide n.
+
 #include <stdlib.h>
 #include <string.h>
 #include "modstring.h"
+#include "dbg.h"
 
 // This function is a wrapper for the getline
 // function that includes the small modification
 // that the last character, which is often \n
 // is transformed to a \0 via the trim() function
+// I am no sure why, but 'n' and the allocated size of
+// 's' must be the same. Getline's realloc call leads
+// to an invalid free and memory leak.
+// Example usage: modgetl(s, 10) for an s of
+// malloc(sizeof(char) * 10);
+// When not possible to do this, use getline() and then
+// trim() as it handles these things appropriately.
+// Of note, I intentionally made this to pass the
+// buffer length with the address operator. I may revise this
+// but I thought it would be useful for the user to recognize
+// that we're passing the address. 
 // RETURN: same as getline()
 ssize_t modgetl(char *s, size_t *n)
 {
@@ -25,15 +40,15 @@ ssize_t modgetl(char *s, size_t *n)
  error:
   return -1;
 }
-
-// Like above, except that it passes a pointer from
-// the integer in the lower stack frame to the
-// function as an argument and returns a trimmed and
-// atoi'd value. Effectively, "3\n" -> 3
+// Identical to above, except atoi is invoked to
+// convert a temporary string into an integer.
+// This will be changed so that the user will not
+// be required to pass the n value.
 // RETURN: same as getline()
 ssize_t modgetlatoi(int *i, size_t *n)
 {
   ssize_t mr;
+  *n = MAX_DATA;
   char *tempstr = malloc(sizeof(char) * MAX_DATA);
 
   if(i) {

@@ -23,6 +23,7 @@ int main()
 	 "%s\n\n",
 	 testString,
 	 compString);
+
   // Testing a character array
   char testStr[10];
   testStr[0] = 'a';
@@ -41,6 +42,19 @@ int main()
     free(compString);
     compString = NULL;
   }
+
+  printf("Testing modgetl.\n\n");
+#define MAXDATA 100
+  // Allocate 50 bytes to the input string inpString
+  char *inpString = malloc(sizeof(char) * MAXDATA);
+  size_t nbytes = MAXDATA;
+  ssize_t rc;
+  printf("Enter a name: ");
+  rc = modgetl(inpString, &nbytes);
+  // rc = getline(&inpString, &nbytes, stdin);
+  printf("\n\nValue of rc:%zd | You entered: %s.\n", rc, inpString);
+  free(inpString);
+  inpString = NULL;
 
   exit(EXIT_SUCCESS);
 }
