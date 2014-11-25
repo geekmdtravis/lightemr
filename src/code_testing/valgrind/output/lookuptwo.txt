@@ -1,0 +1,119 @@
+==33374== Memcheck, a memory error detector
+==33374== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==33374== Using Valgrind-3.10.0 and LibVEX; rerun with -h for copyright info
+==33374== Command: ./lightemr
+==33374== 
+SQL Error: table PATIENTS already exists
+==33374== Invalid write of size 1
+==33374==    at 0x516BD84: getdelim (iogetdelim.c:122)
+==33374==    by 0x403208: modgetl (modstring.c:32)
+==33374==    by 0x401341: Process_patient_lookup (interface.c:58)
+==33374==    by 0x400FF8: main (main.c:56)
+==33374==  Address 0x5903a14 is 0 bytes after a block of size 4 alloc'd
+==33374==    at 0x4C2CEAE: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33374==    by 0x516BC5A: getdelim (iogetdelim.c:106)
+==33374==    by 0x400EC3: main (main.c:45)
+==33374== 
+==33374== Invalid read of size 1
+==33374==    at 0x4C2E134: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33374==    by 0x4033B2: trim (modstring.c:78)
+==33374==    by 0x403218: modgetl (modstring.c:33)
+==33374==    by 0x401341: Process_patient_lookup (interface.c:58)
+==33374==    by 0x400FF8: main (main.c:56)
+==33374==  Address 0x5903a14 is 0 bytes after a block of size 4 alloc'd
+==33374==    at 0x4C2CEAE: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33374==    by 0x516BC5A: getdelim (iogetdelim.c:106)
+==33374==    by 0x400EC3: main (main.c:45)
+==33374== 
+==33374== Invalid write of size 1
+==33374==    at 0x4C2FF63: __GI_memcpy (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33374==    by 0x516BC87: getdelim (iogetdelim.c:115)
+==33374==    by 0x403208: modgetl (modstring.c:32)
+==33374==    by 0x401341: Process_patient_lookup (interface.c:58)
+==33374==    by 0x400FF8: main (main.c:56)
+==33374==  Address 0x5903a14 is 0 bytes after a block of size 4 alloc'd
+==33374==    at 0x4C2CEAE: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33374==    by 0x516BC5A: getdelim (iogetdelim.c:106)
+==33374==    by 0x400EC3: main (main.c:45)
+==33374== 
+==33374== Invalid write of size 1
+==33374==    at 0x4033BE: trim (modstring.c:78)
+==33374==    by 0x403218: modgetl (modstring.c:33)
+==33374==    by 0x401341: Process_patient_lookup (interface.c:58)
+==33374==    by 0x400FF8: main (main.c:56)
+==33374==  Address 0x5903a14 is 0 bytes after a block of size 4 alloc'd
+==33374==    at 0x4C2CEAE: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33374==    by 0x516BC5A: getdelim (iogetdelim.c:106)
+==33374==    by 0x400EC3: main (main.c:45)
+==33374== 
+==33374== Invalid read of size 1
+==33374==    at 0x4C2DE04: strcat (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33374==    by 0x4041D0: Patient_lookup_first (database.c:195)
+==33374==    by 0x4013B8: Process_patient_lookup (interface.c:60)
+==33374==    by 0x400FF8: main (main.c:56)
+==33374==  Address 0x5903a14 is 0 bytes after a block of size 4 alloc'd
+==33374==    at 0x4C2CEAE: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33374==    by 0x516BC5A: getdelim (iogetdelim.c:106)
+==33374==    by 0x400EC3: main (main.c:45)
+==33374== 
+==33374== Invalid write of size 1
+==33374==    at 0x4C2FF63: __GI_memcpy (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33374==    by 0x516BC87: getdelim (iogetdelim.c:115)
+==33374==    by 0x403208: modgetl (modstring.c:32)
+==33374==    by 0x401427: Process_patient_lookup (interface.c:68)
+==33374==    by 0x400FF8: main (main.c:56)
+==33374==  Address 0x5903a14 is 0 bytes after a block of size 4 alloc'd
+==33374==    at 0x4C2CEAE: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33374==    by 0x516BC5A: getdelim (iogetdelim.c:106)
+==33374==    by 0x400EC3: main (main.c:45)
+==33374== 
+==33374== Invalid write of size 1
+==33374==    at 0x516BD84: getdelim (iogetdelim.c:122)
+==33374==    by 0x403208: modgetl (modstring.c:32)
+==33374==    by 0x401427: Process_patient_lookup (interface.c:68)
+==33374==    by 0x400FF8: main (main.c:56)
+==33374==  Address 0x5903a16 is 2 bytes after a block of size 4 alloc'd
+==33374==    at 0x4C2CEAE: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33374==    by 0x516BC5A: getdelim (iogetdelim.c:106)
+==33374==    by 0x400EC3: main (main.c:45)
+==33374== 
+==33374== Invalid read of size 1
+==33374==    at 0x4C2E134: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33374==    by 0x4033B2: trim (modstring.c:78)
+==33374==    by 0x403218: modgetl (modstring.c:33)
+==33374==    by 0x401427: Process_patient_lookup (interface.c:68)
+==33374==    by 0x400FF8: main (main.c:56)
+==33374==  Address 0x5903a14 is 0 bytes after a block of size 4 alloc'd
+==33374==    at 0x4C2CEAE: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33374==    by 0x516BC5A: getdelim (iogetdelim.c:106)
+==33374==    by 0x400EC3: main (main.c:45)
+==33374== 
+==33374== Invalid write of size 1
+==33374==    at 0x4033BE: trim (modstring.c:78)
+==33374==    by 0x403218: modgetl (modstring.c:33)
+==33374==    by 0x401427: Process_patient_lookup (interface.c:68)
+==33374==    by 0x400FF8: main (main.c:56)
+==33374==  Address 0x5903a15 is 1 bytes after a block of size 4 alloc'd
+==33374==    at 0x4C2CEAE: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33374==    by 0x516BC5A: getdelim (iogetdelim.c:106)
+==33374==    by 0x400EC3: main (main.c:45)
+==33374== 
+==33374== Invalid read of size 1
+==33374==    at 0x4C2DE04: strcat (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33374==    by 0x403EC1: Patient_lookup_last (database.c:135)
+==33374==    by 0x40149E: Process_patient_lookup (interface.c:70)
+==33374==    by 0x400FF8: main (main.c:56)
+==33374==  Address 0x5903a14 is 0 bytes after a block of size 4 alloc'd
+==33374==    at 0x4C2CEAE: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33374==    by 0x516BC5A: getdelim (iogetdelim.c:106)
+==33374==    by 0x400EC3: main (main.c:45)
+==33374== 
+==33374== 
+==33374== HEAP SUMMARY:
+==33374==     in use at exit: 0 bytes in 0 blocks
+==33374==   total heap usage: 2,043 allocs, 2,043 frees, 319,668 bytes allocated
+==33374== 
+==33374== All heap blocks were freed -- no leaks are possible
+==33374== 
+==33374== For counts of detected and suppressed errors, rerun with: -v
+==33374== ERROR SUMMARY: 19 errors from 10 contexts (suppressed: 0 from 0)

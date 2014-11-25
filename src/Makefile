@@ -18,6 +18,7 @@ lightemr: main.o
 	@echo "=============================="
 	$(CC) main.o interface.o patient_add.o patient.o modstring.o database.o -o lightemr $(LINK)
 	@echo "=============================="
+	rm -f *.o
 
 main.o: interface.o patient_add.o patient.o modstring.o database.o
 
@@ -28,5 +29,5 @@ clean:
 	@echo "=============================="
 	@echo "  CLEANING PROJECT DIRECTORY"
 	@echo "=============================="
-	rm -f *.o *.c~ *.h~ Makefile~ lightemr
+	rm -f *.o *~ *# Makefile~ lightemr lightemr.data
 	@echo "=============================="

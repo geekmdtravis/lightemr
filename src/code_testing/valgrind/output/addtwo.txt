@@ -1,0 +1,56 @@
+==33355== Memcheck, a memory error detector
+==33355== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==33355== Using Valgrind-3.10.0 and LibVEX; rerun with -h for copyright info
+==33355== Command: ./lightemr
+==33355== 
+==33355== Invalid write of size 1
+==33355==    at 0x516BD84: getdelim (iogetdelim.c:122)
+==33355==    by 0x403208: modgetl (modstring.c:32)
+==33355==    by 0x401B28: Add_patient (patient_add.c:65)
+==33355==    by 0x40101C: main (main.c:62)
+==33355==  Address 0x5918a72 is 0 bytes after a block of size 2 alloc'd
+==33355==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33355==    by 0x401B11: Add_patient (patient_add.c:64)
+==33355==    by 0x40101C: main (main.c:62)
+==33355== 
+==33355== Invalid read of size 1
+==33355==    at 0x4C2E134: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33355==    by 0x4033B2: trim (modstring.c:78)
+==33355==    by 0x403218: modgetl (modstring.c:33)
+==33355==    by 0x401B28: Add_patient (patient_add.c:65)
+==33355==    by 0x40101C: main (main.c:62)
+==33355==  Address 0x5918a72 is 0 bytes after a block of size 2 alloc'd
+==33355==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33355==    by 0x401B11: Add_patient (patient_add.c:64)
+==33355==    by 0x40101C: main (main.c:62)
+==33355== 
+==33355== Invalid write of size 1
+==33355==    at 0x516BD84: getdelim (iogetdelim.c:122)
+==33355==    by 0x403208: modgetl (modstring.c:32)
+==33355==    by 0x401C94: Add_patient (patient_add.c:82)
+==33355==    by 0x40101C: main (main.c:62)
+==33355==  Address 0x5918a72 is 0 bytes after a block of size 2 alloc'd
+==33355==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33355==    by 0x401B11: Add_patient (patient_add.c:64)
+==33355==    by 0x40101C: main (main.c:62)
+==33355== 
+==33355== Invalid read of size 1
+==33355==    at 0x4C2E134: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33355==    by 0x4033B2: trim (modstring.c:78)
+==33355==    by 0x403218: modgetl (modstring.c:33)
+==33355==    by 0x401C94: Add_patient (patient_add.c:82)
+==33355==    by 0x40101C: main (main.c:62)
+==33355==  Address 0x5918a72 is 0 bytes after a block of size 2 alloc'd
+==33355==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33355==    by 0x401B11: Add_patient (patient_add.c:64)
+==33355==    by 0x40101C: main (main.c:62)
+==33355== 
+==33355== 
+==33355== HEAP SUMMARY:
+==33355==     in use at exit: 0 bytes in 0 blocks
+==33355==   total heap usage: 810 allocs, 810 frees, 221,020 bytes allocated
+==33355== 
+==33355== All heap blocks were freed -- no leaks are possible
+==33355== 
+==33355== For counts of detected and suppressed errors, rerun with: -v
+==33355== ERROR SUMMARY: 8 errors from 4 contexts (suppressed: 0 from 0)
