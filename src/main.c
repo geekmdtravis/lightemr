@@ -13,7 +13,7 @@ int main()
   /* return values for use with getline() */
   ssize_t rc = 0; // return value
   size_t nbytes = 2; // for two chars max ('n' + '\x')
-  char *selection = malloc(sizeof(char) * MAX_DATA);
+  char *selection = malloc(sizeof(char) * nbytes);
   
   /* tracking the exit status of the program */
   BOOL EXIT = FALSE;
@@ -53,7 +53,7 @@ int main()
       if(pt) Patient_destroy(pt);
       rc = getline(&selection, &nbytes, stdin);
       check(rc != 0, "Input error.");
-      Process_patient_lookup(selection, pt, db);
+      Process_patient_lookup(selection, &pt, db);
       break;
 
     case '2':
@@ -62,6 +62,7 @@ int main()
       pt = Add_patient();
       query = Create_add_user_query(pt);
       rc = sqlite3_exec(db, query, NULL, 0, &sqlError);
+      free(query);
       break;
       
     case '3':
@@ -106,7 +107,9 @@ int main()
 	  free(selection);
 	  selection = NULL;
 	}
-	if(pt) Patient_destroy(pt);
+	Patient_destroy(pt);
+	pt = NULL;
+	// if(pt != NULL) Patient_destroy(pt);
 	// if(sqlError) sqlite3_free(sqlError);
       	sqlError = NULL;
 	sqlite3_close(db);

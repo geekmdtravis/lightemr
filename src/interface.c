@@ -1,4 +1,9 @@
 #include "interface.h"
+#include "modstring.h"
+
+#ifndef MAXDATA
+#define MAXDATA 100
+#endif
 
 void Display_main_menu()
 {
@@ -31,43 +36,40 @@ void Display_patient_lookup_menu()
 
 }
 
-int Process_patient_lookup(char *selection, Patient *pt, sqlite3 *db)
+int Process_patient_lookup(char *selection, Patient **pt, sqlite3 *db)
 {
-  size_t nbytes = 2; // for two chars max ('n' + '\x')
+  size_t nbytes = MAXDATA; // for two chars max ('n' + '\x')
   ssize_t rc = 0;
   
     // Lookup patient
     switch(selection[0]) {
       case '1': // Lookup by MRN
 	printf("Please enter patients MRN: ");
-	rc = getline(&selection, &nbytes, stdin);
+	rc = modgetl(selection, &nbytes);
 	check(rc != 0, "Input error.");
-	trim(selection); // remove escape chars
-	pt = Patient_lookup_mrn(selection, db);
-	if(pt) {
-	  printf("Found patient %s, %s.\n", pt->name->last, pt->name->first);
+	*pt = Patient_lookup_mrn(selection, db);
+	if(*pt) {
+	  printf("Found patient %s, %s.\n", (*pt)->name->last, (*pt)->name->first);
 	}
 	break;
 	
       case '2': // Lookup by first name
 	printf("Please enter patients first name: ");
-	rc = getline(&selection, &nbytes, stdin);
+	rc = modgetl(selection, &nbytes);
 	check(rc != 0, "Input error.");
-	trim(selection); // remove escape chars
-	pt = Patient_lookup_first(selection, db);
-	if(pt) {
-	  printf("Found patient %s, %s.\n", pt->name->last, pt->name->first);
+	*pt = Patient_lookup_first(selection, db);
+	if(*pt) {
+	  printf("Found patient %s, %s.\n", (*pt)->name->last, (*pt)->name->first);
 	}
 	break;
 	
       case '3': // Lookup by last name
 	printf("Please enter patients last name: ");
-	rc = getline(&selection, &nbytes, stdin);
+	rc = modgetl(selection, &nbytes);
 	check(rc != 0, "Input error.");
-	trim(selection); // remove escape chars
-	pt = Patient_lookup_last(selection, db);
-	if(pt) {
-	  printf("Found patient %s, %s.\n", pt->name->last, pt->name->first);
+	*pt = Patient_lookup_last(selection, db);
+	if(*pt) {
+	  printf("Found patient %s, %s.\n", (*pt)->name->last, (*pt)->name->first);
 	}
 	break;
 	
@@ -77,17 +79,16 @@ int Process_patient_lookup(char *selection, Patient *pt, sqlite3 *db)
       }
       
       // Prompt to display patient info
-      if(pt != NULL) {
+      if(*pt != NULL) {
 	printf("Would you like to display patient info (y/n)? ");
-	rc = getline(&selection, &nbytes, stdin);
+	rc = modgetl(selection, &nbytes);
 	check(rc != 0, "Input error.");
-	trim(selection); // remove escape chars
       }
-      if(pt != NULL && selection[0] == 'y') {
-	Patient_print_info(pt);
-      } else if (pt != NULL && selection[0] == 'n') {
+      if(*pt != NULL && selection[0] == 'y') {
+	Patient_print_info(*pt);
+      } else if (*pt != NULL && selection[0] == 'n') {
 	printf("Information for patient %s, %s will not be displayed.\n",
-		 pt->name->last, pt->name->first);
+	       (*pt)->name->last, (*pt)->name->first);
       } else {
 	printf("No patient selected.\n");
       }
