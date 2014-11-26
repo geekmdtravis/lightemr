@@ -7,6 +7,7 @@
 #include "patient_add.h"
 #include "database.h"
 #include "modstring.h"
+#include "login.h"
 
 int main()
 {
@@ -25,6 +26,8 @@ int main()
 
   /* A single program alone will be in workspace. */
   Patient *pt = NULL;
+
+  User_login();
 
   /* Establish a database connection. If there is no
      database file present, one will be created. Then
