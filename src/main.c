@@ -13,7 +13,7 @@ int main()
 {
   /* return values for use with getline() */
   ssize_t rc = 0; // return value
-  size_t nbytes = 2; // for two chars max ('n' + '\x')
+  size_t nbytes = MAX_DATA; // for two chars max ('n' + '\x')
   char *selection = malloc(sizeof(char) * nbytes);
   
   /* tracking the exit status of the program */

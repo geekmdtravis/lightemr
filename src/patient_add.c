@@ -14,6 +14,8 @@ Patient *Add_patient()
   Patient *p = Patient_create();
   size_t nbytes = MAX_DATA;
   ssize_t mr;
+  char *selection = malloc(sizeof(char) * MAX_DATA);
+
 
   check(p != NULL, "Patient was not created.");
   
@@ -61,7 +63,6 @@ Patient *Add_patient()
   
   // Get emergency contact information
   printf("\nWould you like to add an emergency contact (y/n)? ");
-  char *selection = malloc(sizeof(char) * 2);
   mr = modgetl(selection, &nbytes);
   if (selection[0] == 'y' || selection[0] == 'Y') {
     printf("\nEMERGENCY CONTACT #1\n");

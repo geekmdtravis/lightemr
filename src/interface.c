@@ -1,8 +1,8 @@
 #include "interface.h"
 #include "modstring.h"
 
-#ifndef MAXDATA
-#define MAXDATA 100
+#ifndef MAX_DATA
+#define MAX_DATA 100
 #endif
 
 void Display_main_menu()
@@ -38,7 +38,7 @@ void Display_patient_lookup_menu()
 
 int Process_patient_lookup(char *selection, Patient **pt, sqlite3 *db)
 {
-  size_t nbytes = MAXDATA; // for two chars max ('n' + '\x')
+  size_t nbytes = MAX_DATA; // for two chars max ('n' + '\x')
   ssize_t rc = 0;
   
     // Lookup patient

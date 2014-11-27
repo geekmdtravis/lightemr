@@ -1,119 +1,15 @@
-==4654== Memcheck, a memory error detector
-==4654== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
-==4654== Using Valgrind-3.10.0 and LibVEX; rerun with -h for copyright info
-==4654== Command: ./lightemr
-==4654== 
+==3941== Memcheck, a memory error detector
+==3941== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==3941== Using Valgrind-3.10.0 and LibVEX; rerun with -h for copyright info
+==3941== Command: ./lightemr
+==3941== 
 SQL Error: table PATIENTS already exists
-==4654== Invalid write of size 1
-==4654==    at 0x516BD84: getdelim (iogetdelim.c:122)
-==4654==    by 0x40325D: modgetl (modstring.c:32)
-==4654==    by 0x401396: Process_patient_lookup (interface.c:58)
-==4654==    by 0x40104D: main (main.c:59)
-==4654==  Address 0x5903b74 is 0 bytes after a block of size 4 alloc'd
-==4654==    at 0x4C2CEAE: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==4654==    by 0x516BC5A: getdelim (iogetdelim.c:106)
-==4654==    by 0x400F18: main (main.c:48)
-==4654== 
-==4654== Invalid read of size 1
-==4654==    at 0x4C2E134: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==4654==    by 0x403407: trim (modstring.c:78)
-==4654==    by 0x40326D: modgetl (modstring.c:33)
-==4654==    by 0x401396: Process_patient_lookup (interface.c:58)
-==4654==    by 0x40104D: main (main.c:59)
-==4654==  Address 0x5903b74 is 0 bytes after a block of size 4 alloc'd
-==4654==    at 0x4C2CEAE: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==4654==    by 0x516BC5A: getdelim (iogetdelim.c:106)
-==4654==    by 0x400F18: main (main.c:48)
-==4654== 
-==4654== Invalid write of size 1
-==4654==    at 0x4C2FF63: __GI_memcpy (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==4654==    by 0x516BC87: getdelim (iogetdelim.c:115)
-==4654==    by 0x40325D: modgetl (modstring.c:32)
-==4654==    by 0x401396: Process_patient_lookup (interface.c:58)
-==4654==    by 0x40104D: main (main.c:59)
-==4654==  Address 0x5903b74 is 0 bytes after a block of size 4 alloc'd
-==4654==    at 0x4C2CEAE: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==4654==    by 0x516BC5A: getdelim (iogetdelim.c:106)
-==4654==    by 0x400F18: main (main.c:48)
-==4654== 
-==4654== Invalid write of size 1
-==4654==    at 0x403413: trim (modstring.c:78)
-==4654==    by 0x40326D: modgetl (modstring.c:33)
-==4654==    by 0x401396: Process_patient_lookup (interface.c:58)
-==4654==    by 0x40104D: main (main.c:59)
-==4654==  Address 0x5903b74 is 0 bytes after a block of size 4 alloc'd
-==4654==    at 0x4C2CEAE: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==4654==    by 0x516BC5A: getdelim (iogetdelim.c:106)
-==4654==    by 0x400F18: main (main.c:48)
-==4654== 
-==4654== Invalid read of size 1
-==4654==    at 0x4C2DE04: strcat (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==4654==    by 0x404225: Patient_lookup_first (database.c:195)
-==4654==    by 0x40140D: Process_patient_lookup (interface.c:60)
-==4654==    by 0x40104D: main (main.c:59)
-==4654==  Address 0x5903b74 is 0 bytes after a block of size 4 alloc'd
-==4654==    at 0x4C2CEAE: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==4654==    by 0x516BC5A: getdelim (iogetdelim.c:106)
-==4654==    by 0x400F18: main (main.c:48)
-==4654== 
-==4654== Invalid write of size 2
-==4654==    at 0x4C2FF2B: __GI_memcpy (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==4654==    by 0x516BC87: getdelim (iogetdelim.c:115)
-==4654==    by 0x40325D: modgetl (modstring.c:32)
-==4654==    by 0x40147C: Process_patient_lookup (interface.c:68)
-==4654==    by 0x40104D: main (main.c:59)
-==4654==  Address 0x5903b74 is 0 bytes after a block of size 4 alloc'd
-==4654==    at 0x4C2CEAE: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==4654==    by 0x516BC5A: getdelim (iogetdelim.c:106)
-==4654==    by 0x400F18: main (main.c:48)
-==4654== 
-==4654== Invalid write of size 1
-==4654==    at 0x516BD84: getdelim (iogetdelim.c:122)
-==4654==    by 0x40325D: modgetl (modstring.c:32)
-==4654==    by 0x40147C: Process_patient_lookup (interface.c:68)
-==4654==    by 0x40104D: main (main.c:59)
-==4654==  Address 0x5903b76 is 2 bytes after a block of size 4 alloc'd
-==4654==    at 0x4C2CEAE: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==4654==    by 0x516BC5A: getdelim (iogetdelim.c:106)
-==4654==    by 0x400F18: main (main.c:48)
-==4654== 
-==4654== Invalid read of size 1
-==4654==    at 0x4C2E134: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==4654==    by 0x403407: trim (modstring.c:78)
-==4654==    by 0x40326D: modgetl (modstring.c:33)
-==4654==    by 0x40147C: Process_patient_lookup (interface.c:68)
-==4654==    by 0x40104D: main (main.c:59)
-==4654==  Address 0x5903b74 is 0 bytes after a block of size 4 alloc'd
-==4654==    at 0x4C2CEAE: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==4654==    by 0x516BC5A: getdelim (iogetdelim.c:106)
-==4654==    by 0x400F18: main (main.c:48)
-==4654== 
-==4654== Invalid write of size 1
-==4654==    at 0x403413: trim (modstring.c:78)
-==4654==    by 0x40326D: modgetl (modstring.c:33)
-==4654==    by 0x40147C: Process_patient_lookup (interface.c:68)
-==4654==    by 0x40104D: main (main.c:59)
-==4654==  Address 0x5903b75 is 1 bytes after a block of size 4 alloc'd
-==4654==    at 0x4C2CEAE: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==4654==    by 0x516BC5A: getdelim (iogetdelim.c:106)
-==4654==    by 0x400F18: main (main.c:48)
-==4654== 
-==4654== Invalid read of size 1
-==4654==    at 0x4C2DE04: strcat (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==4654==    by 0x403F16: Patient_lookup_last (database.c:135)
-==4654==    by 0x4014F3: Process_patient_lookup (interface.c:70)
-==4654==    by 0x40104D: main (main.c:59)
-==4654==  Address 0x5903b74 is 0 bytes after a block of size 4 alloc'd
-==4654==    at 0x4C2CEAE: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==4654==    by 0x516BC5A: getdelim (iogetdelim.c:106)
-==4654==    by 0x400F18: main (main.c:48)
-==4654== 
-==4654== 
-==4654== HEAP SUMMARY:
-==4654==     in use at exit: 0 bytes in 0 blocks
-==4654==   total heap usage: 2,045 allocs, 2,045 frees, 319,868 bytes allocated
-==4654== 
-==4654== All heap blocks were freed -- no leaks are possible
-==4654== 
-==4654== For counts of detected and suppressed errors, rerun with: -v
-==4654== ERROR SUMMARY: 19 errors from 10 contexts (suppressed: 0 from 0)
+==3941== 
+==3941== HEAP SUMMARY:
+==3941==     in use at exit: 0 bytes in 0 blocks
+==3941==   total heap usage: 2,044 allocs, 2,044 frees, 319,962 bytes allocated
+==3941== 
+==3941== All heap blocks were freed -- no leaks are possible
+==3941== 
+==3941== For counts of detected and suppressed errors, rerun with: -v
+==3941== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

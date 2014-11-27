@@ -1,56 +1,14 @@
-==4634== Memcheck, a memory error detector
-==4634== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
-==4634== Using Valgrind-3.10.0 and LibVEX; rerun with -h for copyright info
-==4634== Command: ./lightemr
-==4634== 
-==4634== Invalid write of size 1
-==4634==    at 0x516BD84: getdelim (iogetdelim.c:122)
-==4634==    by 0x40325D: modgetl (modstring.c:32)
-==4634==    by 0x401B7D: Add_patient (patient_add.c:65)
-==4634==    by 0x401071: main (main.c:65)
-==4634==  Address 0x5918bd2 is 0 bytes after a block of size 2 alloc'd
-==4634==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==4634==    by 0x401B66: Add_patient (patient_add.c:64)
-==4634==    by 0x401071: main (main.c:65)
-==4634== 
-==4634== Invalid read of size 1
-==4634==    at 0x4C2E134: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==4634==    by 0x403407: trim (modstring.c:78)
-==4634==    by 0x40326D: modgetl (modstring.c:33)
-==4634==    by 0x401B7D: Add_patient (patient_add.c:65)
-==4634==    by 0x401071: main (main.c:65)
-==4634==  Address 0x5918bd2 is 0 bytes after a block of size 2 alloc'd
-==4634==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==4634==    by 0x401B66: Add_patient (patient_add.c:64)
-==4634==    by 0x401071: main (main.c:65)
-==4634== 
-==4634== Invalid write of size 1
-==4634==    at 0x516BD84: getdelim (iogetdelim.c:122)
-==4634==    by 0x40325D: modgetl (modstring.c:32)
-==4634==    by 0x401CE9: Add_patient (patient_add.c:82)
-==4634==    by 0x401071: main (main.c:65)
-==4634==  Address 0x5918bd2 is 0 bytes after a block of size 2 alloc'd
-==4634==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==4634==    by 0x401B66: Add_patient (patient_add.c:64)
-==4634==    by 0x401071: main (main.c:65)
-==4634== 
-==4634== Invalid read of size 1
-==4634==    at 0x4C2E134: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==4634==    by 0x403407: trim (modstring.c:78)
-==4634==    by 0x40326D: modgetl (modstring.c:33)
-==4634==    by 0x401CE9: Add_patient (patient_add.c:82)
-==4634==    by 0x401071: main (main.c:65)
-==4634==  Address 0x5918bd2 is 0 bytes after a block of size 2 alloc'd
-==4634==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==4634==    by 0x401B66: Add_patient (patient_add.c:64)
-==4634==    by 0x401071: main (main.c:65)
-==4634== 
-==4634== 
-==4634== HEAP SUMMARY:
-==4634==     in use at exit: 0 bytes in 0 blocks
-==4634==   total heap usage: 812 allocs, 812 frees, 221,220 bytes allocated
-==4634== 
-==4634== All heap blocks were freed -- no leaks are possible
-==4634== 
-==4634== For counts of detected and suppressed errors, rerun with: -v
-==4634== ERROR SUMMARY: 8 errors from 4 contexts (suppressed: 0 from 0)
+==3922== Memcheck, a memory error detector
+==3922== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==3922== Using Valgrind-3.10.0 and LibVEX; rerun with -h for copyright info
+==3922== Command: ./lightemr
+==3922== 
+==3922== 
+==3922== HEAP SUMMARY:
+==3922==     in use at exit: 0 bytes in 0 blocks
+==3922==   total heap usage: 811 allocs, 811 frees, 221,510 bytes allocated
+==3922== 
+==3922== All heap blocks were freed -- no leaks are possible
+==3922== 
+==3922== For counts of detected and suppressed errors, rerun with: -v
+==3922== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
