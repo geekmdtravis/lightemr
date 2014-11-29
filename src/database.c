@@ -2,7 +2,9 @@
 #include <string.h>
 #include "database.h"
 
-
+// TO DO: Complete Patient_notes_table_create so that it will create
+//        a table for patient notes and include information such as
+//        note number, mrn, author, time, and body text.
 int Patient_demographics_table_create(sqlite3 *db)
 {
   int rc;
@@ -37,6 +39,32 @@ int Patient_demographics_table_create(sqlite3 *db)
     "EC2_PHONE_C CHAR(40), " \
     "EC2_EMAIL CHAR(50), " \
     "PID CHAR(40)" \
+    ");";
+
+  rc = sqlite3_exec(db, sql, NULL, 0, &error);
+
+  if (rc != SQLITE_OK) {
+    fprintf(stderr, "SQL Error: %s\n", error);
+  } else {
+    fprintf(stdout, "Table created.\n");
+  }
+
+  sqlite3_free(error);
+  
+  return rc;
+}
+
+// THIS IS NOT CONFIRMED TO WORK
+int Patient_notes_table_create(sqlite3 *db)
+{
+  int rc;
+  char *error = "ERROR";
+  
+  char *sql = "CREATE TABLE NOTES(" \
+    "NOTE_NUM INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " \
+    "MRN INTEGER NOT NULL, " \
+    "TEXT VARCHAR(N), " \
+    "AUTHOR VARCHAR(N), " \
     ");";
 
   rc = sqlite3_exec(db, sql, NULL, 0, &error);

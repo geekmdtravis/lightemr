@@ -17,6 +17,7 @@
 
 #define MAX_TRIES 5
 
+void Display_welcome(void);
 void Prompt_user(void);
 void Prompt_pass(void);
 int User_login(void);

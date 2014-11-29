@@ -27,7 +27,8 @@ int main()
   /* A single program alone will be in workspace. */
   Patient *pt = NULL;
 
-  User_login();
+  if (User_login() == -1) exit(EXIT_FAILURE);
+  
 
   /* Establish a database connection. If there is no
      database file present, one will be created. Then
