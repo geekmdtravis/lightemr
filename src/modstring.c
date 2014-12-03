@@ -66,6 +66,28 @@ ssize_t modgetlatoi(int *i, size_t *n)
   return -1;
 }
 
+// like above but with atof
+ssize_t modgetlatof(double *d, size_t *n)
+{
+  int mr;
+  *n = MAX_DATA;
+  char *tempstr = malloc(sizeof(char) * MAX_DATA);
+
+  if(d) {
+    mr = getline(&tempstr, n, stdin);
+    trim(tempstr);
+    *d = atof(tempstr);
+    check(mr > 0, "Failed to acquire input.");
+    free(tempstr);
+    return mr;
+  } else {
+    goto error;
+  }
+  
+ error:
+  return -1;
+}
+
 // makes the last character in a string a
 // null terminator. This is useful in that
 // we can replace bothersome escape characters

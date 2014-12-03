@@ -52,7 +52,7 @@ int main()
 	  "The program will now exit.\n");
 
     switch(selection[0]) { // Select only first character.
-    case '1':
+    case '1': // PATIENT LOOKUP
       Display_patient_lookup_menu();
       if(pt) Patient_destroy(pt);
       rc = getline(&selection, &nbytes, stdin);
@@ -60,7 +60,7 @@ int main()
       Process_patient_lookup(selection, &pt, db);
       break;
 
-    case '2':
+    case '2': // PATIENT ADD
       Display_patient_add_menu();
       if(pt) Patient_destroy(pt);
       pt = Add_patient();
@@ -69,7 +69,7 @@ int main()
       free(query);
       break;
       
-    case '3':
+    case '3': // PATIENT REMOVE
       // Presently only removing active
       // patient. Needs to remove from data-
       // base. No database implmented yet.
@@ -83,17 +83,17 @@ int main()
       }
       break;
       
-    case '4':
+    case '4': // HELP
       // empty
       Display_help_menu();
       break;
       
-    case '5':
+    case '5': // CLINICAL TOOLS
       // empty
       Display_clinical_tools_menu();
       break;
       
-    case '6':
+    case '6': // BILLING
       // empty
       Display_billing_menu();
       break;

@@ -15,6 +15,8 @@ void trim(char *s);
 ssize_t modgetl(char *s, size_t *n);
 // getline() and atoi() the result
 ssize_t modgetlatoi(int *i, size_t *n);
+// getline() and atof() the result
+ssize_t modgetlatof(double *d, size_t *n);
 
 #endif
 

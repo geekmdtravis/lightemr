@@ -1,5 +1,6 @@
 #include "interface.h"
 #include "modstring.h"
+#include "clinical_tools.h"
 
 #ifndef MAX_DATA
 #define MAX_DATA 100
@@ -123,9 +124,24 @@ void Display_help_menu()
 
 void Display_clinical_tools_menu()
 {
+  ssize_t rc;
+  size_t nbytes = 2;
+  int selection;
+  
   system("clear");
   printf("\n[ Clinical Tools (%s) ]\n\n", APP_VER);
   printf("\n 1. Anion Gap.\n\n");
+
+  printf("Please enter your selection: ");
+  modgetlatoi(&selection, &nbytes);
+  switch(selection){
+  case 1:
+    Process_anion_gap();
+    break;
+  default:
+    printf("That was not an option.");
+    break;
+  }
 }
 
 void Display_billing_menu()

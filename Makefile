@@ -29,5 +29,5 @@ clean:
 	@echo "=============================="
 	@echo "  CLEANING PROJECT DIRECTORY"
 	@echo "=============================="
-	rm -f *.o *~ *\# Makefile~ lightemr lightemr.data
+	rm -f *.o *~ *# Makefile~ lightemr lightemr.data
 	@echo "=============================="
