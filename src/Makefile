@@ -1,12 +1,13 @@
 SHELL=/bin/sh
 
-.SUFFIXES:
 .SUFFIXES: .c .o
 
 CC=gcc
 
 CFLAGS=-Wall -ggdb
 DEBUGFLAGS=-Wall -Wextra -ggdb
+DEPS=main.o interface.o patient_add.o patient.o modstring.o \
+	database.o login.o clinical_tools.o note.o
 
 LINK=-l sqlite3
 
@@ -16,14 +17,11 @@ lightemr: main.o
 	@echo "=============================="
 	@echo "     BUILDING THE PROJECT"
 	@echo "=============================="
-	$(CC) main.o interface.o patient_add.o patient.o modstring.o database.o login.o clinical_tools.o -o lightemr $(LINK)
+	$(CC) $(DEPS) -o lightemr $(LINK)
 	@echo "=============================="
 	rm -f *.o
 
-main.o: interface.o patient_add.o patient.o modstring.o database.o login.o clinical_tools.o
-
-debug: main.o 
-	$(CC) main.o interface.o patient_add.o patient.o modstring.o database.o login.o clinical_tools.o -o lightemr $(LINK)
+main.o: $(DEPS)
 
 clean:
 	@echo "=============================="

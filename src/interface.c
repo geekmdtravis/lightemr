@@ -49,9 +49,6 @@ int Process_patient_lookup(char *selection, Patient **pt, sqlite3 *db)
 	rc = modgetl(selection, &nbytes);
 	check(rc != 0, "Input error.");
 	*pt = Patient_lookup_mrn(selection, db);
-	if(*pt) {
-	  printf("Found patient %s, %s.\n", (*pt)->name->last, (*pt)->name->first);
-	}
 	break;
 	
       case '2': // Lookup by first name
@@ -59,9 +56,6 @@ int Process_patient_lookup(char *selection, Patient **pt, sqlite3 *db)
 	rc = modgetl(selection, &nbytes);
 	check(rc != 0, "Input error.");
 	*pt = Patient_lookup_first(selection, db);
-	if(*pt) {
-	  printf("Found patient %s, %s.\n", (*pt)->name->last, (*pt)->name->first);
-	}
 	break;
 	
       case '3': // Lookup by last name
@@ -69,32 +63,23 @@ int Process_patient_lookup(char *selection, Patient **pt, sqlite3 *db)
 	rc = modgetl(selection, &nbytes);
 	check(rc != 0, "Input error.");
 	*pt = Patient_lookup_last(selection, db);
-	if(*pt) {
-	  printf("Found patient %s, %s.\n", (*pt)->name->last, (*pt)->name->first);
-	}
 	break;
 	
       default:
 	printf("Invalid entry.\n");
 	break;
-      }
-      
-      // Prompt to display patient info
-      if(*pt != NULL) {
-	printf("Would you like to display patient info (y/n)? ");
-	rc = modgetl(selection, &nbytes);
-	check(rc != 0, "Input error.");
-      }
-      if(*pt != NULL && selection[0] == 'y') {
-	Patient_print_info(*pt);
-      } else if (*pt != NULL && selection[0] == 'n') {
-	printf("Information for patient %s, %s will not be displayed.\n",
-	       (*pt)->name->last, (*pt)->name->first);
-      } else {
-	printf("No patient selected.\n");
-      }
+    }
 
-      return 0;
+    printf("\n");
+    // Print patient info
+    if(*pt != NULL) {
+      Patient_print_search_result(*pt);
+    } else {
+      printf("Patient not found.\n");
+    }
+    printf("\n");
+
+    return 0;
 
  error:
       exit(EXIT_FAILURE);
@@ -124,7 +109,7 @@ void Display_help_menu()
 
 void Display_clinical_tools_menu()
 {
-  ssize_t rc;
+  // ssize_t rc;
   size_t nbytes = 2;
   int selection;
   

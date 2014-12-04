@@ -1,10 +1,54 @@
 // file: database.c
 #include <string.h>
 #include "database.h"
+#include "defs.h"
 
-// TO DO: Complete Patient_notes_table_create so that it will create
-//        a table for patient notes and include information such as
-//        note number, mrn, author, time, and body text.
+/********************************************************
+ ********************************************************
+          NOTES TABLE AND LOOKUP
+ ********************************************************
+ *******************************************************/
+int Patient_notes_table_create(sqlite3 *db)
+{
+  int rc;
+  char *error = "ERROR";
+
+  char *sql = "CREATE TABLE NOTES(" \
+    "MRN INTEGER NOT NULL," \
+    "TITLE CHAR(50) NOT NULL, " \
+    "AUTHOR CHAR(80) NOT NULL, " \
+    "TIME INTEGER NOT NULL, " \
+    "REPLACED INTEGER NOT NULL, " \
+    "TEXT CHAR(8000)" \
+    ");";
+
+  rc = sqlite3_exec(db, sql, NULL, 0, &error);
+
+  if(rc != SQLITE_OK) {
+    fprintf(stderr, "SQL Error: %s\n", error);
+  } else {
+    fprintf(stdout, "Table created.\n");
+  }
+
+  sqlite3_free(error);
+
+  return rc;
+}
+
+char *Create_add_note_query(Note *n)
+{
+  char *query = malloc(sizeof(char) * MAX_QUERY);
+  
+
+  return query;
+}
+
+
+/********************************************************
+ ********************************************************
+            PATIENT DEMOGRAPHICS AND LOOKUP
+ ********************************************************
+ *******************************************************/
 int Patient_demographics_table_create(sqlite3 *db)
 {
   int rc;
@@ -54,35 +98,9 @@ int Patient_demographics_table_create(sqlite3 *db)
   return rc;
 }
 
-// THIS IS NOT CONFIRMED TO WORK
-int Patient_notes_table_create(sqlite3 *db)
-{
-  int rc;
-  char *error = "ERROR";
-  
-  char *sql = "CREATE TABLE NOTES(" \
-    "NOTE_NUM INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " \
-    "MRN INTEGER NOT NULL, " \
-    "TEXT VARCHAR(N), " \
-    "AUTHOR VARCHAR(N), " \
-    ");";
-
-  rc = sqlite3_exec(db, sql, NULL, 0, &error);
-
-  if (rc != SQLITE_OK) {
-    fprintf(stderr, "SQL Error: %s\n", error);
-  } else {
-    fprintf(stdout, "Table created.\n");
-  }
-
-  sqlite3_free(error);
-  
-  return rc;
-}
-
 char *Create_add_user_query(Patient *p)
 {
-  char *query = malloc(sizeof(char) * 1000);
+  char *query = malloc(sizeof(char) * MAX_QUERY);
   char day[2];
   sprintf(day, "%d", p->dob->day);
   char month[2];

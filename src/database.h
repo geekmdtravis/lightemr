@@ -9,9 +9,11 @@
 #include <sqlite3.h>
 #include "patient.h"
 #include "database.h"
+#include "note.h"
 
-int Patient_demographics_table_create(sqlite3 *db);
 int Patient_notes_table_create(sqlite3 *db);
+char *Create_add_note_query(Note *n);
+int Patient_demographics_table_create(sqlite3 *db);
 char *Create_add_user_query(Patient *p);
 Patient *Patient_lookup_mrn(char  *mrn, sqlite3 *db);
 Patient *Patient_lookup_last(char *last, sqlite3 *db);

@@ -356,7 +356,8 @@ void Patient_print_info(Patient *p)
 {
     
   if(p){
-    printf("-------------------\n"
+    printf(
+	 "-------------------\n"
 	 "PATIENT INFORMATION\n"
 	 "===================\n"
 	 " Name: %s %s %s\n"
@@ -418,6 +419,19 @@ void Patient_print_info(Patient *p)
 	 p->emerg2->contact->phone_c,
 	 p->emerg2->contact->phone_w,
 	 p->emerg2->contact->email);
+  } else {
+    printf("No patient available.\n");
+  }
+}
+
+void Patient_print_search_result(Patient *p)
+{
+  if(p) {
+    printf("[ MRN: %s ][ Name: %s %s %s ][ DOB: %d/%d/%d ]\n",
+	 p->mrn, p->name->first,
+	 p->name->middle, p->name->last,
+	 p->dob->month, p->dob->day,
+	 p->dob->year);
   } else {
     printf("No patient available.\n");
   }

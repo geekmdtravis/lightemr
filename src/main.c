@@ -39,9 +39,10 @@ int main()
      and multiple tables will be created at this point.
   */
   rc = sqlite3_open("lightemr.data", &db); // 40 byte memleak here?
-  check(rc == SQLITE_OK, "Could not open database.")
+  check(rc == SQLITE_OK, "Could not open database.");
+  // Create relevant tables
   rc = Patient_demographics_table_create(db);
-  //  check(rc == SQLITE_OK, "Couldn't create demographics table.");
+  rc = Patient_notes_table_create(db);
 
   // MAIN PROGRAM LOOP
   do {

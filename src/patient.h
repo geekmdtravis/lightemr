@@ -3,21 +3,7 @@
 #ifndef _patient_h
 #define _patient_h
 
-#define MAX_NAME  40
-#define MAX_ID    20
-#define MAX_PHONE 15
-#define MAX_ADDR  50
-#define MAX_DATA  100
-
-typedef int BOOL;
-
-#ifndef FALSE
-#define FALSE 0
-#endif
-
-#ifndef TRUE
-#define TRUE  1
-#endif
+#include "defs.h"
 
 typedef struct Name {
   char *first;
@@ -100,7 +86,7 @@ Emergency_contact *Set_emergency_contact(char *full_name,
 		      char *phone_h, char *phone_c,
 		      char *phone_w, char *email);
 void Patient_print_info(Patient *p);
-
+void Patient_print_search_result(Patient *p);
 #endif
 
 // eof: patient.h
