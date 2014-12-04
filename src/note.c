@@ -14,7 +14,7 @@ char *Formatted_time(void)
 
   if(!tmp) return "Failed to get time.\0";
 
-  rc = strftime(timeStr, sizeof(timeStr), timeFormat, tmp);
+  rc = strftime(timeStr, MAX_DATE, timeFormat, tmp);
   if(rc == 0) return "Failed create formatted time string.\0";
 
   return timeStr;

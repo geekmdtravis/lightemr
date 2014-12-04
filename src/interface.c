@@ -1,14 +1,9 @@
 #include "interface.h"
-#include "modstring.h"
-#include "clinical_tools.h"
-
-#ifndef MAX_DATA
-#define MAX_DATA 100
-#endif
 
 void Display_main_menu()
 {
   system("clear");
+  Display_menu_time();
   printf("\n"
          "[ Welcome to %s ]\n"
          "\n"
@@ -23,6 +18,28 @@ void Display_main_menu()
 	 "7. Exit\n"
 	 "\n"
 	 "Please enter your selection: ", APP_VER);
+}
+
+void Display_menu_time()
+{
+  char *timeStr = malloc(sizeof(char) * MAX_DATE);
+  //char timeStr[MAX_DATE];
+  time_t t;
+  struct tm *tmp;
+  const char *timeFormat = "%A %B %d %Y\0";
+  int rc;
+
+  t = time(NULL);
+  tmp = localtime(&t);
+
+  if(!tmp) printf("Failed to get time.");
+
+  rc = strftime(timeStr, MAX_DATE, timeFormat, tmp);
+  if(rc == 0) printf("Failed to create formatted time string.");
+
+  printf("%s\n", timeStr);
+
+  free(timeStr);
 }
 
 /****************************************

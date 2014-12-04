@@ -1,29 +1,21 @@
 // file: interface.h
-#include "patient.h"
-#include "database.h"
-#include "stdio.h"
-#include "modstring.h"
-#include "dbg.h"
-
-typedef int BOOL;
-
-#ifndef TRUE
-#define TRUE 1
-#endif
-
-#ifndef FALSE
-#define FALSE 0
-#endif
 
 #ifndef _interface_h
 #define _interface_h
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+#include "patient.h"
+#include "database.h"
+#include "modstring.h"
 #include "dbg.h"
+#include "defs.h"
+#include "clinical_tools.h"
 #include "version.h"
 
 void Display_main_menu(void);
+void Display_menu_time(void);
 void Display_patient_lookup_menu(void);
 int Process_patient_lookup(char *selection, Patient **pt, sqlite3 *db);
 int Patient_add_commit(Patient *p);

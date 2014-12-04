@@ -7,7 +7,7 @@
 #define MAX_DATA  100
 #define MAX_QUERY 1000
 #define MAX_NOTE  8000
-#define MAX_DATE  20
+#define MAX_DATE  40
 
 typedef int BOOL;
 
