@@ -19,7 +19,6 @@ lightemr: main.o
 	@echo "=============================="
 	$(CC) $(DEPS) -o lightemr $(LINK)
 	@echo "=============================="
-	rm -f *.o
 
 main.o: $(DEPS)
 

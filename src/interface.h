@@ -26,6 +26,7 @@ typedef int BOOL;
 void Display_main_menu(void);
 void Display_patient_lookup_menu(void);
 int Process_patient_lookup(char *selection, Patient **pt, sqlite3 *db);
+int Patient_add_commit(Patient *p);
 void Display_patient_add_menu(void);
 void Display_patient_remove_menu(void);
 void Display_help_menu(void);

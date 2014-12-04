@@ -58,16 +58,24 @@ int main()
       if(pt) Patient_destroy(pt);
       rc = getline(&selection, &nbytes, stdin);
       check(rc != 0, "Input error.");
-      Process_patient_lookup(selection, &pt, db);
+      rc = Process_patient_lookup(selection, &pt, db);
+      if(rc == -1) {
+	printf("Could not process patient lookup.\n\n");
+      } else {
+	// Process_patient(*pt);
+      }
       break;
 
     case '2': // PATIENT ADD
       Display_patient_add_menu();
       if(pt) Patient_destroy(pt);
       pt = Add_patient();
-      query = Create_add_user_query(pt);
-      rc = sqlite3_exec(db, query, NULL, 0, &sqlError);
-      free(query);
+      rc = Patient_add_commit(pt);
+      if(rc == 1) {
+	query = Create_add_user_query(pt);
+	rc = sqlite3_exec(db, query, NULL, 0, &sqlError);
+	free(query);
+      }
       break;
       
     case '3': // PATIENT REMOVE

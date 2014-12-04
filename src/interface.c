@@ -25,6 +25,9 @@ void Display_main_menu()
 	 "Please enter your selection: ", APP_VER);
 }
 
+/****************************************
+          PATIENT LOOKUP
+*****************************************/
 void Display_patient_lookup_menu()
 {
   system("clear");
@@ -47,22 +50,22 @@ int Process_patient_lookup(char *selection, Patient **pt, sqlite3 *db)
       case '1': // Lookup by MRN
 	printf("Please enter patients MRN: ");
 	rc = modgetl(selection, &nbytes);
-	check(rc != 0, "Input error.");
-	*pt = Patient_lookup_mrn(selection, db);
+	if (rc != 0) *pt = Patient_lookup_mrn(selection, db);
+	else printf("Error acquiring input.\n");
 	break;
 	
       case '2': // Lookup by first name
 	printf("Please enter patients first name: ");
 	rc = modgetl(selection, &nbytes);
-	check(rc != 0, "Input error.");
-	*pt = Patient_lookup_first(selection, db);
+	if (rc != 0) *pt = Patient_lookup_first(selection, db);
+	else printf("Error acquiring input.\n");
 	break;
 	
       case '3': // Lookup by last name
 	printf("Please enter patients last name: ");
 	rc = modgetl(selection, &nbytes);
-	check(rc != 0, "Input error.");
-	*pt = Patient_lookup_last(selection, db);
+	if (rc != 0) *pt = Patient_lookup_last(selection, db);
+	else printf("Error acquiring input.\n");
 	break;
 	
       default:
@@ -74,18 +77,58 @@ int Process_patient_lookup(char *selection, Patient **pt, sqlite3 *db)
     // Print patient info
     if(*pt != NULL) {
       Patient_print_search_result(*pt);
+      Patient_print_info(*pt);
+      printf("\n");
     } else {
-      printf("Patient not found.\n");
+      printf("Patient not found.\n\n");
+      return -1;
     }
-    printf("\n");
 
     return 0;
-
- error:
-      exit(EXIT_FAILURE);
-
 }
 
+int Patient_add_commit(Patient *p)
+{
+  ssize_t rc;
+  int selection;
+  size_t nbytes = 2;
+
+  while(1) {
+    system("clear");
+    printf("\n"
+	   "ATTENTION: Please review the information below.\n"
+	   "\n");
+    Patient_print_info(p);
+    printf( "\n"
+	    "Would you like to commit this information to the database?\n"
+	    "(1) YES\n"
+	    "(2) NO\n"
+	    "::> ");
+    rc = modgetlatoi(&selection, &nbytes);
+    if (rc == 0) {
+      printf("\nError acquiring input\n");
+      return 0;
+
+    }
+    switch(selection) {
+    case 1:
+      printf("\nCommitting to database now.\n");
+      return 1;
+      break;
+    case 2:
+      printf("\nThis information will not be commit to database.\n");
+      return 0;
+      break;
+    default:
+      printf("\nInvalid entry. Please try again.\n\n");
+      break;
+    }
+  }
+}
+
+/******************************************
+             PATIENT ADD
+ *****************************************/
 
 void Display_patient_add_menu()
 {
@@ -93,6 +136,9 @@ void Display_patient_add_menu()
   printf("\n[ Patient Add Menu (%s) ]\n\n", APP_VER);
 }
 
+/******************************************
+             PATIENT REMOVE
+ *****************************************/
 
 void Display_patient_remove_menu()
 {
@@ -100,12 +146,18 @@ void Display_patient_remove_menu()
   printf("\n[ Patient Remove Menu (%s) ]\n\n", APP_VER);
 }
 
-
+/******************************************
+             HELP
+ *****************************************/
 void Display_help_menu()
 {
   system("clear");
   printf("\n[ Help (%s) ]\n\n", APP_VER);
 }
+
+/******************************************
+             CLINICAL TOOLS
+ *****************************************/
 
 void Display_clinical_tools_menu()
 {
@@ -129,11 +181,18 @@ void Display_clinical_tools_menu()
   }
 }
 
+/******************************************
+             BILLING
+ *****************************************/
 void Display_billing_menu()
 {
   system("clear");
   printf("\n[ Billing (%s) ]\n\n", APP_VER);
 }
+
+/******************************************
+             FLOW CONTROL
+ *****************************************/
 
 void Display_confirm_continue()
 {

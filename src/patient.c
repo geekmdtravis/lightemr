@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 #include <stdlib.h>
 #include "patient.h"
 
@@ -354,59 +355,55 @@ BOOL Patient_populate(Patient *self, Name *name, Birthdate *dob,
 // a patient object.
 void Patient_print_info(Patient *p)
 {
+  char *upperFirst = Convert_to_upper(p->name->first);
+  char *upperMiddle = Convert_to_upper(p->name->middle);
+  char *upperLast = Convert_to_upper(p->name->last);
     
   if(p){
     printf(
-	 "-------------------\n"
-	 "PATIENT INFORMATION\n"
-	 "===================\n"
-	 " Name: %s %s %s\n"
-	 " DOB: %d/%d/%d\n"
-	 " Address:\n"
-	 "  %s\n"
-	 "  %s\n"
-	 "  %s\n"
-	 "  %s\n"
+	 "=====================================================\n"
+	 "%s %s %s\n"
+	 "DOB: %d/%d/%d PID: %s  MRN: %s\n"
+	 "=====================================================\n"
+	 " %s\n"
+	 " %s\n"
+	 " %s\n"
+	 " %s\n"
+	 " H: %s\n"
+	 " C: %s\n"
+	 " W: %s\n"
 	 " Email: %s\n"
-	 " Home Phone: %s\n"
-	 " Cell Phone: %s\n"
-	 " Work Phone: %s\n"
-	 " Personal ID: %s\n"
-	 " MRN: %s\n\n"
-	 "-------------------\n"
-	 "EMERGENCY CONTACT 1\n"
-	 "===================\n"
-	 " Name: %s\n"
-	 " Relationship: %s\n"
-	 " Phone: %s\n"
-	 " Cell: %s\n"
-	 " Work: %s\n"
-	 " Email: %s\n\n"
-	 "-------------------\n"
-	 "EMERGENCY CONTACT 2\n"
-	 "===================\n"
-	 " Name: %s\n"
-	 " Relationship: %s\n"
-	 " Phone: %s\n"
-	 " Cell: %s\n"
-	 " Work: %s\n"
-	 " Email: %s\n\n",
-	 p->name->first,
-	 p->name->middle,
-	 p->name->last,
+	 "\n"
+	 "%s (%s)\n"
+	 "-----------------------------------------------------\n"
+	 " H: %s\n"
+	 " C: %s\n"
+	 " W: %s\n"
+	 " Email: %s\n"
+	 "\n"
+	 "%s (%s)\n"
+	 "-----------------------------------------------------\n"
+	 " H: %s\n"
+	 " C: %s\n"
+	 " W: %s\n"
+	 " Email: %s\n"
+	 "\n",
+	 upperFirst,
+	 upperMiddle,
+	 upperLast,
 	 p->dob->month,
 	 p->dob->day,
 	 p->dob->year,
+	 p->pid,
+	 p->mrn,
 	 p->addr->field1,
 	 p->addr->field2,
 	 p->addr->field3,
 	 p->addr->field4,
-	 p->contact->email,
 	 p->contact->phone_h,
 	 p->contact->phone_c,
 	 p->contact->phone_w,
-	 p->pid,
-	 p->mrn,
+	 p->contact->email,
 	 p->emerg1->full_name,
 	 p->emerg1->relationship,
 	 p->emerg1->contact->phone_h,
@@ -422,6 +419,10 @@ void Patient_print_info(Patient *p)
   } else {
     printf("No patient available.\n");
   }
+
+  free(upperFirst);
+  free(upperMiddle);
+  free(upperLast);
 }
 
 void Patient_print_search_result(Patient *p)
@@ -435,4 +436,17 @@ void Patient_print_search_result(Patient *p)
   } else {
     printf("No patient available.\n");
   }
+}
+
+char *Convert_to_upper(char *str)
+{
+  int i;
+  char *upperStr = malloc(sizeof(char) * strlen(str) + 1);
+  
+  for (i = 0; i < strlen(str) && str[i] != '\0'; i++) {
+    upperStr[i] = toupper(str[i]);
+  }
+  upperStr[i] = '\0';
+
+  return upperStr;
 }

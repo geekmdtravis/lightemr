@@ -43,7 +43,7 @@ int Process_anion_gap()
       double rd;
       double normalAlb;
       double alb;
-      printf("Normal albumin\t\t: ");
+      printf("Normal albumin (4.2)\t: ");
       modgetlatof(&normalAlb, &nbytes);
       printf("Observed albumin\t: ");
       modgetlatof(&alb, &nbytes);

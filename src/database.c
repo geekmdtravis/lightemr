@@ -191,7 +191,6 @@ Patient *Patient_lookup_last(char  *last, sqlite3 *db)
   if (strcmp(pt->mrn, "") == 0 || rc != SQLITE_OK) {
     Patient_destroy(pt);
     pt = NULL;
-    printf("Patient not found. ");
   }
 
   sqlite3_free(error);
@@ -221,7 +220,6 @@ Patient *Patient_lookup_mrn(char  *mrn, sqlite3 *db)
   if (strcmp(pt->mrn, "") == 0 || rc != SQLITE_OK) {
     Patient_destroy(pt);
     pt = NULL;
-    printf("Patient not found. ");
   }
 
   sqlite3_free(error);
@@ -251,7 +249,6 @@ Patient *Patient_lookup_first(char  *first, sqlite3 *db)
   if (strcmp(pt->mrn, "") == 0 || rc != SQLITE_OK) {
     Patient_destroy(pt);
     pt = NULL;
-    printf("Patient not found. ");
   }
 
   sqlite3_free(error);

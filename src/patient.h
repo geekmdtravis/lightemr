@@ -88,5 +88,6 @@ Emergency_contact *Set_emergency_contact(char *full_name,
 void Patient_print_info(Patient *p);
 void Patient_print_search_result(Patient *p);
 #endif
+char *Convert_to_upper(char *str);
 
 // eof: patient.h
