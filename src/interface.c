@@ -94,7 +94,27 @@ int Process_patient_lookup(char *selection, Patient **pt, sqlite3 *db)
     // Print patient info
     if(*pt != NULL) {
       Patient_print_search_result(*pt);
-      Patient_print_info(*pt);
+      
+      while (selection[0] != 'Y' &&
+	     selection[0] != 'y' &&
+	     selection[0] != 'N' &&
+	     selection[0] != 'n') {
+	printf("\nMore detail on patient %s %s (Yes/No)? ",
+	       (*pt)->name->first, (*pt)->name->last);
+	rc = modgetl(selection, &nbytes);
+	switch(selection[0]) {
+	case 'Y':
+	case 'y':
+	  system("clear");
+	  Patient_print_info(*pt);
+	  break;
+	case 'N':
+	case 'n':
+	  break;
+	default:
+	  printf("Invalid selection.\n");
+	}
+      }
       printf("\n");
     } else {
       printf("Patient not found.\n\n");

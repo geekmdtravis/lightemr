@@ -10,6 +10,7 @@
 #include "patient.h"
 #include "database.h"
 #include "note.h"
+#include "modstring.h"
 
 typedef struct Patient_query_result {
   Patient *resultList[MAX_RESULTS];
@@ -24,7 +25,9 @@ Patient *Patient_lookup_mrn(char  *mrn, sqlite3 *db);
 Patient *Patient_lookup_last(char *last, sqlite3 *db);
 Patient *Patient_lookup_first(char *first, sqlite3 *db);
 int Patient_find_callback(void *upd, int num_c, char *c_vals[], char *c_names[]);
+int Patient_select(const PQR *pqr, char *last);
 
 #endif
 
 // eof: database.h
+

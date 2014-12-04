@@ -175,7 +175,7 @@ Patient *Patient_lookup_last(char  *last, sqlite3 *db)
   Patient *pt;
   char sql[100];
   char *error = "Sqlite3 ERROR.";
-  int rc, i;
+  int rc, i, selection;
 
   for(i = 0; i < MAX_RESULTS; i++) {
     pqr.resultList[i] = Patient_create();
@@ -191,8 +191,8 @@ Patient *Patient_lookup_last(char  *last, sqlite3 *db)
   // argument 'void *upd'. This is how we pass patient information
   // to a patient from the SQL query return.
   rc = sqlite3_exec(db, sql, Patient_find_callback, &pqr, &error);
-
-  pt = pqr.resultList[0];
+  selection = Patient_select(&pqr, last);
+  pt = pqr.resultList[selection];
   
   // If the resulting query is still a blank patient, destroy it
   // and set it to null as the query was unsuccessful.  
@@ -202,8 +202,8 @@ Patient *Patient_lookup_last(char  *last, sqlite3 *db)
   }
   
   // this causes memory leak; but it's a test
-  for(i = 1; i < MAX_RESULTS; i++) {
-    if(pqr.resultList[i]) free(pqr.resultList[i]);
+  for(i = 0; i < MAX_RESULTS; i++) {
+    if(pqr.resultList[i] && i != selection) free(pqr.resultList[i]);
   }
 
   sqlite3_free(error);
@@ -260,7 +260,7 @@ Patient *Patient_lookup_first(char  *first, sqlite3 *db)
   Patient *pt;
   char sql[100];
   char *error = "Sqlite3 ERROR.";
-  int rc, i;
+  int rc, i, selection;
 
   for(i = 0; i < MAX_RESULTS; i++) {
     pqr.resultList[i] = Patient_create();
@@ -276,8 +276,8 @@ Patient *Patient_lookup_first(char  *first, sqlite3 *db)
   // argument 'void *upd'. This is how we pass patient information
   // to a patient from the SQL query return.
   rc = sqlite3_exec(db, sql, Patient_find_callback, &pqr, &error);
-
-  pt = pqr.resultList[0];
+  selection = Patient_select(&pqr, first);
+  pt = pqr.resultList[selection];
 
   // If the resulting query is still a blank patient, destroy it
   // and set it to null as the query was unsuccessful.  
@@ -329,4 +329,28 @@ int Patient_find_callback(void *udp, int c_num, char *c_vals[], char *c_names[])
   return 0;
 }
 
+int Patient_select(const PQR *pqr, char *last)
+{
+  int selection, i;
+  size_t nbytes = 4;
+
+  if(pqr->count == 1) {
+    selection = 0;
+  } else {
+    printf("\n\n"
+	   "Multiple results found for query \"%s\".\n"
+	   "---------------------------------------------------------\n"
+	   , last);
+    for (i = 0; i < pqr->count; i++) {
+      printf("[# %d] ", i);
+      Patient_print_search_result(pqr->resultList[i]);
+    }
+    printf("\n"
+	   "Please enter the selection number for the correct patient below.\n"
+	   "::> ");
+    modgetlatoi(&selection, &nbytes);
+  }
+  
+  return selection;
+}
 // eof: database.c
