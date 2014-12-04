@@ -10,6 +10,10 @@
 #define MAX_NOTE    8000
 #define MAX_DATE    40
 
+#define THICK_LINE "==================================================\n"
+#define THIN_LINE  "--------------------------------------------------\n"
+#define PLUS_LINE  "++++++++++++++++++++++++++++++++++++++++++++++++++\n"
+
 typedef int BOOL;
 
 #ifndef FALSE

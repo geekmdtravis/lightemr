@@ -339,7 +339,7 @@ int Patient_select(const PQR *pqr, char *last)
   } else {
     printf("\n\n"
 	   "Multiple results found for query \"%s\".\n"
-	   "---------------------------------------------------------\n"
+	   THIN_LINE
 	   , last);
     for (i = 0; i < pqr->count; i++) {
       printf("[# %d] ", i);

@@ -361,10 +361,10 @@ void Patient_print_info(Patient *p)
     
   if(p){
     printf(
-	 "=====================================================\n"
+	 THICK_LINE
 	 "%s %s %s\n"
 	 "DOB: %d/%d/%d PID: %s  MRN: %s\n"
-	 "=====================================================\n"
+	 THICK_LINE
 	 " %s\n"
 	 " %s\n"
 	 " %s\n"
@@ -375,14 +375,14 @@ void Patient_print_info(Patient *p)
 	 " Email: %s\n"
 	 "\n"
 	 "%s (%s)\n"
-	 "-----------------------------------------------------\n"
+	 THIN_LINE
 	 " H: %s\n"
 	 " C: %s\n"
 	 " W: %s\n"
 	 " Email: %s\n"
 	 "\n"
 	 "%s (%s)\n"
-	 "-----------------------------------------------------\n"
+	 THIN_LINE
 	 " H: %s\n"
 	 " C: %s\n"
 	 " W: %s\n"
