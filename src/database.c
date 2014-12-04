@@ -171,10 +171,16 @@ char *Create_add_user_query(Patient *p)
 
 Patient *Patient_lookup_last(char  *last, sqlite3 *db)
 {
-  Patient *pt = Patient_create();
+  PQR pqr;
+  Patient *pt;
   char sql[100];
   char *error = "Sqlite3 ERROR.";
-  int rc;
+  int rc, i;
+
+  for(i = 0; i < MAX_RESULTS; i++) {
+    pqr.resultList[i] = Patient_create();
+  }
+  pqr.count = 0;
   
   sql[0] = '\0';
   strcat(sql, "SELECT * FROM PATIENTS WHERE LOWER(LAST) = LOWER('");
@@ -184,26 +190,39 @@ Patient *Patient_lookup_last(char  *last, sqlite3 *db)
   // the 4th argument (pt) is provided to callback as the first
   // argument 'void *upd'. This is how we pass patient information
   // to a patient from the SQL query return.
-  rc = sqlite3_exec(db, sql, Patient_find_callback, pt, &error);
+  rc = sqlite3_exec(db, sql, Patient_find_callback, &pqr, &error);
 
+  pt = pqr.resultList[0];
+  
   // If the resulting query is still a blank patient, destroy it
   // and set it to null as the query was unsuccessful.  
   if (strcmp(pt->mrn, "") == 0 || rc != SQLITE_OK) {
     Patient_destroy(pt);
     pt = NULL;
   }
+  
+  // this causes memory leak; but it's a test
+  for(i = 1; i < MAX_RESULTS; i++) {
+    if(pqr.resultList[i]) free(pqr.resultList[i]);
+  }
 
   sqlite3_free(error);
-  
+
   return pt;
 }
 
 Patient *Patient_lookup_mrn(char  *mrn, sqlite3 *db)
 {
-  Patient *pt = Patient_create();
+  PQR pqr;
+  Patient *pt;
   char sql[100];
   char *error = "Sqlite3 ERROR.";
-  int rc;
+  int rc, i;
+
+  for(i = 0; i < MAX_RESULTS; i++) {
+    pqr.resultList[i] = Patient_create();
+  }
+  pqr.count = 0;
   
   sql[0] = '\0';
   strcat(sql, "SELECT * FROM PATIENTS WHERE mrn = '");
@@ -213,13 +232,21 @@ Patient *Patient_lookup_mrn(char  *mrn, sqlite3 *db)
   // the 4th argument (pt) is provided to callback as the first
   // argument 'void *upd'. This is how we pass patient information
   // to a patient from the SQL query return.
-  rc = sqlite3_exec(db, sql, Patient_find_callback, pt, &error);
+  // NOTE: when pqr is exchaged with pqr.resultList[n] this works
+  rc = sqlite3_exec(db, sql, Patient_find_callback, &pqr, &error);
+
+  pt = pqr.resultList[0];
   
   // If the resulting query is still a blank patient, destroy it
   // and set it to null as the query was unsuccessful.  
   if (strcmp(pt->mrn, "") == 0 || rc != SQLITE_OK) {
     Patient_destroy(pt);
     pt = NULL;
+  }
+  
+  // this causes memory leak; but it's a test
+  for(i = 1; i < MAX_RESULTS; i++) {
+    if(pqr.resultList[i]) free(pqr.resultList[i]);
   }
 
   sqlite3_free(error);
@@ -229,10 +256,16 @@ Patient *Patient_lookup_mrn(char  *mrn, sqlite3 *db)
 
 Patient *Patient_lookup_first(char  *first, sqlite3 *db)
 {
-  Patient *pt = Patient_create();
+  PQR pqr;
+  Patient *pt;
   char sql[100];
   char *error = "Sqlite3 ERROR.";
-  int rc;
+  int rc, i;
+
+  for(i = 0; i < MAX_RESULTS; i++) {
+    pqr.resultList[i] = Patient_create();
+  }
+  pqr.count = 0;
   
   sql[0] = '\0';
   strcat(sql, "SELECT * FROM PATIENTS WHERE LOWER(FIRST) = LOWER('");
@@ -242,50 +275,56 @@ Patient *Patient_lookup_first(char  *first, sqlite3 *db)
   // the 4th argument (pt) is provided to callback as the first
   // argument 'void *upd'. This is how we pass patient information
   // to a patient from the SQL query return.
-  rc = sqlite3_exec(db, sql, Patient_find_callback, pt, &error);
-  
+  rc = sqlite3_exec(db, sql, Patient_find_callback, &pqr, &error);
+
+  pt = pqr.resultList[0];
+
   // If the resulting query is still a blank patient, destroy it
-  // and set it to null as the query was unsuccessful.
+  // and set it to null as the query was unsuccessful.  
   if (strcmp(pt->mrn, "") == 0 || rc != SQLITE_OK) {
     Patient_destroy(pt);
     pt = NULL;
   }
 
   sqlite3_free(error);
- 
+  
   return pt;
 }
 
 int Patient_find_callback(void *udp, int c_num, char *c_vals[], char *c_names[])
 {
-  strcpy(((Patient*)udp)->mrn, c_vals[0]);
-  strcpy(((Patient*)udp)->name->first, c_vals[1]);
-  strcpy(((Patient*)udp)->name->middle, c_vals[2]);
-  strcpy(((Patient*)udp)->name->last, c_vals[3]);
-  ((Patient*)udp)->dob->month = atoi(c_vals[4]);
-  ((Patient*)udp)->dob->day = atoi(c_vals[5]);
-  ((Patient*)udp)->dob->year = atoi(c_vals[6]);
-  strcpy(((Patient*)udp)->addr->field1, c_vals[7]);
-  strcpy(((Patient*)udp)->addr->field2, c_vals[8]);
-  strcpy(((Patient*)udp)->addr->field3, c_vals[9]);
-  strcpy(((Patient*)udp)->addr->field4, c_vals[10]);
-  strcpy(((Patient*)udp)->contact->phone_h, c_vals[11]);
-  strcpy(((Patient*)udp)->contact->phone_w, c_vals[12]);
-  strcpy(((Patient*)udp)->contact->phone_c, c_vals[13]);
-  strcpy(((Patient*)udp)->contact->email, c_vals[14]);
-  strcpy(((Patient*)udp)->emerg1->full_name, c_vals[15]);
-  strcpy(((Patient*)udp)->emerg1->relationship, c_vals[16]);
-  strcpy(((Patient*)udp)->emerg1->contact->phone_h, c_vals[17]);
-  strcpy(((Patient*)udp)->emerg1->contact->phone_w, c_vals[18]);
-  strcpy(((Patient*)udp)->emerg1->contact->phone_c, c_vals[19]);
-  strcpy(((Patient*)udp)->emerg1->contact->email, c_vals[20]);
-  strcpy(((Patient*)udp)->emerg2->full_name, c_vals[21]);
-  strcpy(((Patient*)udp)->emerg2->relationship, c_vals[22]);
-  strcpy(((Patient*)udp)->emerg2->contact->phone_h, c_vals[23]);
-  strcpy(((Patient*)udp)->emerg2->contact->phone_w, c_vals[24]);
-  strcpy(((Patient*)udp)->emerg2->contact->phone_c, c_vals[25]);
-  strcpy(((Patient*)udp)->emerg2->contact->email, c_vals[26]);
-  strcpy(((Patient*)udp)->pid, c_vals[27]);
+  int i = ((PQR*)udp)->count;
+  
+  strcpy(((PQR*)udp)->resultList[i]->mrn, c_vals[0]);
+  strcpy(((PQR*)udp)->resultList[i]->name->first, c_vals[1]);
+  strcpy(((PQR*)udp)->resultList[i]->name->middle, c_vals[2]);
+  strcpy(((PQR*)udp)->resultList[i]->name->last, c_vals[3]);
+  ((PQR*)udp)->resultList[i]->dob->month = atoi(c_vals[4]);
+  ((PQR*)udp)->resultList[i]->dob->day = atoi(c_vals[5]);
+  ((PQR*)udp)->resultList[i]->dob->year = atoi(c_vals[6]);
+  strcpy(((PQR*)udp)->resultList[i]->addr->field1, c_vals[7]);
+  strcpy(((PQR*)udp)->resultList[i]->addr->field2, c_vals[8]);
+  strcpy(((PQR*)udp)->resultList[i]->addr->field3, c_vals[9]);
+  strcpy(((PQR*)udp)->resultList[i]->addr->field4, c_vals[10]);
+  strcpy(((PQR*)udp)->resultList[i]->contact->phone_h, c_vals[11]);
+  strcpy(((PQR*)udp)->resultList[i]->contact->phone_w, c_vals[12]);
+  strcpy(((PQR*)udp)->resultList[i]->contact->phone_c, c_vals[13]);
+  strcpy(((PQR*)udp)->resultList[i]->contact->email, c_vals[14]);
+  strcpy(((PQR*)udp)->resultList[i]->emerg1->full_name, c_vals[15]);
+  strcpy(((PQR*)udp)->resultList[i]->emerg1->relationship, c_vals[16]);
+  strcpy(((PQR*)udp)->resultList[i]->emerg1->contact->phone_h, c_vals[17]);
+  strcpy(((PQR*)udp)->resultList[i]->emerg1->contact->phone_w, c_vals[18]);
+  strcpy(((PQR*)udp)->resultList[i]->emerg1->contact->phone_c, c_vals[19]);
+  strcpy(((PQR*)udp)->resultList[i]->emerg1->contact->email, c_vals[20]);
+  strcpy(((PQR*)udp)->resultList[i]->emerg2->full_name, c_vals[21]);
+  strcpy(((PQR*)udp)->resultList[i]->emerg2->relationship, c_vals[22]);
+  strcpy(((PQR*)udp)->resultList[i]->emerg2->contact->phone_h, c_vals[23]);
+  strcpy(((PQR*)udp)->resultList[i]->emerg2->contact->phone_w, c_vals[24]);
+  strcpy(((PQR*)udp)->resultList[i]->emerg2->contact->phone_c, c_vals[25]);
+  strcpy(((PQR*)udp)->resultList[i]->emerg2->contact->email, c_vals[26]);
+  strcpy(((PQR*)udp)->resultList[i]->pid, c_vals[27]);
+
+  ((PQR*)udp)->count++;
 
   return 0;
 }

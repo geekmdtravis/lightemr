@@ -11,6 +11,11 @@
 #include "database.h"
 #include "note.h"
 
+typedef struct Patient_query_result {
+  Patient *resultList[MAX_RESULTS];
+  int count;
+} PQR;
+
 int Patient_notes_table_create(sqlite3 *db);
 char *Create_add_note_query(Note *n);
 int Patient_demographics_table_create(sqlite3 *db);

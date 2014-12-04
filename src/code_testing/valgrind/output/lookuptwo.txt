@@ -1,16 +1,22 @@
-==23674== Memcheck, a memory error detector
-==23674== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
-==23674== Using Valgrind-3.10.0 and LibVEX; rerun with -h for copyright info
-==23674== Command: ./lightemr
-==23674== 
+==29435== Memcheck, a memory error detector
+==29435== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==29435== Using Valgrind-3.10.0 and LibVEX; rerun with -h for copyright info
+==29435== Command: ./lightemr
+==29435== 
 SQL Error: table PATIENTS already exists
 SQL Error: table NOTES already exists
-==23674== 
-==23674== HEAP SUMMARY:
-==23674==     in use at exit: 0 bytes in 0 blocks
-==23674==   total heap usage: 2,122 allocs, 2,122 frees, 334,546 bytes allocated
-==23674== 
-==23674== All heap blocks were freed -- no leaks are possible
-==23674== 
-==23674== For counts of detected and suppressed errors, rerun with: -v
-==23674== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==29435== 
+==29435== HEAP SUMMARY:
+==29435==     in use at exit: 8,037,954 bytes in 199,800 blocks
+==29435==   total heap usage: 205,918 allocs, 6,118 frees, 8,660,212 bytes allocated
+==29435== 
+==29435== LEAK SUMMARY:
+==29435==    definitely lost: 895,104 bytes in 33,966 blocks
+==29435==    indirectly lost: 7,142,770 bytes in 165,833 blocks
+==29435==      possibly lost: 80 bytes in 1 blocks
+==29435==    still reachable: 0 bytes in 0 blocks
+==29435==         suppressed: 0 bytes in 0 blocks
+==29435== Rerun with --leak-check=full to see details of leaked memory
+==29435== 
+==29435== For counts of detected and suppressed errors, rerun with: -v
+==29435== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
