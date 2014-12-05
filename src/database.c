@@ -1,5 +1,6 @@
 // file: database.c
 #include <string.h>
+#include <ctype.h>
 #include "database.h"
 #include "defs.h"
 
@@ -347,11 +348,11 @@ int Patient_select(const struct Patient_query_result *pqr, const char *querymod)
     for (i = 0; i < pqr->count; i++) {
       // Null out the ptResult
       for (j = 0; j < MAX_LINE_TEXT; j++) ptResult[j] = '\0';
-      sprintf(ptResult, "[ # %d][ %s %s %s MRN: %s DOB %d/%d/%d ] ",
+      sprintf(ptResult, "[ # %d] %s, %s %c. MRN: %s DOB %d/%d/%d  ",
 	     i,
-	     pqr->resultList[i]->name->first,
-	     pqr->resultList[i]->name->middle,
 	     pqr->resultList[i]->name->last,
+	     pqr->resultList[i]->name->first,
+	     pqr->resultList[i]->name->middle[0],
 	     pqr->resultList[i]->mrn,
 	     pqr->resultList[i]->dob->month,
 	     pqr->resultList[i]->dob->day,

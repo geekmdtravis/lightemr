@@ -20,7 +20,7 @@
 #define SELECTION_PROMPT_ABBREVIATED "Selection: "
 #define SELECTION_PROMPT_MINIMAL "::> "
 
-#define CLEAR_LINE { for(i = 0; i < MAX_LINE_TEXT; i++) line[i] = '\0'; } 
+#define CLEAR_STRING(STR, INC, LEN) { for((INC) = 0; (INC) < (LEN); (INC)++) (STR)[(INC)] = '\0'; } 
 
 typedef int BOOL;
 

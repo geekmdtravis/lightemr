@@ -364,11 +364,11 @@ void Patient_print_info(Patient *p)
 
   if(p) {
     system("clear");
-    CLEAR_LINE;
+    CLEAR_STRING(line, i, MAX_LINE_TEXT);// this requires 'int i'
     prt(THIN_LINE, LEFT);
     sprintf(line, "%s %s %s", upperFirst, upperMiddle, upperLast);
     prt(line, CENTER);
-    CLEAR_LINE;
+    CLEAR_STRING(line, i, MAX_LINE_TEXT);
     sprintf(line, "[ DOB: %d/%d/%d ][ PID: %s ][ MRN: %s ]",
 	    p->dob->month, p->dob->day, p->dob->year,
 	    p->pid, p->mrn);
@@ -383,56 +383,56 @@ void Patient_print_info(Patient *p)
     prt(THIN_LINE, LEFT);
     prt("Contact information", CENTER);
     prt(THIN_LINE, LEFT);
-    CLEAR_LINE;
+    CLEAR_STRING(line, i, MAX_LINE_TEXT);
     sprintf(line, "[H] %s", p->contact->phone_h);
     prt(line, CENTER);
-    CLEAR_LINE;
+    CLEAR_STRING(line, i, MAX_LINE_TEXT);
     sprintf(line, "[C] %s", p->contact->phone_c);
     prt(line, CENTER);
-    CLEAR_LINE;
+    CLEAR_STRING(line, i, MAX_LINE_TEXT);
     sprintf(line, "[W] %s", p->contact->phone_w);
     prt(line, CENTER);
-    CLEAR_LINE;
+    CLEAR_STRING(line, i, MAX_LINE_TEXT);
     sprintf(line, "[E] %s", p->contact->email);
     prt(line, CENTER);
     prt(THIN_LINE, LEFT);
-    if (strcmp(p->emerg1->full_name, "") != 0) {
-      CLEAR_LINE;
-      sprintf(line, "Emergency Contact: %s (%s)",
+    if (strcmp(p->emerg1->full_name, "No contact given") != 0) {
+      CLEAR_STRING(line, i, MAX_LINE_TEXT);
+      sprintf(line, "%s [%s]",
 	      p->emerg1->full_name,
 	      p->emerg1->relationship);
       prt(line, CENTER);
       prt(THIN_LINE, LEFT);
-      CLEAR_LINE;
+      CLEAR_STRING(line, i, MAX_LINE_TEXT);
       sprintf(line, "[H] %s", p->emerg1->contact->phone_h);
       prt(line, CENTER);
-      CLEAR_LINE;
+      CLEAR_STRING(line, i, MAX_LINE_TEXT);
       sprintf(line, "[C] %s", p->emerg1->contact->phone_c);
       prt(line, CENTER);
-      CLEAR_LINE;
+      CLEAR_STRING(line, i, MAX_LINE_TEXT);
       sprintf(line, "[W] %s", p->emerg1->contact->phone_w);
       prt(line, CENTER);
-      CLEAR_LINE;
+      CLEAR_STRING(line, i, MAX_LINE_TEXT);
       sprintf(line, "[E] %s", p->emerg1->contact->email);
       prt(THIN_LINE, LEFT);
     }
-    if (strcmp(p->emerg2->full_name, "") != 0) {
-      CLEAR_LINE;
-      sprintf(line, "Emergency Contact: %s (%s)",
+    if (strcmp(p->emerg2->full_name, "No contact given") != 0) {
+      CLEAR_STRING(line, i, MAX_LINE_TEXT);
+      sprintf(line, "%s [%s]",
 	      p->emerg2->full_name,
 	      p->emerg2->relationship);
       prt(line, CENTER);
       prt(THIN_LINE, LEFT);
-      CLEAR_LINE;
+      CLEAR_STRING(line, i, MAX_LINE_TEXT);
       sprintf(line, "[H] %s", p->emerg2->contact->phone_h);
       prt(line, CENTER);
-      CLEAR_LINE;
+      CLEAR_STRING(line, i, MAX_LINE_TEXT);
       sprintf(line, "[C] %s", p->emerg2->contact->phone_c);
       prt(line, CENTER);
-      CLEAR_LINE;
+      CLEAR_STRING(line, i, MAX_LINE_TEXT);
       sprintf(line, "[W] %s", p->emerg2->contact->phone_w);
       prt(line, CENTER);
-      CLEAR_LINE;
+      CLEAR_STRING(line, i, MAX_LINE_TEXT);
       sprintf(line, "[E] %s", p->emerg2->contact->email);
       prt(THIN_LINE, LEFT);
     }
