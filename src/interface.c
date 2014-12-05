@@ -67,21 +67,21 @@ int Process_patient_lookup(char *selection, Patient **pt, sqlite3 *db)
       case '1': // Lookup by MRN
 	printf("Please enter patients MRN: ");
 	rc = modgetl(selection, &nbytes);
-	if (rc != 0) *pt = Patient_lookup_mrn(selection, db);
+	if (rc != 0) *pt = Patient_lookup(db, selection, "MRN");
 	else printf("Error acquiring input.\n");
 	break;
 	
       case '2': // Lookup by first name
 	printf("Please enter patients first name: ");
 	rc = modgetl(selection, &nbytes);
-	if (rc != 0) *pt = Patient_lookup_first(selection, db);
+	if (rc != 0) *pt = Patient_lookup(db, selection, "FIRST");
 	else printf("Error acquiring input.\n");
 	break;
 	
       case '3': // Lookup by last name
 	printf("Please enter patients last name: ");
 	rc = modgetl(selection, &nbytes);
-	if (rc != 0) *pt = Patient_lookup_last(selection, db);
+	if (rc != 0) *pt = Patient_lookup(db, selection, "LAST");
 	else printf("Error acquiring input.\n");
 	break;
 	

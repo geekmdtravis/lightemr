@@ -374,6 +374,8 @@ void Patient_print_info(Patient *p)
 	 " W: %s\n"
 	 " Email: %s\n"
 	 "\n"
+	 THIN_LINE
+	 "Emergency Contact:\n"
 	 "%s (%s)\n"
 	 THIN_LINE
 	 " H: %s\n"
@@ -381,6 +383,8 @@ void Patient_print_info(Patient *p)
 	 " W: %s\n"
 	 " Email: %s\n"
 	 "\n"
+	 THIN_LINE
+	 "Emergency Contact:\n"
 	 "%s (%s)\n"
 	 THIN_LINE
 	 " H: %s\n"

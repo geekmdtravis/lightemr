@@ -8,6 +8,12 @@
           NOTES TABLE AND LOOKUP
  ********************************************************
  *******************************************************/
+// Generate an SQL command to create a table with
+// fields mrn, title, author, time, replaced, and text.
+// NOTE: the 'replaced' field is meant to effectively
+// rended a field deactivated. There will be no
+// updates to notes. They will only be replaced with
+// new notes.
 int Patient_notes_table_create(sqlite3 *db)
 {
   int rc;
@@ -22,21 +28,28 @@ int Patient_notes_table_create(sqlite3 *db)
     "TEXT CHAR(8000)" \
     ");";
 
-  rc = sqlite3_exec(db, sql, NULL, 0, &error);
+  rc = sqlite3_exec(db, sql, NULL, NULL, &error);
 
+  // The input and output here would likely benefit
+  // from development of a 'log' rather than sending this
+  // to stdout/stderr.
   if(rc != SQLITE_OK) {
     fprintf(stderr, "SQL Error: %s\n", error);
   } else {
     fprintf(stdout, "Table created.\n");
   }
 
+  // Clean up the sqlite3 query/command
   sqlite3_free(error);
 
+  // Return the sqlite3_exec return value
   return rc;
 }
 
-char *Create_add_note_query(Note *n)
+char *Create_add_note_query(const Note *n)
 {
+  // Allocate memory on heap for the query we're
+  // returning as a string.
   char *query = malloc(sizeof(char) * MAX_QUERY);
   
 
@@ -46,14 +59,17 @@ char *Create_add_note_query(Note *n)
 
 /********************************************************
  ********************************************************
-            PATIENT DEMOGRAPHICS AND LOOKUP
+       PATIENT DEMOGRAPHICS TABLE AND LOOKUP
  ********************************************************
  *******************************************************/
+// Create a sqlite statement which creates a table
+// containing all fields from the "Patient" struct.
 int Patient_demographics_table_create(sqlite3 *db)
 {
   int rc;
   char *error = "ERROR";
-  
+
+  // The SQL statement to add patient 'p' to database
   char *sql = "CREATE TABLE PATIENTS(" \
     "MRN INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " \
     "FIRST CHAR(40) NOT NULL, " \
@@ -85,30 +101,40 @@ int Patient_demographics_table_create(sqlite3 *db)
     "PID CHAR(40)" \
     ");";
 
-  rc = sqlite3_exec(db, sql, NULL, 0, &error);
+  // Execute the query
+  rc = sqlite3_exec(db, sql, NULL, NULL, &error);
 
+  // To do: send to a log instead of stderr/stdout
   if (rc != SQLITE_OK) {
     fprintf(stderr, "SQL Error: %s\n", error);
   } else {
     fprintf(stdout, "Table created.\n");
   }
 
+  // Clean up the sqlite query/statement
   sqlite3_free(error);
   
   return rc;
 }
 
-char *Create_add_user_query(Patient *p)
+// Create a statement for adding patient 'p' to
+// the database.
+char *Create_add_user_query(const Patient *p)
 {
+  // Allocate heap memory
   char *query = malloc(sizeof(char) * MAX_QUERY);
-  char day[2];
-  sprintf(day, "%d", p->dob->day);
-  char month[2];
-  sprintf(month, "%d", p->dob->month);
-  char year[4];
-  sprintf(year, "%d", p->dob->year);
+  
+  // Turn the day / mo / year values into strings
+  // so they can be placed into the statement
+  char day[2]; sprintf(day, "%d", p->dob->day);
+  char month[2]; sprintf(month, "%d", p->dob->month);
+  char year[4]; sprintf(year, "%d", p->dob->year);
 
+  // Before we concatenate, make sure there is a null
+  // terminating character which can be recognized by the
+  // strcat function
   query[0] = '\0';
+  // Generate the statement
   strcat(query, "INSERT INTO PATIENTS VALUES(");
   strcat(query, "NULL, '");
   strcat(query, p->name->first);
@@ -168,137 +194,92 @@ char *Create_add_user_query(Patient *p)
 
   return query;
 }
-
-Patient *Patient_lookup_last(char  *last, sqlite3 *db)
+// Generate a query that will allow us to lookup a
+// patient by the query provided.
+// RETURN: return's a pointer to a Patient object on the heap
+Patient *Patient_lookup(sqlite3 *db, const char *identifier, const char *querymod)
 {
+  // The PQR struct was created specifically to deal with the
+  // callback function in the patient_lookup_ functions. For
+  // more details, see database.h where the definition of this
+  // structure is. PQR is a typedef for the following struct:
+  // typedef struct Patient_query_result {
+  //    Patient *resultList[MAX_RESULTS];
+  //    int count;
+  // } PQR;
   PQR pqr;
   Patient *pt;
   char sql[100];
   char *error = "Sqlite3 ERROR.";
   int rc, i, selection;
 
+  // Initialize the patient list for up to MAX_RESULTS patients.
   for(i = 0; i < MAX_RESULTS; i++) {
     pqr.resultList[i] = Patient_create();
   }
-  pqr.count = 0;
-  
+
+  // Create the query
   sql[0] = '\0';
-  strcat(sql, "SELECT * FROM PATIENTS WHERE LOWER(LAST) = LOWER('");
-  strcat(sql, last);
+  strcat(sql, "SELECT * FROM PATIENTS WHERE LOWER(");
+  strcat(sql, querymod);
+  strcat(sql, ") = LOWER('");
+  strcat(sql, identifier);
   strcat(sql, "');\0");
 
-  // the 4th argument (pt) is provided to callback as the first
-  // argument 'void *upd'. This is how we pass patient information
-  // to a patient from the SQL query return.
-  rc = sqlite3_exec(db, sql, Patient_find_callback, &pqr, &error);
-  selection = Patient_select(&pqr, last);
-  pt = pqr.resultList[selection];
-  
-  // If the resulting query is still a blank patient, destroy it
-  // and set it to null as the query was unsuccessful.  
-  if (strcmp(pt->mrn, "") == 0 || rc != SQLITE_OK) {
-    Patient_destroy(pt);
-    pt = NULL;
-  }
-  
-  // this causes memory leak; but it's a test
-  for(i = 0; i < MAX_RESULTS; i++) {
-    if(pqr.resultList[i] && i != selection) free(pqr.resultList[i]);
-  }
-
-  sqlite3_free(error);
-
-  return pt;
-}
-
-Patient *Patient_lookup_mrn(char  *mrn, sqlite3 *db)
-{
-  PQR pqr;
-  Patient *pt;
-  char sql[100];
-  char *error = "Sqlite3 ERROR.";
-  int rc, i;
-
-  for(i = 0; i < MAX_RESULTS; i++) {
-    pqr.resultList[i] = Patient_create();
-  }
+  // Set the pqr.count value to zero to indicate that the callback
+  // function has not yet been invoked.
   pqr.count = 0;
-  
-  sql[0] = '\0';
-  strcat(sql, "SELECT * FROM PATIENTS WHERE mrn = '");
-  strcat(sql, mrn);
-  strcat(sql, "';\0");
-
-  // the 4th argument (pt) is provided to callback as the first
-  // argument 'void *upd'. This is how we pass patient information
-  // to a patient from the SQL query return.
-  // NOTE: when pqr is exchaged with pqr.resultList[n] this works
+  // Execute the query on 'db' with query 'sql' invoking callback
+  // 'Patient_find_callback' and passing a pointer to the struct
+  // 'pqr' which contains the patient list and a counter for the
+  // callbacks and error message 'error'.
+  // NOTE: emphasis on pointer &pqr being passed to this fourth
+  // argument position, which ultimately is passed on further
+  // to the void poitner 'void *udp' in the callback function
   rc = sqlite3_exec(db, sql, Patient_find_callback, &pqr, &error);
-
-  pt = pqr.resultList[0];
-  
-  // If the resulting query is still a blank patient, destroy it
-  // and set it to null as the query was unsuccessful.  
-  if (strcmp(pt->mrn, "") == 0 || rc != SQLITE_OK) {
-    Patient_destroy(pt);
+  // Assign an integer value identifiing the correct patient to
+  // selection and then assign that result to patient. Do this
+  // so long as the selection returned is valid
+  selection = Patient_select(&pqr, identifier);
+  if (selection != -1) {
+    pt = pqr.resultList[selection];
+  } else {
     pt = NULL;
   }
   
-  // this causes memory leak; but it's a test
-  for(i = 1; i < MAX_RESULTS; i++) {
-    if(pqr.resultList[i]) free(pqr.resultList[i]);
-  }
+  // If the result of the query is a blank patient, destroy it.
+  if (pt && (strcmp(pt->mrn, "") == 0 || rc != SQLITE_OK)) Patient_destroy(pt);
 
-  sqlite3_free(error);
-    
-  return pt;
-}
-
-Patient *Patient_lookup_first(char  *first, sqlite3 *db)
-{
-  PQR pqr;
-  Patient *pt;
-  char sql[100];
-  char *error = "Sqlite3 ERROR.";
-  int rc, i, selection;
-
+  // Destroy all patients returned and all blank patients on the heap
+  // except the one user has selected
   for(i = 0; i < MAX_RESULTS; i++) {
-    pqr.resultList[i] = Patient_create();
-  }
-  pqr.count = 0;
-  
-  sql[0] = '\0';
-  strcat(sql, "SELECT * FROM PATIENTS WHERE LOWER(FIRST) = LOWER('");
-  strcat(sql, first);
-  strcat(sql, "');\0");
-
-  // the 4th argument (pt) is provided to callback as the first
-  // argument 'void *upd'. This is how we pass patient information
-  // to a patient from the SQL query return.
-  rc = sqlite3_exec(db, sql, Patient_find_callback, &pqr, &error);
-  selection = Patient_select(&pqr, first);
-  pt = pqr.resultList[selection];
-
-  // If the resulting query is still a blank patient, destroy it
-  // and set it to null as the query was unsuccessful.  
-  if (strcmp(pt->mrn, "") == 0 || rc != SQLITE_OK) {
-    Patient_destroy(pt);
-    pt = NULL;
+    if(pqr.resultList[i] && i != selection) Patient_destroy(pqr.resultList[i]);
   }
 
+  // Cleanup the sqlite3 error message
   sqlite3_free(error);
   
   return pt;
 }
 
+// This function is executed inside of sql3_exec for EACH row in the
+// database. c_num is the number of columns, *c_vals[] is a pointer
+// to a list of 'c_num' values as extracted from columns in that row
+// and *c_names[] is a similar list but which represents the names
+// for the column headers.
+// RETURN: 0 for success, -1 for failure to get patient from database
 int Patient_find_callback(void *udp, int c_num, char *c_vals[], char *c_names[])
 {
+  // For clarity in the code assign 'i'.
   int i = ((PQR*)udp)->count;
-  
+
+  // Copy the values from each column into their respective
+  // fields in the PQR.resultList[i] Patient object on the heap
   strcpy(((PQR*)udp)->resultList[i]->mrn, c_vals[0]);
   strcpy(((PQR*)udp)->resultList[i]->name->first, c_vals[1]);
   strcpy(((PQR*)udp)->resultList[i]->name->middle, c_vals[2]);
   strcpy(((PQR*)udp)->resultList[i]->name->last, c_vals[3]);
+  // Recall: mo/day/yr are ints
   ((PQR*)udp)->resultList[i]->dob->month = atoi(c_vals[4]);
   ((PQR*)udp)->resultList[i]->dob->day = atoi(c_vals[5]);
   ((PQR*)udp)->resultList[i]->dob->year = atoi(c_vals[6]);
@@ -324,33 +305,52 @@ int Patient_find_callback(void *udp, int c_num, char *c_vals[], char *c_names[])
   strcpy(((PQR*)udp)->resultList[i]->emerg2->contact->email, c_vals[26]);
   strcpy(((PQR*)udp)->resultList[i]->pid, c_vals[27]);
 
+  // Increment the count so we know how many patients are returned to the list
+  // and so that we can assign the next patient to the next list position
   ((PQR*)udp)->count++;
 
-  return 0;
+  // If the mrn isn't blank, return 0 for success otherwise -1 
+  return (strcmp(((PQR*)udp)->resultList[i]->mrn, "") == 0 ? -1 : 0);
 }
 
-int Patient_select(const PQR *pqr, char *last)
+// When multiple results are passed back to the PQR by multiple executions
+// of the patient callback, this function is used to allow the user to
+// discriminate between them and select their intended patient from that
+// list of candidates.
+// RETURN: returns an integer which is associated with the position of the
+// pointer to the Patient of interest in the array of the Patient object
+// pointers.
+int Patient_select(const struct Patient_query_result *pqr, const char *querymod)
 {
   int selection, i;
   size_t nbytes = 4;
 
+  // If there is only one returned patient, we know that patient is going
+  // to be found in array index zero (0).
   if(pqr->count == 1) {
     selection = 0;
-  } else {
+  } else if (pqr->count < 1) {
+    return -1;
+  } else { // Otherwise
     printf("\n\n"
 	   "Multiple results found for query \"%s\".\n"
 	   THIN_LINE
-	   , last);
+	   , querymod);
+    // Print each of the candidates along with an integer value
+    // which correlates with it's array index position.
     for (i = 0; i < pqr->count; i++) {
       printf("[# %d] ", i);
       Patient_print_search_result(pqr->resultList[i]);
     }
+    // Record that position
     printf("\n"
 	   "Please enter the selection number for the correct patient below.\n"
 	   "::> ");
     modgetlatoi(&selection, &nbytes);
   }
-  
-  return selection;
+
+  // return that position as selection so long as it's a valid
+  // selection value
+  return (selection <= pqr->count) ? selection : -1;
 }
 // eof: database.c
