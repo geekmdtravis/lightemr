@@ -60,7 +60,7 @@ int main()
       check(rc != 0, "Input error.");
       rc = Process_patient_lookup(selection, &pt, db);
       if(rc == -1) {
-	printf("Could not process patient lookup.\n\n");
+	printf("No patient was returned.\n\n");
       } else {
 	// Process_patient(*pt);
       }

@@ -322,8 +322,11 @@ int Patient_find_callback(void *udp, int c_num, char *c_vals[], char *c_names[])
 // pointers.
 int Patient_select(const struct Patient_query_result *pqr, const char *querymod)
 {
-  int selection, i;
+  int selection, i, j;
   size_t nbytes = 4;
+  void (*prt)(char *input, int align) = Print_interface_line;
+  char ptResult[MAX_LINE_TEXT];
+
 
   // If there is only one returned patient, we know that patient is going
   // to be found in array index zero (0).
@@ -332,20 +335,33 @@ int Patient_select(const struct Patient_query_result *pqr, const char *querymod)
   } else if (pqr->count < 1) {
     return -1;
   } else { // Otherwise
-    printf("\n\n"
-	   "Multiple results found for query \"%s\".\n"
-	   THIN_LINE
-	   , querymod);
+    system("clear");
+    prt(THIN_LINE, LEFT);
+    prt("LightEMR: Lookup Patient", CENTER);
+    prt(THICK_LINE, LEFT);
+    prt("Multiple results returned. Select desired patient.", CENTER);
+    prt(THIN_LINE, LEFT);
+
     // Print each of the candidates along with an integer value
     // which correlates with it's array index position.
     for (i = 0; i < pqr->count; i++) {
-      printf("[# %d] ", i);
-      Patient_print_search_result(pqr->resultList[i]);
+      // Null out the ptResult
+      for (j = 0; j < MAX_LINE_TEXT; j++) ptResult[j] = '\0';
+      sprintf(ptResult, "[ # %d][ %s %s %s MRN: %s DOB %d/%d/%d ] ",
+	     i,
+	     pqr->resultList[i]->name->first,
+	     pqr->resultList[i]->name->middle,
+	     pqr->resultList[i]->name->last,
+	     pqr->resultList[i]->mrn,
+	     pqr->resultList[i]->dob->month,
+	     pqr->resultList[i]->dob->day,
+	     pqr->resultList[i]->dob->year);
+      prt(ptResult, LEFT);
     }
+    prt(BLANK_LINE, LEFT);
+    prt(THIN_LINE, LEFT);
     // Record that position
-    printf("\n"
-	   "Please enter the selection number for the correct patient below.\n"
-	   "::> ");
+    fprintf(stdout, SELECTION_PROMPT_LONG);
     modgetlatoi(&selection, &nbytes);
   }
 

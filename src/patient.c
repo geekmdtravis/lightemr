@@ -355,10 +355,26 @@ BOOL Patient_populate(Patient *self, Name *name, Birthdate *dob,
 // a patient object.
 void Patient_print_info(Patient *p)
 {
+  void (*prt)(char *input, int align) = Print_interface_line;
   char *upperFirst = Convert_to_upper(p->name->first);
   char *upperMiddle = Convert_to_upper(p->name->middle);
   char *upperLast = Convert_to_upper(p->name->last);
-    
+  char line[MAX_LINE_TEXT];
+  int i;
+
+  system("clear");
+  for(i = 0; i < MAX_LINE_TEXT; i++) line[i] = '\0';
+  prt(THIN_LINE, LEFT);
+  sprintf(line, "%s %s %s", upperFirst, upperMiddle, upperLast);
+  prt(line, CENTER);
+  for(i = 0; i < MAX_LINE_TEXT; i++) line[i] = '\0';
+  sprintf(line, "DOB: %d/%d/%d PID: %s MRN: %s",
+	  p->dob->month, p->dob->day, p->dob->year,
+	  p->pid, p->mrn);  
+  prt(line, CENTER);
+  prt(THICK_LINE, LEFT);
+
+  /*
   if(p){
     printf(
 	 THICK_LINE
@@ -423,6 +439,7 @@ void Patient_print_info(Patient *p)
   } else {
     printf("No patient available.\n");
   }
+  */
 
   free(upperFirst);
   free(upperMiddle);

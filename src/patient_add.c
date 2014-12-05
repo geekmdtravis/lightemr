@@ -1,12 +1,5 @@
 // file: patient_add.c
-
-#include <stdio.h>
-#include <stdlib.h>
-#include "patient.h"
 #include "patient_add.h"
-#include "modstring.h"
-#include "dbg.h"
-
 
 // Create patient, populate the fields.
 Patient *Add_patient()

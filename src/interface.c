@@ -1,45 +1,81 @@
 #include "interface.h"
 
-void Display_main_menu()
+// Each line of text output to the interface, with a few exceptions
+// where I'm limited by need to acquire user input, should be filtered
+// through this function. This allows for uniformity in presentation.
+void Print_interface_line(char *input, int align)
 {
-  system("clear");
-  Display_menu_time();
-  printf("\n"
-         "[ Welcome to %s ]\n"
-         "\n"
-         "             -= MENU =-             \n"
-	 "\n"
-         "1. Patient Lookup\n"
-	 "2. Add Patient\n"
-	 "3. Remove Patient\n"
-	 "4. Help\n"
-	 "5. Clinical Tools\n"
-	 "6. Billing\n"
-	 "7. Exit\n"
-	 "\n"
-	 "Please enter your selection: ", APP_VER);
+  int len = strlen(input);
+  int i, j, offset;
+  char line[MAX_LINE];
+
+  for (i = 0; i < MAX_LINE; i++) {
+    line[i] = ' ';
+  }
+  line[0] = '|';
+  line[77] = '|';
+  line[78] = '\n';
+  line[79] = '\0';
+
+  if (align == RIGHT) {
+    offset = MAX_LINE_TEXT - len;
+  } else if (align == CENTER) {
+    offset = (MAX_LINE_TEXT - len) / 2;
+  } else {
+    offset = 1;
+  }
+
+  for (i = offset, j = 0; j < len && i < MAX_LINE_TEXT; j++, i++) {
+    line[i] = input[j];
+  }
+
+  fprintf(stdout, "%s", line);
 }
 
-void Display_menu_time()
+// This returns a string of a formtted current date
+char *Formatted_date()
 {
-  char *timeStr = malloc(sizeof(char) * MAX_DATE);
-  //char timeStr[MAX_DATE];
-  time_t t;
-  struct tm *tmp;
+  time_t t = time(NULL);
+  struct tm *tmp = localtime(&t);
   const char *timeFormat = "%A %B %d %Y\0";
+  char *timeStr = malloc(sizeof(char) * MAX_DATE);
   int rc;
 
-  t = time(NULL);
-  tmp = localtime(&t);
+  if(!tmp) {
+    return "Failed to get time.";
+  } else {
+    rc = strftime(timeStr, MAX_DATE, timeFormat, tmp);
+    return ((rc == 0) ? "Unable to get time" : timeStr);
+  }
+}
 
-  if(!tmp) printf("Failed to get time.");
+/**********************************
+         MAIN MENU
+ *********************************/
+void Display_main_menu()
+{
+  char *date = Formatted_date();  
+  void (*prt)(char *input, int align) = Print_interface_line;
+  
+  system("clear");
+  prt(THIN_LINE, LEFT);
+  prt(date, CENTER);
+  prt(THICK_LINE, LEFT);
+  prt("Welcome to LightEMR", CENTER);
+  prt(THIN_LINE, LEFT);
+  prt(BLANK_LINE, LEFT);
+  prt(" 1. Lookup Patient", CENTER);
+  prt(" 2. Add Patient   ", CENTER);
+  prt(" 3. Remove Patient", CENTER);
+  prt(" 4. Help          ", CENTER);
+  prt(" 5. Tools         ", CENTER);
+  prt(" 6. Billing       ", CENTER);
+  prt(" 7. Exit          ", CENTER);
+  prt(BLANK_LINE, LEFT);
+  prt(THIN_LINE, LEFT);
+  fprintf(stdout, "%s", SELECTION_PROMPT_LONG);
 
-  rc = strftime(timeStr, MAX_DATE, timeFormat, tmp);
-  if(rc == 0) printf("Failed to create formatted time string.");
-
-  printf("%s\n", timeStr);
-
-  free(timeStr);
+  free(date);
 }
 
 /****************************************
@@ -47,14 +83,25 @@ void Display_menu_time()
 *****************************************/
 void Display_patient_lookup_menu()
 {
+  char *date = Formatted_date();
+  
   system("clear");
-  printf("\n[ Patient Look-up (%s) ]\n\n", APP_VER);
-  printf("\t1. Lookup by MRN\n");
-  printf("\t2. Lookup by first name\n");
-  printf("\t3. Lookup by last name\n");
-  printf("\n");
+  void (*prt)(char *input, int align) = Print_interface_line;
+  prt(THIN_LINE, LEFT);
+  prt(date, CENTER);
+  prt(THICK_LINE, LEFT);
+  prt("LightEMR: Patient Look-up", CENTER);
+  prt(THIN_LINE, LEFT);
+  prt(BLANK_LINE, LEFT);
+  prt(" 1. Find by MRN         ", CENTER);
+  prt(" 2. Find by first name  ", CENTER);
+  prt(" 3. Find by last name   ", CENTER);
+  prt(" 4. Go back to main menu", CENTER);
+  prt(BLANK_LINE, LEFT);
+  prt(THIN_LINE, LEFT);
   printf("Please enter your selection: ");
 
+  free(date);
 }
 
 int Process_patient_lookup(char *selection, Patient **pt, sqlite3 *db)
@@ -85,27 +132,24 @@ int Process_patient_lookup(char *selection, Patient **pt, sqlite3 *db)
 	else printf("Error acquiring input.\n");
 	break;
 	
-      default:
-	printf("Invalid entry.\n");
-	break;
+    case '4': // Return to main menu
+      if(pt) Patient_destroy(*pt);
+      return 1;
+      break;
+      
+    default:
+      printf("Invalid entry.\n");
+      break;
     }
-
-    printf("\n");
     // Print patient info
     if(*pt != NULL) {
-      Patient_print_search_result(*pt);
-      
-      while (selection[0] != 'Y' &&
-	     selection[0] != 'y' &&
-	     selection[0] != 'N' &&
-	     selection[0] != 'n') {
-	printf("\nMore detail on patient %s %s (Yes/No)? ",
+      do {
+	fprintf(stdout, "\nMore detail on patient %s %s (Yes/No)? ",
 	       (*pt)->name->first, (*pt)->name->last);
 	rc = modgetl(selection, &nbytes);
 	switch(selection[0]) {
 	case 'Y':
 	case 'y':
-	  system("clear");
 	  Patient_print_info(*pt);
 	  break;
 	case 'N':
@@ -114,10 +158,13 @@ int Process_patient_lookup(char *selection, Patient **pt, sqlite3 *db)
 	default:
 	  printf("Invalid selection.\n");
 	}
-      }
+      } while (selection[0] != 'Y' &&
+	     selection[0] != 'y' &&
+	     selection[0] != 'N' &&
+		 selection[0] != 'n');
       printf("\n");
     } else {
-      printf("Patient not found.\n\n");
+      printf("ERROR ");
       return -1;
     }
 

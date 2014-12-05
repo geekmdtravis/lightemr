@@ -4,6 +4,7 @@
 #define _patient_h
 
 #include "defs.h"
+#include "interface.h"
 
 typedef struct Name {
   char *first;

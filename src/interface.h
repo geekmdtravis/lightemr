@@ -6,16 +6,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "patient.h"
 #include "database.h"
 #include "modstring.h"
 #include "dbg.h"
 #include "defs.h"
 #include "clinical_tools.h"
 #include "version.h"
+#include "patient.h"
 
+#define LEFT   0
+#define RIGHT  1
+#define CENTER 2
+
+void Print_interface_line(char *input, int align);
 void Display_main_menu(void);
-void Display_menu_time(void);
+char *Formatted_date(void);
 void Display_patient_lookup_menu(void);
 int Process_patient_lookup(char *selection, Patient **pt, sqlite3 *db);
 int Patient_add_commit(Patient *p);

@@ -7,6 +7,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <sqlite3.h>
+#include "interface.h"
 #include "patient.h"
 #include "database.h"
 #include "note.h"
