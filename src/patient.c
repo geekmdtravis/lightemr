@@ -362,85 +362,84 @@ void Patient_print_info(Patient *p)
   char line[MAX_LINE_TEXT];
   int i;
 
-  system("clear");
-  for(i = 0; i < MAX_LINE_TEXT; i++) line[i] = '\0';
-  prt(THIN_LINE, LEFT);
-  sprintf(line, "%s %s %s", upperFirst, upperMiddle, upperLast);
-  prt(line, CENTER);
-  for(i = 0; i < MAX_LINE_TEXT; i++) line[i] = '\0';
-  sprintf(line, "DOB: %d/%d/%d PID: %s MRN: %s",
-	  p->dob->month, p->dob->day, p->dob->year,
-	  p->pid, p->mrn);  
-  prt(line, CENTER);
-  prt(THICK_LINE, LEFT);
-
-  /*
-  if(p){
-    printf(
-	 THICK_LINE
-	 "%s %s %s\n"
-	 "DOB: %d/%d/%d PID: %s  MRN: %s\n"
-	 THICK_LINE
-	 " %s\n"
-	 " %s\n"
-	 " %s\n"
-	 " %s\n"
-	 " H: %s\n"
-	 " C: %s\n"
-	 " W: %s\n"
-	 " Email: %s\n"
-	 "\n"
-	 THIN_LINE
-	 "Emergency Contact:\n"
-	 "%s (%s)\n"
-	 THIN_LINE
-	 " H: %s\n"
-	 " C: %s\n"
-	 " W: %s\n"
-	 " Email: %s\n"
-	 "\n"
-	 THIN_LINE
-	 "Emergency Contact:\n"
-	 "%s (%s)\n"
-	 THIN_LINE
-	 " H: %s\n"
-	 " C: %s\n"
-	 " W: %s\n"
-	 " Email: %s\n"
-	 "\n",
-	 upperFirst,
-	 upperMiddle,
-	 upperLast,
-	 p->dob->month,
-	 p->dob->day,
-	 p->dob->year,
-	 p->pid,
-	 p->mrn,
-	 p->addr->field1,
-	 p->addr->field2,
-	 p->addr->field3,
-	 p->addr->field4,
-	 p->contact->phone_h,
-	 p->contact->phone_c,
-	 p->contact->phone_w,
-	 p->contact->email,
-	 p->emerg1->full_name,
-	 p->emerg1->relationship,
-	 p->emerg1->contact->phone_h,
-	 p->emerg1->contact->phone_c,
-	 p->emerg1->contact->phone_w,
-	 p->emerg1->contact->email,
-	 p->emerg2->full_name,
-	 p->emerg2->relationship,
-	 p->emerg2->contact->phone_h,
-	 p->emerg2->contact->phone_c,
-	 p->emerg2->contact->phone_w,
-	 p->emerg2->contact->email);
+  if(p) {
+    system("clear");
+    CLEAR_LINE;
+    prt(THIN_LINE, LEFT);
+    sprintf(line, "%s %s %s", upperFirst, upperMiddle, upperLast);
+    prt(line, CENTER);
+    CLEAR_LINE;
+    sprintf(line, "[ DOB: %d/%d/%d ][ PID: %s ][ MRN: %s ]",
+	    p->dob->month, p->dob->day, p->dob->year,
+	    p->pid, p->mrn);
+    prt(line, CENTER);
+    prt(THICK_LINE, LEFT);
+    prt("Address", CENTER);
+    prt(THIN_LINE, LEFT);
+    prt(p->addr->field1, CENTER);
+    prt(p->addr->field2, CENTER);
+    prt(p->addr->field3, CENTER);
+    prt(p->addr->field4, CENTER);
+    prt(THIN_LINE, LEFT);
+    prt("Contact information", CENTER);
+    prt(THIN_LINE, LEFT);
+    CLEAR_LINE;
+    sprintf(line, "[H] %s", p->contact->phone_h);
+    prt(line, CENTER);
+    CLEAR_LINE;
+    sprintf(line, "[C] %s", p->contact->phone_c);
+    prt(line, CENTER);
+    CLEAR_LINE;
+    sprintf(line, "[W] %s", p->contact->phone_w);
+    prt(line, CENTER);
+    CLEAR_LINE;
+    sprintf(line, "[E] %s", p->contact->email);
+    prt(line, CENTER);
+    prt(THIN_LINE, LEFT);
+    if (strcmp(p->emerg1->full_name, "") != 0) {
+      CLEAR_LINE;
+      sprintf(line, "Emergency Contact: %s (%s)",
+	      p->emerg1->full_name,
+	      p->emerg1->relationship);
+      prt(line, CENTER);
+      prt(THIN_LINE, LEFT);
+      CLEAR_LINE;
+      sprintf(line, "[H] %s", p->emerg1->contact->phone_h);
+      prt(line, CENTER);
+      CLEAR_LINE;
+      sprintf(line, "[C] %s", p->emerg1->contact->phone_c);
+      prt(line, CENTER);
+      CLEAR_LINE;
+      sprintf(line, "[W] %s", p->emerg1->contact->phone_w);
+      prt(line, CENTER);
+      CLEAR_LINE;
+      sprintf(line, "[E] %s", p->emerg1->contact->email);
+      prt(THIN_LINE, LEFT);
+    }
+    if (strcmp(p->emerg2->full_name, "") != 0) {
+      CLEAR_LINE;
+      sprintf(line, "Emergency Contact: %s (%s)",
+	      p->emerg2->full_name,
+	      p->emerg2->relationship);
+      prt(line, CENTER);
+      prt(THIN_LINE, LEFT);
+      CLEAR_LINE;
+      sprintf(line, "[H] %s", p->emerg2->contact->phone_h);
+      prt(line, CENTER);
+      CLEAR_LINE;
+      sprintf(line, "[C] %s", p->emerg2->contact->phone_c);
+      prt(line, CENTER);
+      CLEAR_LINE;
+      sprintf(line, "[W] %s", p->emerg2->contact->phone_w);
+      prt(line, CENTER);
+      CLEAR_LINE;
+      sprintf(line, "[E] %s", p->emerg2->contact->email);
+      prt(THIN_LINE, LEFT);
+    }
   } else {
-    printf("No patient available.\n");
+    prt("No patient information avaialble.", CENTER);
+    prt(THIN_LINE, LEFT);
   }
-  */
-
   free(upperFirst);
   free(upperMiddle);
   free(upperLast);

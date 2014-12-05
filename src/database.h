@@ -13,6 +13,11 @@
 #include "note.h"
 #include "modstring.h"
 
+// No idea why this is necessary considering everything is working
+// in all other includes. 
+typedef struct Patient Patient;
+typedef struct Note Note;
+
 /* The PQR struct was created specifically to deal with a
    challenge presented by the need for callback functions
    in the sqlite3_exec() function. A list of patients needed

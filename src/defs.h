@@ -20,6 +20,8 @@
 #define SELECTION_PROMPT_ABBREVIATED "Selection: "
 #define SELECTION_PROMPT_MINIMAL "::> "
 
+#define CLEAR_LINE { for(i = 0; i < MAX_LINE_TEXT; i++) line[i] = '\0'; } 
+
 typedef int BOOL;
 
 #ifndef FALSE
