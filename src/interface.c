@@ -176,19 +176,20 @@ int Patient_add_commit(Patient *p)
   ssize_t rc;
   int selection;
   size_t nbytes = 2;
+  void (*prt)(char *input, int align) = Print_interface_line;
 
   while(1) {
     system("clear");
-    printf("\n"
-	   "ATTENTION: Please review the information below.\n"
-	   "\n");
     Patient_print_info(p);
-    printf( "\n"
-	    "Would you like to commit this information to the database?\n"
-	    "(1) YES\n"
-	    "(2) NO\n"
-	    "::> ");
+    prt("PLEASE REVIEW THE ABOVE INFORMATION", CENTER);
+    prt(THIN_LINE, LEFT);
+    prt("Would you like to commit this patient to database?", LEFT);
+    prt(" (1) Yes, commit this patient as above to database.", LEFT);
+    prt(" (2) No, do not commit this patient information.", LEFT);
+    prt(THIN_LINE, LEFT);
+    fprintf(stdout, "%s", SELECTION_PROMPT_ABBREVIATED);
     rc = modgetlatoi(&selection, &nbytes);
+    
     if (rc == 0) {
       printf("\nError acquiring input\n");
       return 0;
@@ -216,8 +217,19 @@ int Patient_add_commit(Patient *p)
 
 void Display_patient_add_menu()
 {
+  char *date = Formatted_date();
+  void (*prt)(char *input, int align) = Print_interface_line;
+  
   system("clear");
-  printf("\n[ Patient Add Menu (%s) ]\n\n", APP_VER);
+  prt(THIN_LINE, LEFT);
+  prt(date, CENTER);
+  prt(THICK_LINE, LEFT);
+  prt("LightEMR: Add Patient", CENTER);
+  prt(THIN_LINE, LEFT);
+  fprintf(stdout, "%s", "\n");
+
+  free(date);
+  
 }
 
 /******************************************

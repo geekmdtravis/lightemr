@@ -6,7 +6,7 @@ CC=gcc
 
 CFLAGS=-Wall -ggdb
 DEBUGFLAGS=-Wall -Wextra -ggdb
-DEPS=main.o interface.o patient_add.o patient.o modstring.o \
+DEPS=main.o interface.o patient.o modstring.o \
 	database.o login.o clinical_tools.o note.o
 
 LINK=-l sqlite3

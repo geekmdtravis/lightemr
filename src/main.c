@@ -4,7 +4,6 @@
 #include <string.h>
 #include "interface.h"
 #include "patient.h" 
-#include "patient_add.h"
 #include "database.h"
 #include "modstring.h"
 #include "login.h"

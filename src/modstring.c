@@ -5,6 +5,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "modstring.h"
 #include "dbg.h"
 
@@ -99,6 +100,19 @@ void trim(char *s)
   if(s){
     s[strlen(s) - 1] = '\0';
   }
+}
+
+char *Convert_to_upper(char *str)
+{
+  int i;
+  char *upperStr = malloc(sizeof(char) * strlen(str) + 1);
+  
+  for (i = 0; i < strlen(str) && str[i] != '\0'; i++) {
+    upperStr[i] = toupper(str[i]);
+  }
+  upperStr[i] = '\0';
+
+  return upperStr;
 }
 
 // eof: modstring.c

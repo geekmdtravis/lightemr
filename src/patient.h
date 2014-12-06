@@ -3,6 +3,11 @@
 #ifndef _patient_h
 #define _patient_h
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "patient.h"
+#include "modstring.h"
+#include "dbg.h"
 #include "defs.h"
 #include "interface.h"
 
@@ -87,8 +92,9 @@ Emergency_contact *Set_emergency_contact(char *full_name,
 		      char *phone_h, char *phone_c,
 		      char *phone_w, char *email);
 void Patient_print_info(Patient *p);
-void Patient_print_search_result(Patient *p);
+Patient *Add_patient(void);
+
 #endif
-char *Convert_to_upper(char *str);
+
 
 // eof: patient.h
