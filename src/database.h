@@ -16,7 +16,9 @@
 #include "defs.h"
 
 // No idea why this is necessary considering everything is working
-// in all other includes. 
+// in all other includes. One workaround I've found is to put the
+// definitions into a separate header file, but this doesn't make
+// any sense to me.
 typedef struct Patient Patient;
 typedef struct Note Note;
 
