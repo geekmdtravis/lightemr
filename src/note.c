@@ -1,4 +1,5 @@
 // file: note.c
+
 #include "note.h"
 
 char *Formatted_time(void)

@@ -3,11 +3,7 @@
 // TO DO: Modify modgetlatoi() so that it
 // no longer requires the user to provide n.
 
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
 #include "modstring.h"
-#include "dbg.h"
 
 // This function is a wrapper for the getline
 // function that includes the small modification

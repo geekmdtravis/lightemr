@@ -1,9 +1,5 @@
 // file: clinical_tools.c
-#include <stdio.h>
-#include <stdlib.h>
-#include "modstring.h"
 #include "clinical_tools.h"
-#include "interface.h"
 
 int Calculate_anion_gap(int na, int cl, int bicarb)
 {  

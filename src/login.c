@@ -1,7 +1,5 @@
 // file: login.c
-#include "version.h"
 #include "login.h"
-#include "interface.h"
 
 // to do: add database support so  users and their passwords can be stored.
 // also encrypt passwords as follows:

@@ -12,6 +12,7 @@
 #include "defs.h"
 #include "clinical_tools.h"
 #include "version.h"
+#include "defs.h"
 #include "patient.h"
 
 #define LEFT   0

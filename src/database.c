@@ -1,8 +1,7 @@
 // file: database.c
-#include <string.h>
-#include <ctype.h>
+
 #include "database.h"
-#include "defs.h"
+
 
 /********************************************************
  ********************************************************

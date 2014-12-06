@@ -5,11 +5,12 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "patient.h"
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
 #include "modstring.h"
-#include "dbg.h"
-#include "defs.h"
 #include "interface.h"
+#include "defs.h"
 
 typedef struct Name {
   char *first;

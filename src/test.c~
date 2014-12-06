@@ -1,9 +1,0 @@
-#include <stdio.h>
-#include "note.h"
-#include "database.h"
-
-int main()
-{
-  
-  return 0;
-}

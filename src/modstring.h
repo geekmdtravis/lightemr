@@ -3,6 +3,9 @@
 #ifndef _modstring_h
 #define _modstring_h
 
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 #include "defs.h"
 #include "dbg.h"
 

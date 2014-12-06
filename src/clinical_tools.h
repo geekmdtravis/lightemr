@@ -3,15 +3,11 @@
 #ifndef _clinical_tools_h
 #define _clinical_tools_h
 
-typedef int BOOL;
-
-#ifndef TRUE
-#define TRUE 1
-#endif
-
-#ifndef FALSE
-#define FALSE 0
-#endif
+#include <stdio.h>
+#include <stdlib.h>
+#include "modstring.h"
+#include "defs.h"
+#include "interface.h"
 
 struct Basic_metabolic_panel {
   int na;
