@@ -293,8 +293,11 @@ int Patient_find_callback(void *udp, int c_num, char *c_vals[], char *c_names[])
   // fields in the PQR.resultList[i] Patient object on the heap
   strcpy(((PQR*)udp)->resultList[i]->mrn, c_vals[0]);
   strcpy(((PQR*)udp)->resultList[i]->name->first, c_vals[1]);
+  ((PQR*)udp)->resultList[i]->name->first[0] = toupper(((PQR*)udp)->resultList[i]->name->first[0]);
   strcpy(((PQR*)udp)->resultList[i]->name->middle, c_vals[2]);
+  ((PQR*)udp)->resultList[i]->name->middle[0] = toupper(((PQR*)udp)->resultList[i]->name->middle[0]);
   strcpy(((PQR*)udp)->resultList[i]->name->last, c_vals[3]);
+  ((PQR*)udp)->resultList[i]->name->last[0] = toupper(((PQR*)udp)->resultList[i]->name->last[0]);
   // Recall: mo/day/yr are ints
   ((PQR*)udp)->resultList[i]->dob->month = atoi(c_vals[4]);
   ((PQR*)udp)->resultList[i]->dob->day = atoi(c_vals[5]);
