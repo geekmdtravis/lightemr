@@ -1,16 +1,16 @@
-==29516== Memcheck, a memory error detector
-==29516== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
-==29516== Using Valgrind-3.10.0 and LibVEX; rerun with -h for copyright info
-==29516== Command: ./lightemr
-==29516== 
+==25161== Memcheck, a memory error detector
+==25161== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==25161== Using Valgrind-3.10.0.SVN and LibVEX; rerun with -h for copyright info
+==25161== Command: ./lightemr
+==25161== 
 SQL Error: table PATIENTS already exists
 SQL Error: table NOTES already exists
-==29516== 
-==29516== HEAP SUMMARY:
-==29516==     in use at exit: 0 bytes in 0 blocks
-==29516==   total heap usage: 294 allocs, 294 frees, 133,759 bytes allocated
-==29516== 
-==29516== All heap blocks were freed -- no leaks are possible
-==29516== 
-==29516== For counts of detected and suppressed errors, rerun with: -v
-==29516== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==25161== 
+==25161== HEAP SUMMARY:
+==25161==     in use at exit: 0 bytes in 0 blocks
+==25161==   total heap usage: 292 allocs, 292 frees, 133,967 bytes allocated
+==25161== 
+==25161== All heap blocks were freed -- no leaks are possible
+==25161== 
+==25161== For counts of detected and suppressed errors, rerun with: -v
+==25161== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

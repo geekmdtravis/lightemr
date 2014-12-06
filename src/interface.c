@@ -238,8 +238,12 @@ void Display_patient_add_menu()
 
 void Display_patient_remove_menu()
 {
+  void (*prt)(char *input, int align) = Print_interface_line;
   system("clear");
-  printf("\n[ Patient Remove Menu (%s) ]\n\n", APP_VER);
+  prt(THIN_LINE, LEFT);
+  prt("LightEMR: Remove Patient", CENTER);
+  prt(THICK_LINE, LEFT);
+  
 }
 
 /******************************************
@@ -247,8 +251,11 @@ void Display_patient_remove_menu()
  *****************************************/
 void Display_help_menu()
 {
+  void (*prt)(char *input, int align) = Print_interface_line;
   system("clear");
-  printf("\n[ Help (%s) ]\n\n", APP_VER);
+  prt(THIN_LINE, LEFT);
+  prt("LightEMR: Help", CENTER);
+  prt(THICK_LINE, LEFT);
 }
 
 /******************************************
@@ -260,13 +267,20 @@ void Display_clinical_tools_menu()
   // ssize_t rc;
   size_t nbytes = 2;
   int selection;
+  void (*prt)(char *input, int align) = Print_interface_line;
   
   system("clear");
-  printf("\n[ Clinical Tools (%s) ]\n\n", APP_VER);
-  printf("\n 1. Anion Gap.\n\n");
+  prt(THIN_LINE, LEFT);
+  prt("LightEMR: Tools", CENTER);
+  prt(THICK_LINE, LEFT);
+  prt(BLANK_LINE, LEFT);
+  prt("1. Anion Gap", CENTER);
+  prt(BLANK_LINE, LEFT);
+  prt(THIN_LINE, LEFT);
 
-  printf("Please enter your selection: ");
+  fprintf(stdout, "%s", SELECTION_PROMPT_LONG);
   modgetlatoi(&selection, &nbytes);
+  
   switch(selection){
   case 1:
     Process_anion_gap();
