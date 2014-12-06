@@ -15,11 +15,9 @@
 #include "defs.h"
 #include "patient.h"
 
-#define LEFT   0
-#define RIGHT  1
-#define CENTER 2
+typedef enum {LEFT, RIGHT, CENTER } align_t;
 
-void Print_interface_line(char *input, int align);
+void Print_interface_line(char *input, align_t align);
 void Display_main_menu(void);
 char *Formatted_date(void);
 void Display_patient_lookup_menu(void);

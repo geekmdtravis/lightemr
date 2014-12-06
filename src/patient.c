@@ -61,8 +61,7 @@ Patient *Patient_create()
   Patient_update_emergency(new_patient->emerg2,
 		      "No contact given", "5555555555", "5555555555",
 			   "5555555555", "None", "No@Email.Given");
-  new_patient->init = Patient_populate;
-  
+
   return ((new_patient) ? new_patient : NULL);
 }
 
@@ -351,7 +350,7 @@ BOOL Patient_populate(Patient *self, Name *name, Birthdate *dob,
 // a patient object.
 void Patient_print_info(Patient *p)
 {
-  void (*prt)(char *input, int align) = Print_interface_line;
+  void (*prt)(char *input, align_t align) = Print_interface_line;
   char *upperFirst = Convert_to_upper(p->name->first);
   char *upperMiddle = Convert_to_upper(p->name->middle);
   char *upperLast = Convert_to_upper(p->name->last);

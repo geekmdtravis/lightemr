@@ -54,11 +54,6 @@ typedef struct Patient {
   Emergency_contact *emerg2;
   char *pid;
   char *mrn;
-  BOOL (*init)(struct Patient *self, Name *name,
-	       Birthdate *dob, Address *addr,
-	      Contact *contact, Emergency_contact *emerg1,
-	      Emergency_contact *emerg2,
-	      char *pid, char *mrn);
 } Patient;
 
 Patient *Patient_create(void);

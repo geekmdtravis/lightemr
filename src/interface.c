@@ -3,7 +3,7 @@
 // Each line of text output to the interface, with a few exceptions
 // where I'm limited by need to acquire user input, should be filtered
 // through this function. This allows for uniformity in presentation.
-void Print_interface_line(char *input, int align)
+void Print_interface_line(char *input, align_t align)
 {
   int len = strlen(input);
   int i, j, offset;
@@ -55,7 +55,7 @@ char *Formatted_date()
 void Display_main_menu()
 {
   char *date = Formatted_date();  
-  void (*prt)(char *input, int align) = Print_interface_line;
+  void (*prt)(char *input, align_t align) = Print_interface_line;
   
   system("clear");
   prt(THIN_LINE, LEFT);
@@ -86,7 +86,7 @@ void Display_patient_lookup_menu()
   char *date = Formatted_date();
   
   system("clear");
-  void (*prt)(char *input, int align) = Print_interface_line;
+  void (*prt)(char *input, align_t align) = Print_interface_line;
   prt(THIN_LINE, LEFT);
   prt(date, CENTER);
   prt(THICK_LINE, LEFT);
@@ -176,7 +176,7 @@ int Patient_add_commit(Patient *p)
   ssize_t rc;
   int selection;
   size_t nbytes = 2;
-  void (*prt)(char *input, int align) = Print_interface_line;
+  void (*prt)(char *input, align_t align) = Print_interface_line;
 
   while(1) {
     system("clear");
@@ -218,7 +218,7 @@ int Patient_add_commit(Patient *p)
 void Display_patient_add_menu()
 {
   char *date = Formatted_date();
-  void (*prt)(char *input, int align) = Print_interface_line;
+  void (*prt)(char *input, align_t align) = Print_interface_line;
   
   system("clear");
   prt(THIN_LINE, LEFT);
@@ -238,7 +238,7 @@ void Display_patient_add_menu()
 
 void Display_patient_remove_menu()
 {
-  void (*prt)(char *input, int align) = Print_interface_line;
+  void (*prt)(char *input, align_t align) = Print_interface_line;
   system("clear");
   prt(THIN_LINE, LEFT);
   prt("LightEMR: Remove Patient", CENTER);
@@ -255,7 +255,7 @@ void Display_patient_remove_menu()
  *****************************************/
 void Display_help_menu()
 {
-  void (*prt)(char *input, int align) = Print_interface_line;
+  void (*prt)(char *input, align_t align) = Print_interface_line;
   system("clear");
   prt(THIN_LINE, LEFT);
   prt("LightEMR: Help", CENTER);
@@ -275,7 +275,7 @@ void Display_clinical_tools_menu()
   // ssize_t rc;
   size_t nbytes = 2;
   int selection;
-  void (*prt)(char *input, int align) = Print_interface_line;
+  void (*prt)(char *input, align_t align) = Print_interface_line;
   
   system("clear");
   prt(THIN_LINE, LEFT);
@@ -304,7 +304,7 @@ void Display_clinical_tools_menu()
  *****************************************/
 void Display_billing_menu()
 {
-  void (*prt)(char *input, int align) = Print_interface_line;
+  void (*prt)(char *input, align_t align) = Print_interface_line;
   
   system("clear");
   prt(THIN_LINE, LEFT);
@@ -351,7 +351,7 @@ void Display_confirm_continue()
 // RETURN: TRUE(1) if user wants to exit, FALSE(0) if not.
 BOOL Display_confirm_exit()
 {
-  void (*prt)(char *input, int align) = Print_interface_line;
+  void (*prt)(char *input, align_t align) = Print_interface_line;
   size_t nbytes = 4;
   char *selection = malloc(sizeof(char) * 4);
   BOOL confirmExit = FALSE;
@@ -396,7 +396,7 @@ BOOL Display_confirm_exit()
 // show that the command was understood.
 void Evaluate_exit_signal(BOOL exit)
 {
-  void (*prt)(char *input, int align) = Print_interface_line;
+  void (*prt)(char *input, align_t align) = Print_interface_line;
   system("clear");
 
   if(exit) {
@@ -426,7 +426,7 @@ void Evaluate_exit_signal(BOOL exit)
 
 void Display_default_warning(char selection)
 {
-  void (*prt)(char *input, int align) = Print_interface_line;
+  void (*prt)(char *input, align_t align) = Print_interface_line;
   char line[MAX_LINE_TEXT];
   int i;
 

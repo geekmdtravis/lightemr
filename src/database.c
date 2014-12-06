@@ -342,7 +342,7 @@ int Patient_select(const struct Patient_query_result *pqr, const char *querymod)
 {
   int selection, i, j;
   size_t nbytes = 4;
-  void (*prt)(char *input, int align) = Print_interface_line;
+  void (*prt)(char *input, align_t align) = Print_interface_line;
   char ptResult[MAX_LINE_TEXT];
 
 

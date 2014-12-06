@@ -67,7 +67,7 @@ int User_login()
 
 void Display_welcome()
 {
-  void (*prt)(char *intput, int align) = Print_interface_line;
+  void (*prt)(char *intput, align_t align) = Print_interface_line;
   
   system("clear");
   prt(THICK_LINE, LEFT);
