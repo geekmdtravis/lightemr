@@ -1,6 +1,7 @@
 // file: login.c
 #include "version.h"
 #include "login.h"
+#include "interface.h"
 
 // to do: add database support so  users and their passwords can be stored.
 // also encrypt passwords as follows:
@@ -30,28 +31,28 @@ int User_login()
   // The user has MAX_TRIES attempts at a username
   while (tryCount <= MAX_TRIES && invalid_user) {
     // Prompt for username
-    Prompt_user();
+    fprintf(stdout, "%s", "  User name: ");
     rc = modgetl(username, &nbytes);
     check(rc != 0, "Input error.");
     // If person is defined user, prompt for pass
     if (strcmp(username, user_comp) == 0) {
       while (tryCount <= MAX_TRIES && invalid_user) {
-	Prompt_pass();
+	fprintf(stdout, "%s", "  Password : ");
 	rc = modgetl(password, &nbytes);
 	check(rc != 0, "Input error.");
 	// If pass matches, grant access
 	if (strcmp(password, pass_comp) == 0 ) {
-	  printf("Login access granted!\n");
+	  fprintf(stdout, "%s", "  Login access granted!\n");
 	  invalid_user = FALSE;
 	  access_granted = TRUE;
 	} else { // Else do not grant access
-	  printf("Password incorrect.");
-	  printf("You have %d attempts remaining.\n",  (MAX_TRIES - tryCount));
+	  fprintf(stdout, "  Password incorrect. "
+		  "You have %d attempts remaining.\n",  (MAX_TRIES - tryCount));
 	}
 	tryCount++;
       }
     } else {
-      printf("Username '%s' was not found. You have %d attempts remaining.\n",
+      fprintf(stdout, "  Username '%s' was not found. You have %d attempts remaining.\n",
 	     username, (MAX_TRIES - tryCount));
     }
     tryCount++;
@@ -68,23 +69,12 @@ int User_login()
 
 void Display_welcome()
 {
+  void (*prt)(char *intput, int align) = Print_interface_line;
+  
   system("clear");
-  printf("\n"
-	 "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n"
-	 " [%s]\n"
-	 "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n"
-	 " Please login to continue.\n\n",
-	 APP_VER);
-}
-
-void Prompt_user()
-{
-  printf("USERNAME: ");
-}
-
-void Prompt_pass()
-{
-  printf("PASSWORD: ");
+  prt(THICK_LINE, LEFT);
+  prt("LightEMR: User Login Credentials Required", CENTER);
+  prt(THIN_LINE, LEFT);
 }
 
 

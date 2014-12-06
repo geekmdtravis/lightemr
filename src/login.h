@@ -6,20 +6,11 @@
 #include <stdlib.h>
 #include "modstring.h"
 #include "dbg.h"
-
-#ifndef TRUE
-#define TRUE 1
-#endif
-
-#ifndef FALSE
-#define FALSE 0
-#endif
+#include "defs.h"
 
 #define MAX_TRIES 5
 
 void Display_welcome(void);
-void Prompt_user(void);
-void Prompt_pass(void);
 int User_login(void);
 
 #endif

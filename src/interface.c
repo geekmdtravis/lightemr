@@ -318,37 +318,88 @@ void Display_confirm_continue()
 // RETURN: TRUE(1) if user wants to exit, FALSE(0) if not.
 BOOL Display_confirm_exit()
 {
-  char selection;
+  void (*prt)(char *input, int align) = Print_interface_line;
+  size_t nbytes = 4;
+  char *selection = malloc(sizeof(char) * 4);
+  BOOL confirmExit = FALSE;
 
   system("clear");
-  printf("\n\nWARNING: You are about to exit %s.\n\n"
-	 "Are you sure you'd like to exit (y/n)?  ", APP_VER);
-  selection = getchar();
+  prt(THIN_LINE, LEFT);
+  prt("LightEMR: Exit confirmation", CENTER);
+  prt(THICK_LINE, LEFT);
+  prt(BLANK_LINE, LEFT);
+  prt("Are you sure you'd like to exit?", CENTER);
+  prt(BLANK_LINE, LEFT);
+  prt(THIN_LINE, LEFT);
+
+  do {
+    fprintf(stdout, "  %s", SELECTION_PROMPT_ABBREVIATED);
+    modgetl(selection, &nbytes);
   
-  return ((selection == 'y' || selection == 'Y') ? TRUE : FALSE);
+    switch(selection[0]) {
+    case 'Y':
+    case 'y':
+      confirmExit = TRUE;
+      break;
+
+    case 'N':
+    case 'n':
+      confirmExit = FALSE;
+      break;
+
+    default:
+      fprintf(stdout, "  %s", "  Incorrect selection\n");
+      break;
+    }
+  } while (selection[0] != 'Y' && selection[0] != 'y' &&
+	   selection[0] != 'N' && selection[0] != 'n');
+  
+  free(selection);
+  
+  return confirmExit;
 }
 
 // Look at the users decision to exit or not and
 // show that the command was understood.
 void Evaluate_exit_signal(BOOL exit)
 {
+  void (*prt)(char *input, int align) = Print_interface_line;
   system("clear");
 
   if(exit) {
-    printf("\n\n[ EXITING ]\n\n"
-	   "Thank you for using %s.\n\n"
-	   " - %s\n\n",
-	   APP_VER, APP_AUTHOR);
+    prt(THIN_LINE, LEFT);
+    prt("LightEMR: Exiting the program", CENTER);
+    prt(THICK_LINE, LEFT);
+    prt(BLANK_LINE, LEFT);
+    prt("Travis Nesbit, MD", CENTER);
+    prt(BLANK_LINE, LEFT);
+    prt(THIN_LINE, LEFT);
   } else {
-    printf("\nYou will head "
-	   "back to main menu.\n\n");
+    prt(THIN_LINE, LEFT);
+    prt("LightEMR: You've chosen NOT to exit.", CENTER);
+    prt(THICK_LINE, LEFT);
+    prt(BLANK_LINE, LEFT);
+    prt("You're being directed to the main menu.", CENTER);
+    prt(BLANK_LINE, LEFT);
+    prt(THIN_LINE, LEFT);
   }
 }
 
 void Display_default_warning(char selection)
 {
+  void (*prt)(char *input, int align) = Print_interface_line;
+  char line[MAX_LINE_TEXT];
+  int i;
+
+  CLEAR_STRING(line, i, MAX_LINE_TEXT);
+  sprintf(line, "WARNING: '%c' is an invalid selection.", selection);
+  
   system("clear");
-  printf("\nWarning: '%c' is an invalid selection.\n"
-             "Type a number as indicated  "
-	 "and then press enter.\n\n", selection);
+  prt(THIN_LINE, LEFT);
+  prt(line, CENTER);
+  prt(THICK_LINE, LEFT);
+  prt(BLANK_LINE, CENTER);
+  prt("Please type a number as indicated and press ENTER.", CENTER);
+  prt(BLANK_LINE, CENTER);
+  prt(THIN_LINE, CENTER);
 }
