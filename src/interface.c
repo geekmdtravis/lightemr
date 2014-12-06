@@ -243,6 +243,10 @@ void Display_patient_remove_menu()
   prt(THIN_LINE, LEFT);
   prt("LightEMR: Remove Patient", CENTER);
   prt(THICK_LINE, LEFT);
+  prt(BLANK_LINE, LEFT);
+  prt("Module in development.", CENTER);
+  prt(BLANK_LINE, LEFT);
+  prt(THIN_LINE, LEFT);
   
 }
 
@@ -256,6 +260,10 @@ void Display_help_menu()
   prt(THIN_LINE, LEFT);
   prt("LightEMR: Help", CENTER);
   prt(THICK_LINE, LEFT);
+  prt(BLANK_LINE, LEFT);
+  prt("Module in development.", CENTER);
+  prt(BLANK_LINE, LEFT);
+  prt(THIN_LINE, LEFT);
 }
 
 /******************************************
@@ -296,8 +304,16 @@ void Display_clinical_tools_menu()
  *****************************************/
 void Display_billing_menu()
 {
+  void (*prt)(char *input, int align) = Print_interface_line;
+  
   system("clear");
-  printf("\n[ Billing (%s) ]\n\n", APP_VER);
+  prt(THIN_LINE, LEFT);
+  prt("LightEMR: Billing", CENTER);
+  prt(THICK_LINE, LEFT);
+  prt(BLANK_LINE, LEFT);
+  prt("Module in development.", CENTER);
+  prt(BLANK_LINE, LEFT);
+  prt(THIN_LINE, LEFT);
 }
 
 /******************************************
@@ -306,9 +322,26 @@ void Display_billing_menu()
 
 void Display_confirm_continue()
 {
-  printf("Press RETURN to continue");
+  char line[MAX_LINE_TEXT];
+  char *cont= "[ Press RETURN to continue ]";
+  int i, len, offset;
+  len = strlen(cont);
+  offset = (MAX_LINE_TEXT - len) / 2;
+
+  for(i = 0; i < MAX_LINE_TEXT; i++){
+    if (i < offset) {
+      line[i] = ' ';
+    } else if (i >= offset && i <= (offset + len)) {
+      line[i] = cont[i - offset];
+    }
+    else {
+      line[i] = '\0';
+    }
+  }
+  line[MAX_LINE_TEXT] = '\0';
+  
+  fprintf(stdout, "%s", line);
   getchar();
-  system("clear");
 }
 
 // Prompts the user for confirmation of exit. If yes,
@@ -328,12 +361,12 @@ BOOL Display_confirm_exit()
   prt("LightEMR: Exit confirmation", CENTER);
   prt(THICK_LINE, LEFT);
   prt(BLANK_LINE, LEFT);
-  prt("Are you sure you'd like to exit?", CENTER);
+  prt("Are you sure you'd like to exit (y/n)?", CENTER);
   prt(BLANK_LINE, LEFT);
   prt(THIN_LINE, LEFT);
 
   do {
-    fprintf(stdout, "  %s", SELECTION_PROMPT_ABBREVIATED);
+    fprintf(stdout, "  %s", SELECTION_PROMPT_LONG);
     modgetl(selection, &nbytes);
   
     switch(selection[0]) {
@@ -371,7 +404,13 @@ void Evaluate_exit_signal(BOOL exit)
     prt("LightEMR: Exiting the program", CENTER);
     prt(THICK_LINE, LEFT);
     prt(BLANK_LINE, LEFT);
-    prt("Travis Nesbit, MD", CENTER);
+    prt("This software is written and maintained by ", CENTER);
+    prt("Travis Nesbit, MD. It is a free and open-  ", CENTER);
+    prt("source software under the GNU GPL license. ", CENTER);
+    prt(BLANK_LINE, LEFT);
+    prt("Special thank you to:                      ", CENTER);
+    prt(" - My wonderful wife                       ", CENTER);
+    prt(" - The entire GNU/Linux community          ", CENTER);
     prt(BLANK_LINE, LEFT);
     prt(THIN_LINE, LEFT);
   } else {

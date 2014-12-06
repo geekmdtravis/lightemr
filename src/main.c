@@ -45,6 +45,7 @@ int main()
 
   // MAIN PROGRAM LOOP
   do {
+    system("clear");
     Display_main_menu();
     rc = getline(&selection, &nbytes, stdin);
     check(rc != 0, "Error acquiring input.\n"
