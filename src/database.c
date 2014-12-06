@@ -52,7 +52,22 @@ char *Create_add_note_query(const Note *n)
   // Allocate memory on heap for the query we're
   // returning as a string.
   char *query = malloc(sizeof(char) * MAX_QUERY);
+  int i;
   
+  CLEAR_STRING(query, i, MAX_QUERY);
+  strcat(query, "INSERT INTO NOTES VALUES('");
+  strcat(query, n->mrn);
+  strcat(query, "', '");
+  strcat(query, n->title);
+  strcat(query, "', '");
+  strcat(query, n->author);
+  strcat(query, "', '");
+  strcat(query, n->time);
+  strcat(query, "', '");
+  strcat(query, n->replaced);
+  strcat(query, "', '");
+  strcat(query, n->text);
+  strcat(query, "');");
 
   return query;
 }
