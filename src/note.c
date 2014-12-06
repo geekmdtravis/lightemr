@@ -29,17 +29,17 @@ Note *Note_create(char *mrn)
   n->mrn = malloc(sizeof(char) * MAX_ID);
   n->title = malloc(sizeof(char) * MAX_DATA);
   n->author = malloc(sizeof(char) * MAX_NAME * 2);
-  n->time = malloc(sizeof(char) * MAX_DATE);
+  n->time = Formatted_time();
   n->replaced = malloc(sizeof(char) * 4);
   n->text = malloc(sizeof(char) * MAX_NOTE);
 
   // Initialize note with basic values
   if(n->mrn) strcpy(n->mrn, mrn);
-  // title excluded
-  // author excluded
-  if(n->time) strcpy(n->time, Formatted_time());
+  // title excluded temporarily
+  // author excluded temporarily
+  // Formatted time already done above as passed pointer
   if(n->replaced) strcpy(n->replaced, "no\0");
-  // text excluded
+  // text excluded temporarily
 
   return n;
 }
@@ -51,7 +51,7 @@ BOOL Note_destroy(Note *n)
   if(n->author) free(n->author); n->author = NULL;
   if(n->time) free(n->time); n->time = NULL;
   if(n->replaced) free(n->replaced); n->replaced = NULL;
-  if(n->text) free(n->text); n->text = NULL;
+  if(n->text) free(n->text); n-> text = NULL;
   if(n) free(n); n = NULL;
 
   return (n == NULL) ? TRUE : FALSE;

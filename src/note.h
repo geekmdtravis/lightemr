@@ -18,6 +18,7 @@ typedef struct Note {
   char *text;
 } Note;
 
+char *Formatted_time(void);
 Note *Note_create(char *mrn);
 BOOL Note_destroy(Note *n);
 
