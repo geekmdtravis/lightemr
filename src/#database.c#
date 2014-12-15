@@ -395,7 +395,7 @@ BOOL PQ_node_add(PQ_node *n) {
   PQ_node *tail = PQ_list_find_tail(n);
 
   tail->next = new;
-  new->prev = tail;
+q  new->prev = tail;
   new->count = tail->count + 1;
 
   return ((new) ? TRUE : FALSE);

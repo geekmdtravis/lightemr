@@ -8,15 +8,7 @@
 #include <string.h>
 #include "patient.h"
 #include "defs.h"
-
-typedef struct Note {
-  char *mrn;
-  char *title;
-  char *author;
-  char *time;
-  char *replaced;
-  char *text;
-} Note;
+#include "note_structure.h"
 
 char *Formatted_time(void);
 Note *Note_create(char *mrn);

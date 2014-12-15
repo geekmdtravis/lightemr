@@ -1,0 +1,16 @@
+==7066== Memcheck, a memory error detector
+==7066== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==7066== Using Valgrind-3.10.0 and LibVEX; rerun with -h for copyright info
+==7066== Command: ./lightemr
+==7066== 
+SQL Error: table PATIENTS already exists
+SQL Error: table NOTES already exists
+==7066== 
+==7066== HEAP SUMMARY:
+==7066==     in use at exit: 0 bytes in 0 blocks
+==7066==   total heap usage: 3,976 allocs, 3,976 frees, 514,526 bytes allocated
+==7066== 
+==7066== All heap blocks were freed -- no leaks are possible
+==7066== 
+==7066== For counts of detected and suppressed errors, rerun with: -v
+==7066== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

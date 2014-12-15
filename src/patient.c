@@ -539,3 +539,39 @@ Patient *Add_patient()
  error:
   return NULL;
 }
+
+Patient *Patient_copy(Patient *p)
+{
+  Patient *p_Pt = Patient_create();
+
+  strcpy(p_Pt->name->first, p->name->first);
+  strcpy(p_Pt->name->middle, p->name->middle);
+  strcpy(p_Pt->name->last, p->name->last);
+  p_Pt->dob->month = p->dob->month;
+  p_Pt->dob->day = p->dob->day;
+  p_Pt->dob->year = p->dob->year;
+  strcpy(p_Pt->addr->field1, p->addr->field1);
+  strcpy(p_Pt->addr->field2, p->addr->field2);
+  strcpy(p_Pt->addr->field3, p->addr->field3);
+  strcpy(p_Pt->addr->field4, p->addr->field4);
+  strcpy(p_Pt->contact->phone_h, p->contact->phone_h);
+  strcpy(p_Pt->contact->phone_w, p->contact->phone_w);
+  strcpy(p_Pt->contact->phone_c, p->contact->phone_c);
+  strcpy(p_Pt->contact->email, p->contact->email);
+  strcpy(p_Pt->emerg1->full_name, p->emerg1->full_name);
+  strcpy(p_Pt->emerg1->relationship, p->emerg1->relationship);
+  strcpy(p_Pt->emerg1->contact->phone_h, p->emerg1->contact->phone_h);
+  strcpy(p_Pt->emerg1->contact->phone_w, p->emerg1->contact->phone_w);
+  strcpy(p_Pt->emerg1->contact->phone_c, p->emerg1->contact->phone_c);
+  strcpy(p_Pt->emerg1->contact->email, p->emerg1->contact->email);
+  strcpy(p_Pt->emerg2->full_name, p->emerg2->full_name);
+  strcpy(p_Pt->emerg2->relationship, p->emerg2->relationship);
+  strcpy(p_Pt->emerg2->contact->phone_h, p->emerg2->contact->phone_h);
+  strcpy(p_Pt->emerg2->contact->phone_w, p->emerg2->contact->phone_w);
+  strcpy(p_Pt->emerg2->contact->phone_c, p->emerg2->contact->phone_c);
+  strcpy(p_Pt->emerg2->contact->email, p->emerg2->contact->email);
+  strcpy(p_Pt->pid, p->pid);
+  strcpy(p_Pt->mrn, p->mrn);
+
+  return p_Pt;
+}

@@ -19,12 +19,17 @@ fi
 
 if [ -e "lightemr" ]
 then
-    # Add two patients to the database
-    valgrind ./lightemr < ./code_testing/valgrind/tests/add_patients.test 2> ./code_testing/valgrind/output/add_patients.txt  
-    # Lookup two patients from the database
-    valgrind ./lightemr < ./code_testing/valgrind/tests/lookup_patients.test 2> ./code_testing/valgrind/output/lookup_patient.txt
+    # Add  patients to the database
+    echo "TEST: Add patients to database."
+    valgrind --leak-check=full ./lightemr < ./code_testing/valgrind/tests/add_patients.test 2> ./code_testing/valgrind/output/add_patients.txt  
+    # Lookup patients from the database
+    echo "TEST: Lookup patients from database withOUT out of bounds requests."
+    valgrind --leak-check=full ./lightemr < ./code_testing/valgrind/tests/lookup_patients.test 2> ./code_testing/valgrind/output/lookup_patient.txt
+    echo "TEST: Lookup patients from database WITH out of bounds requests."
+    valgrind --leak-check=full ./lightemr < ./code_testing/valgrind/tests/lookup_patients_oob.test 2> ./code_testing/valgrind/output/lookup_patient_oob.txt
     # Calculate an anion gap x 2
-    valgrind ./lightemr < ./code_testing/valgrind/tests/aniongap.test 2> ./code_testing/valgrind/output/aniongap.txt
+    echo "TEST: Calculating the anion gap withOUT out of bounds values."
+    valgrind --leak-check=full ./lightemr < ./code_testing/valgrind/tests/aniongap.test 2> ./code_testing/valgrind/output/aniongap.txt
 else
     echo "Was unable to make LightEMR from source files."
 fi

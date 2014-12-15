@@ -7,7 +7,7 @@ char *Formatted_time(void)
   char *timeStr = malloc(sizeof(char) * MAX_DATE);
   time_t t;
   struct tm *tmp;
-  const char *timeFormat = "%d/%m/%y %R\0";
+  const char *timeFormat = "%d/%m/%y %T\0";
   int rc;
 
   t = time(NULL);
@@ -31,6 +31,7 @@ Note *Note_create(char *mrn)
   n->title = malloc(sizeof(char) * MAX_DATA);
   n->author = malloc(sizeof(char) * MAX_NAME * 2);
   n->time = Formatted_time();
+  n->time_sec = time(NULL);
   n->replaced = malloc(sizeof(char) * 4);
   n->text = malloc(sizeof(char) * MAX_NOTE);
 

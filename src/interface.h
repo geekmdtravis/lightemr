@@ -14,6 +14,12 @@
 #include "version.h"
 #include "defs.h"
 #include "patient.h"
+#include "note.h"
+
+typedef struct Patient Patient;
+typedef struct Note Note;
+typedef struct Patient_query_result PQR;
+typedef struct Patient_query_node PQ_node;
 
 typedef enum {LEFT, RIGHT, CENTER } align_t;
 
@@ -27,12 +33,14 @@ void Display_patient_add_menu(void);
 void Display_patient_remove_menu(void);
 void Display_help_menu(void);
 void Display_clinical_tools_menu(void);
+int Process_anion_gap(void);
 void Display_billing_menu(void);
 void Display_confirm_continue(void);
 int Display_confirm_exit(void);
 void Evaluate_exit_signal(int exit);
 void Display_default_warning(char selection);
-
+int Lookup_result_selection(PQ_node *head);
+  
 #endif
 
 

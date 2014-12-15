@@ -1,0 +1,55 @@
+   +--database.c--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   |245       PQ_node_del(head);                                                                                                                                                                                  |
+   |246                                                                                                                                                                                                           |
+   |247       // Assign an integer value identifiing the correct patient to                                                                                                                                       |
+   |248       // selection and then assign that result to patient. Do this                                                                                                                                        |
+   |249       // so long as the selection returned is valid                                                                                                                                                       |
+   |250                                                                                                                                                                                                           |
+   |251       selection = Patient_select(head, identifier);                                                                                                                                                       |
+   |252                                                                                                                                                                                                           |
+   |253       for(curr = head; curr->next; curr = curr->next) {                                                                                                                                                   |
+   |254         if(curr->count == selection) memcpy(&pt, &(curr->pt), sizeof(pt));                                                                                                                                |
+   |255       }                                                                                                                                                                                                   |
+B+ |256                                                                                                                                                                                                           |
+   |257       // If the result of the query is a blank patient, destroy it.                                                                                                                                       |
+   |258       if (pt && (strcmp(pt->mrn, "") == 0 || rc != SQLITE_OK)) Patient_destroy(pt);                                                                                                                       |
+   |259                                                                                                                                                                                                           |
+   |260       PQ_list_delete(head);                                                                                                                                                                               |
+   |261       head = NULL;                                                                                                                                                                                        |
+   |262                                                                                                                                                                                                           |
+  >|263       // Cleanup the sqlite3 error message                                                                                                                                                                |
+   |264       sqlite3_free(error);                                                                                                                                                                                |
+   |265                                                                                                                                                                                                           |
+   |266       return pt;                                                                                                                                                                                          |
+   |267     }                                                                                                                                                                                                     |
+   |268                                                                                                                                                                                                           |
+   |269     // This function is executed inside of sql3_exec for EACH row in the                                                                                                                                  |
+   |270     // database. c_num is the number of columns, *c_vals[] is a pointer                                                                                                                                   |
+   |271     // to a list of 'c_num' values as extracted from columns in that row                                                                                                                                  |
+   |272     // and *c_names[] is a similar list but which represents the names                                                                                                                                    |
+   |273     // for the column headers.                                                                                                                                                                            |
+   |274     // RETURN: 0 for success, -1 for failure to get patient from database                                                                                                                                 |
+   |275     int Patient_find_callback(void *udp, int c_num, char *c_vals[], char *c_names[])                                                                                                                      |
+   |276     {                                                                                                                                                                                                     |
+   |277       // For clarity in the code assign 'i'.                                                                                                                                                              |
+   |278       // int i = ((PQR*)udp)->count;                                                                                                                                                                      |
+   +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+multi-thre Thread 0x7ffff (SingleKey) In: Patient_lookup                                                                                                                                   Line: 263  PC: 0x406068
+Quit
+Quit
+Quit
+Quit
+Quit
+Quit
+Quit
+Quit
+Quit
+Quit
+Quit
+Quit
+Quit
+Quit
+Quit
+Quit
+Quit
+

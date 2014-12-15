@@ -142,7 +142,7 @@ int Process_patient_lookup(char *selection, Patient **pt, sqlite3 *db)
       break;
     }
     // Print patient info
-    if(*pt != NULL) {
+    if(*pt) {
       do {
 	fprintf(stdout, "\nMore detail on patient %s %s (Yes/No)? ",
 	       (*pt)->name->first, (*pt)->name->last);
@@ -299,6 +299,91 @@ void Display_clinical_tools_menu()
   }
 }
 
+// Process the clinicians request to calc anion gap withint program
+// RETURN: 0 for good output, -1 for unexpected or poor output
+int Process_anion_gap()
+{
+  BMP b; // basic metabolic panel
+  int rc, i;
+  int gap;
+  double rd;
+  double normalAlb;
+  double alb;
+  size_t nbytes = 4;
+  char *userInput = malloc(sizeof(char) * nbytes);
+  void (*prt)(char *input, align_t align) = Print_interface_line;
+  char line[MAX_LINE_TEXT];
+  
+  system("clear");
+  prt(THIN_LINE, LEFT);
+  prt("LightEMR: Anion Gap Calculator", CENTER);
+  prt(THICK_LINE, LEFT);
+  fprintf(stdout, "%s", "  Sodium  : ");
+  modgetlatoi(&b.na, &nbytes);
+  fprintf(stdout, "%s", "  Chloride: ");
+  modgetlatoi(&b.cl, &nbytes);
+  fprintf(stdout, "%s", "  Bicarb  : ");
+  modgetlatoi(&b.bicarb, &nbytes);
+
+  rc = Calculate_anion_gap(b.na, b.cl, b.bicarb);
+  prt(THIN_LINE, LEFT);
+  CLEAR_STRING(line, i, MAX_LINE_TEXT);
+  sprintf(line, "Anion gap: %d", rc);
+  prt(line, CENTER);
+  CLEAR_STRING(line, i, MAX_LINE_TEXT);
+  sprintf(line, "(%d - (%d + %d))", b.na, b.cl, b.bicarb);
+  prt(line, CENTER);
+  prt(THIN_LINE, LEFT);
+  
+  if(rc != -99) {
+    printf("  Would you like to calculate for hypoalbuminemia (y/n)? ");
+    modgetl(userInput, &nbytes);
+    switch(userInput[0]) {
+    case 'Y':
+    case 'y':
+      gap = rc;
+      printf("  Normal albumin (4.2): ");
+      modgetlatof(&normalAlb, &nbytes);
+      printf("  Observed albumin    : ");
+      modgetlatof(&alb, &nbytes);
+      rd = Calculate_corrected_anion_gap(gap, normalAlb, alb);
+      prt(THIN_LINE, LEFT);
+      CLEAR_STRING(line, i, MAX_LINE_TEXT);
+      sprintf(line, "Corrected anion gap: %.2f", rd);
+      prt(line, CENTER);
+      CLEAR_STRING(line, i, MAX_LINE_TEXT);
+      sprintf(line, "(%.2f x (%.2f - %.2f))", 2.5, normalAlb, alb);
+      prt(line, CENTER);
+      prt(THIN_LINE, LEFT);
+      break;
+      
+    case 'N':
+    case 'n':
+      prt(THIN_LINE, LEFT);
+      prt("Correction will not be calculated.  ", CENTER);
+      prt(THIN_LINE, LEFT);
+      break;
+
+    default:
+      prt(THIN_LINE, LEFT);
+      prt("  Incorrect selection. You will be returned to the main menu.", LEFT);
+      prt(THIN_LINE, LEFT);
+      return -1;
+      break;
+    }
+    free(userInput);
+    return 0;
+  } else {
+    prt(THIN_LINE, LEFT);
+    CLEAR_STRING(line, i, MAX_LINE_TEXT);
+    sprintf(line, "  Result of %d indicating input error.\n\n", rc);
+    prt(line, LEFT);
+    prt(THIN_LINE, LEFT);
+    free(userInput);
+    return -1;
+  }
+}
+
 /******************************************
              BILLING
  *****************************************/
@@ -441,4 +526,64 @@ void Display_default_warning(char selection)
   prt("Please type a number as indicated and press ENTER.", CENTER);
   prt(BLANK_LINE, CENTER);
   prt(THIN_LINE, CENTER);
+}
+
+/*****************************************************
+                      DATABASE INTERFACE
+ *****************************************************/
+
+// REturns selection # in addition to setting selection
+// flag to true
+int Lookup_result_selection(PQ_node *head)
+{
+  void (*prt)(char *input, align_t align) = Print_interface_line;
+  PQ_node *curr;
+  int selection, i;
+  size_t nbytes = 4;
+  char ptResult[MAX_LINE_TEXT];
+
+  system("clear");
+  prt(THIN_LINE, LEFT);
+  prt("LightEMR: Lookup Patient", CENTER);
+  prt(THICK_LINE, LEFT);
+  prt("Multiple results returned. Select desired patient.", CENTER);
+  prt(THIN_LINE, LEFT);
+
+  //  for(curr = head; curr->next; curr = (curr->next) ? curr->next : tail) {
+  for(curr = head; curr->next; curr = curr->next) {
+   CLEAR_STRING(ptResult, i, MAX_LINE_TEXT);
+   sprintf(ptResult, "[ # %d] %s, %s %c. MRN: %s DOB %d/%d/%d  ",
+	   curr->count,
+	   curr->pt->name->last,
+	   curr->pt->name->first,
+	   curr->pt->name->middle[0],
+	   curr->pt->mrn,
+	   curr->pt->dob->month,
+	   curr->pt->dob->day,
+	   curr->pt->dob->year);
+   prt(ptResult, LEFT);
+  }
+  CLEAR_STRING(ptResult, i, MAX_LINE_TEXT);
+  sprintf(ptResult, "[ # %d] %s, %s %c. MRN: %s DOB %d/%d/%d  ",
+	  curr->count,
+	  curr->pt->name->last,
+	  curr->pt->name->first,
+	  curr->pt->name->middle[0],
+	  curr->pt->mrn,
+	  curr->pt->dob->month,
+	  curr->pt->dob->day,
+	  curr->pt->dob->year);
+  prt(ptResult, LEFT);
+  prt(BLANK_LINE, LEFT);
+  prt(THIN_LINE, LEFT);
+
+  fprintf(stdout, "%s", SELECTION_PROMPT_LONG);
+  modgetlatoi(&selection, &nbytes);
+
+  for(curr = head; curr->next; curr = curr->next) {
+    if (curr->count == selection) curr->selected = TRUE;
+  }
+  if (curr->count == selection) curr->selected = TRUE;
+
+  return selection;
 }

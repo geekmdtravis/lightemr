@@ -8,19 +8,11 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <sqlite3.h>
-#include "interface.h"
 #include "patient.h"
-#include "database.h"
+#include "patient_structure.h"
 #include "note.h"
-#include "modstring.h"
+#include "note_structure.h"
 #include "defs.h"
-
-// No idea why this is necessary considering everything is working
-// in all other includes. One workaround I've found is to put the
-// definitions into a separate header file, but this doesn't make
-// any sense to me.
-typedef struct Patient Patient;
-typedef struct Note Note;
 
 /* The PQR struct was created specifically to deal with a
    challenge presented by the need for callback functions
@@ -59,14 +51,29 @@ typedef struct Patient_query_result {
   int count;
 } PQR;
 
-int Patient_notes_table_create(sqlite3 *db);
-char *Create_add_note_query(const Note *n);
-int Patient_demographics_table_create(sqlite3 *db);
-char *Create_add_user_query(const Patient *p);
-Patient *Patient_lookup(sqlite3 *db, const char *identifier, const char *querymod);
-int Patient_find_callback(void *upd, int num_c, char *c_vals[], char *c_names[]);
-int Patient_select(const struct Patient_query_result *pqr, const char *last);
+typedef struct Patient_query_node {
+  int count;
+  BOOL selected;
+  Patient *pt;
+  struct Patient_query_node *next;
+  struct Patient_query_node *prev;
+} PQ_node;
 
+int Patient_notes_table_create(sqlite3 *db);
+char *Create_add_note_query(Note *n);
+int Patient_demographics_table_create(sqlite3 *db);
+char *Create_add_user_query(Patient *p);
+Patient *Patient_lookup(sqlite3 *db, char *identifier, char *querymod);
+char *Create_patient_lookup_query(char *identifier, char *querymod);
+int Patient_find_callback(void *upd, int num_c, char *c_vals[], char *c_names[]);
+int Patient_select(PQ_node *n, char *last);
+PQ_node *PQ_node_alloc(void);
+BOOL PQ_node_add(PQ_node *n);
+BOOL PQ_list_pop(PQ_node *n);
+PQ_node *PQ_list_find_tail(PQ_node *n);
+void PQ_list_purge(PQ_node *n);
+PQ_node *PQ_list_node_extract(PQ_node *n);
+void PQ_node_destroy(PQ_node *n);
 #endif
 
 // eof: database.h
