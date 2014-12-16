@@ -580,10 +580,13 @@ int Lookup_result_selection(PQ_node *head)
   fprintf(stdout, "%s", SELECTION_PROMPT_LONG);
   modgetlatoi(&selection, &nbytes);
 
+  selection = 0; // The first index is one, so zero would be error.
   for(curr = head; curr->next; curr = curr->next) {
     if (curr->count == selection) curr->selected = TRUE;
   }
   if (curr->count == selection) curr->selected = TRUE;
+
+  if (selection == 0) fprintf(stdout, "%s", "Patient was not found.\n");
 
   return selection;
 }

@@ -214,63 +214,52 @@ char *Create_add_user_query(Patient *p)
 
   return query;
 }
-
+///////////////////////////////////////////////////////////////////
+// Patient_lookup()                                             ///
+///////////////////////////////////////////////////////////////////
 // Generate a query that will allow us to lookup a
 // patient by the query provided.
 // RETURN: return's a pointer to a Patient object on the heap
+///////////////////////////////////////////////////////////////////
 Patient *Patient_lookup(sqlite3 *db, char *identifier, char *querymod)
 {
   PQ_node *p_head = PQ_node_alloc();
   PQ_node *p_tmp = NULL;
   Patient *p_pt = NULL;
-  char *sqlQuery;
+  char *sqlQuery = NULL;
   char *error = "Sqlite3 ERROR.";
   int rc, selection;
 
+  // Create query, run query, free sqlQuery from mem when done
   sqlQuery = Create_patient_lookup_query(identifier, querymod);
-
-  // Execute the query on 'db' with query 'sql' invoking callback
-  // 'Patient_find_callback' and passing a pointer to the struct
-  // 'pqr' which contains the patient list and a counter for the
-  // callbacks and error message 'error'.
-  // NOTE: emphasis on pointer &pqr being passed to this fourth
-  // argument position, which ultimately is passed on further
-  // to the void poitner 'void *udp' in the callback function
   rc = sqlite3_exec(db, sqlQuery, Patient_find_callback, p_head, &error);
-  if(p_head->next) {
+  free(sqlQuery);
+  sqlite3_free(error); // cleanup the sqlite3 error message
+
+  // Remove the dummy patient that is returned with each patient_find_callback
+  // If there is no 'next', then no dummy was returned, and likely there is
+  // an error so list is purged and null returned.
+  if(p_head->next && rc == SQLITE_OK) {
     PQ_list_pop(p_head);
-    free(sqlQuery);
   } else {
     PQ_list_purge(p_head);
     p_pt = NULL;
-    free(sqlQuery);
     return p_pt;
   }
 
+  // Get the users selection of correct patient
   selection = Patient_select(p_head, querymod);
 
+  // if patient is found by list, as identified by selection #, then
+  // copy it to new pt before destroying returned list.
   for(p_tmp = p_head; p_tmp->next; p_tmp = p_tmp->next) {
     if(p_tmp->count == selection && p_tmp->pt) p_pt = Patient_copy(p_tmp->pt);
   }
   if(p_tmp->count == selection && p_tmp->pt) p_pt = Patient_copy(p_tmp->pt);
 
+  // Destroy the linked list of patients (a PQ_node)
   PQ_list_purge(p_head);
-  
-  // Assign an integer value identifiing the correct patient to
-  // selection and then assign that result to patient. Do this
-  // so long as the selection returned is valid
-  
-  /************************************************************/
-  // CODE TO SORT OUT THE VARIOUS QUERY RESULTS RETURNS HERE
-  /************************************************************/
-
     
-  // If the result of the query is a blank patient, destroy it.
-  // if (p_pt && (strcmp(p_pt->mrn, "") == 0 || rc != SQLITE_OK)) Patient_destroy(p_pt);
-
-  // Cleanup the sqlite3 error message
-  sqlite3_free(error);
-  
   return p_pt;
 }
 
