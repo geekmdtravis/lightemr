@@ -18,7 +18,6 @@
 
 typedef struct Patient Patient;
 typedef struct Note Note;
-typedef struct Patient_query_result PQR;
 typedef struct Patient_query_node PQ_node;
 
 typedef enum {LEFT, RIGHT, CENTER } align_t;

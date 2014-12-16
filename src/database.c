@@ -251,7 +251,7 @@ Patient *Patient_lookup(sqlite3 *db, char *identifier, char *field)
   }
 
   // Get the users selection of correct patient
-  selection = Patient_select(p_head, identifier);
+  selection = Process_lookup_results(p_head, identifier);
 
   // if patient is found by list, as identified by selection #, then
   // copy it to new pt before destroying returned list.
@@ -266,7 +266,7 @@ Patient *Patient_lookup(sqlite3 *db, char *identifier, char *field)
   return p_pt;
 }
 
-
+// Returns the query for a patient lookup
 char *Create_patient_lookup_query(char *identifier, char *field)
 {
   char *sql = malloc(sizeof(char) * MAX_QUERY);
@@ -282,22 +282,24 @@ char *Create_patient_lookup_query(char *identifier, char *field)
   return sql;
 }
 
+/*******************************************************************
+                 PATIENT FIND CALLBACK FUNCTION
+ ******************************************************************
+ This function is executed inside of sql3_exec for EACH row in the
+ database. c_num is the number of columns, *c_vals[] is a pointer
+ to a list of 'c_num' values as extracted from columns in that row
+ and *c_names[] is a similar list but which represents the names
+ for the column headers.
 
+ RETURN: 0 for success, -1 for failure to get patient from database
 
-// This function is executed inside of sql3_exec for EACH row in the
-// database. c_num is the number of columns, *c_vals[] is a pointer
-// to a list of 'c_num' values as extracted from columns in that row
-// and *c_names[] is a similar list but which represents the names
-// for the column headers.
-// RETURN: 0 for success, -1 for failure to get patient from database
+ ******************************************************************/
 int Patient_find_callback(void *udp, int c_num, char *c_vals[], char *c_names[])
 {
-  // For clarity in the code assign 'i'.
-  // int i = ((PQR*)udp)->count;
   PQ_node *tail = PQ_list_find_tail((PQ_node*)udp);
 
   // Copy the values from each column into their respective
-  // fields in the PQR.resultList[i] Patient object on the heap
+  // fields in the PQ_node *list nodes.
   strcpy(tail->pt->mrn, c_vals[0]);
   strcpy(tail->pt->name->first, c_vals[1]);
   tail->pt->name->first[0] = toupper(tail->pt->name->first[0]);
@@ -305,10 +307,9 @@ int Patient_find_callback(void *udp, int c_num, char *c_vals[], char *c_names[])
   tail->pt->name->middle[0] = toupper(tail->pt->name->middle[0]);
   strcpy(tail->pt->name->last, c_vals[3]);
   tail->pt->name->last[0] = toupper(tail->pt->name->last[0]);
-  // Recall: mo/day/yr are ints
-  tail->pt->dob->month = atoi(c_vals[4]);
-  tail->pt->dob->day = atoi(c_vals[5]);
-  tail->pt->dob->year = atoi(c_vals[6]);
+  tail->pt->dob->month = atoi(c_vals[4]); // Recall: mo/day/yr are ints
+  tail->pt->dob->day = atoi(c_vals[5]);   // Recall: mo/day/yr are ints
+  tail->pt->dob->year = atoi(c_vals[6]);  // Recall: mo/day/yr are ints
   strcpy(tail->pt->addr->field1, c_vals[7]);
   strcpy(tail->pt->addr->field2, c_vals[8]);
   strcpy(tail->pt->addr->field3, c_vals[9]);
@@ -332,24 +333,26 @@ int Patient_find_callback(void *udp, int c_num, char *c_vals[], char *c_names[])
   strcpy(tail->pt->pid, c_vals[27]);
 
   PQ_node_add(tail);
-  
-  // Increment the count so we know how many patients are returned to the list
-  // and so that we can assign the next patient to the next list position
-  // ((PQR*)udp)->count++;
 
-  // If the mrn isn't blank, return 0 for success otherwise -1 
+  // If the mrn isn't blank (initialized but not set),
+  // return 0 for success otherwise -1 
   return (strcmp(((PQ_node*)udp)->pt->mrn, "") == 0 ? -1 : 0);
 }
 
-// When multiple results are passed back to the PQR by multiple executions
-// of the patient callback, this function is used to allow the user to
-// discriminate between them and select their intended patient from that
-// list of candidates.
-// RETURN: returns an integer which is associated with the position of the
-// pointer to the Patient of interest in the array of the Patient object
-// pointers.
-// change name to: Lookup results processing
-int Patient_select(PQ_node *head, char *identifier)
+/************************************************************************
+              PROCESS LOOKUP RESULTS ()
+************************************************************************
+
+ PURPOSE: When multiple results are passed back to the PQ_node list through
+ the patient callback, this function is used to allow the user to discriminate
+ between them and select their intended patient from that list of candidates.
+
+ RETURN: returns an integer which is associated with the position of the
+ pointer to the Patient of interest in the list of the Patient object
+ pointers.
+
+***********************************************************************/
+int Process_lookup_results(PQ_node *head, char *identifier)
 {
   int selection;
   PQ_node *tail = PQ_list_find_tail(head);
@@ -363,12 +366,11 @@ int Patient_select(PQ_node *head, char *identifier)
 
   return selection;
 }
-// eof: database.c
 
 /**************************************************
- Patient query results linked list will be implem-
- ented through these function.
+ Patient lookup query linked list implementation
  **************************************************/
+// Return a newly allocated (P)atient(Q)uery node.
 PQ_node *PQ_node_alloc(void) {
   
   PQ_node *n = malloc(sizeof(PQ_node));
@@ -382,6 +384,7 @@ PQ_node *PQ_node_alloc(void) {
   return n;
 }
 
+// Add a node to list; return success as TRUE
 BOOL PQ_node_add(PQ_node *n) {
   PQ_node *new = PQ_node_alloc();
   PQ_node *tail = PQ_list_find_tail(n);
@@ -393,6 +396,7 @@ BOOL PQ_node_add(PQ_node *n) {
   return ((new) ? TRUE : FALSE);
 }
 
+// Pop a node from tail of list; return success at TRUE
 BOOL PQ_list_pop(PQ_node *n)
 {
   PQ_node *tail = PQ_list_find_tail(n);
@@ -417,16 +421,18 @@ BOOL PQ_list_pop(PQ_node *n)
   return TRUE;
 }
 
+// Find tail of list, return pointer
 PQ_node *PQ_list_find_tail(PQ_node *n)
 {
-  PQ_node *tail;
+  PQ_node *tail = NULL;
 
   for(tail = n; tail->next; tail = tail->next);
 
   return tail;
 }
 
-void PQ_list_purge(PQ_node *n)
+// Completely destroy the PQ_node list
+BOOL PQ_list_purge(PQ_node *n)
 {
   PQ_node *p_head = n;
   PQ_node *p_next = NULL;
@@ -441,11 +447,16 @@ void PQ_list_purge(PQ_node *n)
   }
   if(p_curr->pt) Patient_destroy(p_curr->pt); p_curr->pt = NULL;
   if(p_curr) free(p_curr); p_curr = NULL;
+
+  return (!p_curr) ? TRUE : FALSE;
 }
 
+// Extract a single node from the list, return it,
+// and close up the list so there are no dangling pointers
 PQ_node *PQ_list_node_extract(PQ_node *n)
 {
   PQ_node *p_extracted, *p_left, *p_right;
+  p_extracted = p_left = p_right = NULL;
 
   p_extracted = n;
   if(n->prev) p_left = n->prev;
@@ -460,10 +471,15 @@ PQ_node *PQ_list_node_extract(PQ_node *n)
   return p_extracted;  
 }
 
-void PQ_node_destroy(PQ_node *n)
+// Destroy a single node from list
+BOOL PQ_node_destroy(PQ_node *n)
 {
   if(n->pt) Patient_destroy(n->pt);
   if(n->pt) n->pt = NULL;
   if(n) free(n);
   n = NULL;
+
+  return (!n) ? TRUE : FALSE;
 }
+
+// eof: database.c
