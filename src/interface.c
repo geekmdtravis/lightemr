@@ -534,13 +534,14 @@ void Display_default_warning(char selection)
 
 // REturns selection # in addition to setting selection
 // flag to true
-int Lookup_result_selection(PQ_node *head)
+int Lookup_result_selection(PQ_node *head, char *identifier)
 {
   void (*prt)(char *input, align_t align) = Print_interface_line;
   PQ_node *curr;
   int selection, i;
   size_t nbytes = 4;
   char ptResult[MAX_LINE_TEXT];
+  BOOL found = FALSE;
 
   system("clear");
   prt(THIN_LINE, LEFT);
@@ -580,13 +581,22 @@ int Lookup_result_selection(PQ_node *head)
   fprintf(stdout, "%s", SELECTION_PROMPT_LONG);
   modgetlatoi(&selection, &nbytes);
 
-  selection = 0; // The first index is one, so zero would be error.
   for(curr = head; curr->next; curr = curr->next) {
-    if (curr->count == selection) curr->selected = TRUE;
+    if (curr->count == selection) {
+      curr->selected = TRUE;
+      selection = curr->count;
+      found = TRUE;
+    }
   }
-  if (curr->count == selection) curr->selected = TRUE;
+  if (curr->count == selection) {
+    curr->selected = TRUE;
+    selection = curr->count;
+    found = TRUE;
+  }
 
-  if (selection == 0) fprintf(stdout, "%s", "Patient was not found.\n");
+  if (found == FALSE) {
+    fprintf(stdout, "No patient was found with the \"identifier\" %s.\n", identifier);
+  }
 
   return selection;
 }

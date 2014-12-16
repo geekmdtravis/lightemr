@@ -221,7 +221,7 @@ char *Create_add_user_query(Patient *p)
 // patient by the query provided.
 // RETURN: return's a pointer to a Patient object on the heap
 ///////////////////////////////////////////////////////////////////
-Patient *Patient_lookup(sqlite3 *db, char *identifier, char *querymod)
+Patient *Patient_lookup(sqlite3 *db, char *identifier, char *field)
 {
   PQ_node *p_head = PQ_node_alloc();
   PQ_node *p_tmp = NULL;
@@ -231,7 +231,7 @@ Patient *Patient_lookup(sqlite3 *db, char *identifier, char *querymod)
   int rc, selection;
 
   // Create query, run query, free sqlQuery from mem when done
-  sqlQuery = Create_patient_lookup_query(identifier, querymod);
+  sqlQuery = Create_patient_lookup_query(identifier, field);
   rc = sqlite3_exec(db, sqlQuery, Patient_find_callback, p_head, &error);
   free(sqlQuery);
   sqlite3_free(error); // cleanup the sqlite3 error message
@@ -239,16 +239,19 @@ Patient *Patient_lookup(sqlite3 *db, char *identifier, char *querymod)
   // Remove the dummy patient that is returned with each patient_find_callback
   // If there is no 'next', then no dummy was returned, and likely there is
   // an error so list is purged and null returned.
-  if(p_head->next && rc == SQLITE_OK) {
+  if(p_head->next && rc == 0) {
     PQ_list_pop(p_head);
   } else {
     PQ_list_purge(p_head);
     p_pt = NULL;
+    // Would prefer to move this print statement outside of this
+    // file/function. #TODO
+    fprintf(stdout, "Identifier \"%s\" was not found.\n", identifier);
     return p_pt;
   }
 
   // Get the users selection of correct patient
-  selection = Patient_select(p_head, querymod);
+  selection = Patient_select(p_head, identifier);
 
   // if patient is found by list, as identified by selection #, then
   // copy it to new pt before destroying returned list.
@@ -264,14 +267,14 @@ Patient *Patient_lookup(sqlite3 *db, char *identifier, char *querymod)
 }
 
 
-char *Create_patient_lookup_query(char *identifier, char *querymod)
+char *Create_patient_lookup_query(char *identifier, char *field)
 {
   char *sql = malloc(sizeof(char) * MAX_QUERY);
   
   // Create the query
   sql[0] = '\0';
   strcat(sql, "SELECT * FROM PATIENTS WHERE LOWER(");
-  strcat(sql, querymod);
+  strcat(sql, field);
   strcat(sql, ") = LOWER('");
   strcat(sql, identifier);
   strcat(sql, "');\0");
@@ -346,7 +349,7 @@ int Patient_find_callback(void *udp, int c_num, char *c_vals[], char *c_names[])
 // pointer to the Patient of interest in the array of the Patient object
 // pointers.
 // change name to: Lookup results processing
-int Patient_select(PQ_node *head, char *querymod)
+int Patient_select(PQ_node *head, char *identifier)
 {
   int selection;
   PQ_node *tail = PQ_list_find_tail(head);
@@ -355,7 +358,7 @@ int Patient_select(PQ_node *head, char *querymod)
     selection = head->count;
     head->selected = TRUE;
   } else {
-    selection = Lookup_result_selection(head);
+    selection = Lookup_result_selection(head, identifier);
   }
 
   return selection;

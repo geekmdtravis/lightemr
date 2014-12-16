@@ -39,7 +39,7 @@ void Display_confirm_continue(void);
 int Display_confirm_exit(void);
 void Evaluate_exit_signal(int exit);
 void Display_default_warning(char selection);
-int Lookup_result_selection(PQ_node *head);
+int Lookup_result_selection(PQ_node *head, char *identifier);
   
 #endif
 
