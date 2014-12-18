@@ -184,7 +184,7 @@ int Process_patient_lookup(char *selection, Patient **pt, sqlite3 *db)
 	    Display_confirm_continue();
 	    break;
 	  case 4:
-	    fprintf(stdout, "Option 4 not implemented yet.\n\n");
+	    Patient_print_info(*pt);
 	    Display_confirm_continue();
 	    break;
 	  case 5:
@@ -334,9 +334,6 @@ void Display_help_menu()
 
 void Display_clinical_tools_menu()
 {
-  // ssize_t rc;
-  size_t nbytes = 2;
-  int selection;
   void (*prt)(char *input, align_t align) = Print_interface_line;
   
   system("clear");
@@ -345,20 +342,36 @@ void Display_clinical_tools_menu()
   prt(THICK_LINE, LEFT);
   prt(BLANK_LINE, LEFT);
   prt("1. Anion Gap", CENTER);
+  prt("2. Main Menu", CENTER);
   prt(BLANK_LINE, LEFT);
   prt(THIN_LINE, LEFT);
 
-  fprintf(stdout, "%s", SELECTION_PROMPT_LONG);
-  modgetlatoi(&selection, &nbytes);
-  
-  switch(selection){
-  case 1:
-    Process_anion_gap();
-    break;
-  default:
-    printf("That was not an option.");
-    break;
+}
+
+void Process_clinical_tools_menu()
+{
+  // ssize_t rc;
+  size_t nbytes = 2;
+  int selection = 0;
+
+  while (selection != 2) {
+    fprintf(stdout, "%s", SELECTION_PROMPT_LONG);
+    modgetlatoi(&selection, &nbytes);
+
+    switch(selection){
+    case 1:
+      Process_anion_gap();
+      break;
+    case 2:
+      break;
+    default:
+      printf("That was not an option.\n");
+      break;
+    }
+    Display_confirm_continue();
+    Display_clinical_tools_menu();
   }
+  
 }
 
 // Process the clinicians request to calc anion gap withint program

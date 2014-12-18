@@ -100,6 +100,7 @@ int main()
     case '5': // CLINICAL TOOLS
       // empty
       Display_clinical_tools_menu();
+      Process_clinical_tools_menu();
       break;
       
     case '6': // BILLING
@@ -136,7 +137,7 @@ int main()
       break;
     }
     
-    Display_confirm_continue();
+    // Display_confirm_continue();
     
   } while (!EXIT);
   

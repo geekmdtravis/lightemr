@@ -33,6 +33,7 @@ void Display_patient_add_menu(void);
 void Display_patient_remove_menu(void);
 void Display_help_menu(void);
 void Display_clinical_tools_menu(void);
+void Process_clinical_tools_menu(void);
 int Process_anion_gap(void);
 void Display_billing_menu(void);
 void Display_confirm_continue(void);
