@@ -27,6 +27,7 @@ void Display_main_menu(void);
 char *Formatted_date(void);
 void Display_patient_lookup_menu(void);
 int Process_patient_lookup(char *selection, Patient **pt, sqlite3 *db);
+void Display_patient_portal_menu(Patient *p);
 int Patient_add_commit(Patient *p);
 void Display_patient_add_menu(void);
 void Display_patient_remove_menu(void);

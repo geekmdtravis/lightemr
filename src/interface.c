@@ -108,6 +108,7 @@ int Process_patient_lookup(char *selection, Patient **pt, sqlite3 *db)
 {
   size_t nbytes = MAX_DATA; // for two chars max ('n' + '\x')
   ssize_t rc = 0;
+  int selectionNum = 0;
   
     // Lookup patient
     switch(selection[0]) {
@@ -151,6 +152,8 @@ int Process_patient_lookup(char *selection, Patient **pt, sqlite3 *db)
 	case 'Y':
 	case 'y':
 	  Patient_print_info(*pt);
+	  Display_confirm_continue();
+	  fprintf(stdout, "\n");
 	  break;
 	case 'N':
 	case 'n':
@@ -162,14 +165,67 @@ int Process_patient_lookup(char *selection, Patient **pt, sqlite3 *db)
 	     selection[0] != 'y' &&
 	     selection[0] != 'N' &&
 		 selection[0] != 'n');
-      printf("\n");
+      // Enter the patient portal
+      if (rc != 0) {
+	while(selectionNum != 3){
+	  Display_patient_portal_menu(*pt);
+	  rc = modgetlatoi(&selectionNum, &nbytes);
+	  switch(selectionNum) {
+	  case 1:
+	    fprintf(stdout, "Option 1 not implemented yet.\n\n");
+	    Display_confirm_continue();
+	    break;
+	  case 2:
+	    fprintf(stdout, "Option 2 not implemented yet.\n\n");
+	    Display_confirm_continue();
+	    break;
+	  case 3:
+	    break;
+	  default:
+	    fprintf(stdout, "Selection '%d' is not valid.\n\n", selectionNum);
+	    Display_confirm_continue();
+	    break;
+	  }
+	  fprintf(stdout, "\n");
+	}
+      }
     } else {
-      printf("ERROR ");
+      fprintf(stdout, "ERROR: ");
       return -1;
     }
 
     return 0;
 }
+
+
+/******************************************
+            PATIENT_PORTAL
+ *****************************************/
+void Display_patient_portal_menu(Patient *pt)
+{
+  void (*prt)(char *input, align_t align) = Print_interface_line;
+  char *line = malloc(sizeof(char) * MAX_LINE_TEXT);
+    
+  system("clear");
+  prt(THIN_LINE, LEFT);
+  prt("Clinical Portal", CENTER);
+  sprintf(line, "[ %s, %s %s ] [ MRN: %s ] [ DOB: %d/%d/%d ]",
+	  pt->name->last, pt->name->first, pt->name->middle,
+	  pt->mrn, pt->dob->day, pt->dob->month, pt->dob->year);
+  prt(line, CENTER);
+  prt(THICK_LINE, LEFT);
+  prt("1. Add note         ", CENTER);
+  prt("2. Search notes     ", CENTER);
+  prt("3. Back to main menu", CENTER);
+  prt(THIN_LINE, LEFT);
+  fprintf(stdout, "%s", SELECTION_PROMPT_LONG);
+
+  if(line) free(line); line = NULL;
+}
+
+/******************************************
+             PATIENT ADD
+ *****************************************/
 
 int Patient_add_commit(Patient *p)
 {
@@ -210,10 +266,6 @@ int Patient_add_commit(Patient *p)
     }
   }
 }
-
-/******************************************
-             PATIENT ADD
- *****************************************/
 
 void Display_patient_add_menu()
 {
