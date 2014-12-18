@@ -167,7 +167,7 @@ int Process_patient_lookup(char *selection, Patient **pt, sqlite3 *db)
 		 selection[0] != 'n');
       // Enter the patient portal
       if (rc != 0) {
-	while(selectionNum != 3){
+	while(selectionNum != 5){
 	  Display_patient_portal_menu(*pt);
 	  rc = modgetlatoi(&selectionNum, &nbytes);
 	  switch(selectionNum) {
@@ -180,6 +180,14 @@ int Process_patient_lookup(char *selection, Patient **pt, sqlite3 *db)
 	    Display_confirm_continue();
 	    break;
 	  case 3:
+	    fprintf(stdout, "Option 3 not implemented yet.\n\n");
+	    Display_confirm_continue();
+	    break;
+	  case 4:
+	    fprintf(stdout, "Option 4 not implemented yet.\n\n");
+	    Display_confirm_continue();
+	    break;
+	  case 5:
 	    break;
 	  default:
 	    fprintf(stdout, "Selection '%d' is not valid.\n\n", selectionNum);
@@ -214,9 +222,11 @@ void Display_patient_portal_menu(Patient *pt)
 	  pt->mrn, pt->dob->day, pt->dob->month, pt->dob->year);
   prt(line, CENTER);
   prt(THICK_LINE, LEFT);
-  prt("1. Add note         ", CENTER);
-  prt("2. Search notes     ", CENTER);
-  prt("3. Back to main menu", CENTER);
+  prt("1. Medical History", CENTER);
+  prt("2. Notes          ", CENTER);
+  prt("3. Laboratory Data", CENTER);
+  prt("4. Patient Info   ", CENTER);
+  prt("5. Main Menu      ", CENTER);
   prt(THIN_LINE, LEFT);
   fprintf(stdout, "%s", SELECTION_PROMPT_LONG);
 
