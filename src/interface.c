@@ -212,27 +212,27 @@ int Process_patient_portal_selection(Patient *pt)
       return -1;
     }
     switch(selection[0]) {
-    case '1':
+    case '1': // medical history
       fprintf(stdout, "Option 1 not implemented yet.\n\n");
       Display_confirm_continue();
       break;
       
-    case '2':
+    case '2': // notes
       fprintf(stdout, "Option 2 not implemented yet.\n\n");
       Display_confirm_continue();
       break;
       
-    case '3':
+    case '3': // lab data
       fprintf(stdout, "Option 3 not implemented yet.\n\n");
       Display_confirm_continue();
       break;
       
-    case '4':
+    case '4': // demographic data
       Patient_print_info(pt);
       Display_confirm_continue();
       break;
 
-    case 'q':
+    case 'q': // previous menu
     case 'Q':
     case '5':
       break;
