@@ -8,7 +8,7 @@ char *Formatted_time(void)
   time_t t;
   struct tm *tmp;
   const char *timeFormat = "%d/%m/%y %T\0";
-  int rc;
+  int rc = 0;
 
   t = time(NULL);
   tmp = localtime(&t);
@@ -37,11 +37,11 @@ Note *Note_create(char *mrn)
 
   // Initialize note with basic values
   if(n->mrn) strcpy(n->mrn, mrn);
-  // title excluded temporarily
-  // author excluded temporarily
+  if(n->title) strcpy(n->title, "Note Title");
+  if(n->author) strcpy(n->author, "Author");
   // Formatted time already done above as passed pointer
   if(n->replaced) strcpy(n->replaced, "no\0");
-  // text excluded temporarily
+  if(n->text) strcpy(n->text, "Text goes here.");
 
   return n;
 }
