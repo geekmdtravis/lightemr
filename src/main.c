@@ -20,15 +20,14 @@ int main()
 
   /* For use with Sqlite3 */
   sqlite3 *db; 
-  char *query;
-  char *sqlError;
+  char *query = NULL;
+  char *sqlError = NULL;
 
   /* A single program alone will be in workspace. */
   Patient *pt = NULL;
 
   if (User_login() == -1) exit(EXIT_FAILURE);
   
-
   /* Establish a database connection. If there is no
      database file present, one will be created. Then
      validate. Establish a patient demographics table
@@ -54,21 +53,14 @@ int main()
 
     switch(selection[0]) { // Select only first character.
     case '1': // PATIENT LOOKUP
-      Display_patient_lookup_menu();
       if(pt) Patient_destroy(pt);
-      rc = getline(&selection, &nbytes, stdin);
-      check(rc != 0, "Input error.");
-      rc = Process_patient_lookup(selection, &pt, db);
-      if(rc == -1) {
-	printf("No patient was returned.\n\n");
-      } else {
-	// Process_patient(*pt);
-      }
+      rc = Process_patient_lookup(&pt, db);
+      if(rc == -1) printf("No patient was returned.\n\n");
       break;
 
     case '2': // PATIENT ADD
       Display_patient_add_menu();
-      if(pt) Patient_destroy(pt);
+      if(pt) Patient_destroy(pt); pt = NULL;
       pt = Add_patient();
       rc = Patient_add_commit(pt);
       if(rc == 1) {
@@ -90,6 +82,7 @@ int main()
       } else {
 	printf("No active patients.\n\n");
       }
+      Display_confirm_continue();
       break;
       
     case '4': // HELP
@@ -117,15 +110,9 @@ int main()
       EXIT = Display_confirm_exit();
       Evaluate_exit_signal(EXIT);
       if(EXIT){
-	if(selection) {
-	  free(selection);
-	  selection = NULL;
-	}
-	Patient_destroy(pt);
-	pt = NULL;
-	// if(pt != NULL) Patient_destroy(pt);
-	// if(sqlError) sqlite3_free(sqlError);
-      	sqlError = NULL;
+	if(selection)free(selection); selection = NULL;
+	if(pt) Patient_destroy(pt); pt = NULL;
+	if(sqlError) sqlite3_free(sqlError); sqlError = NULL;
 	sqlite3_close(db);
 	db = NULL;
 	exit(EXIT_SUCCESS);
@@ -139,7 +126,7 @@ int main()
     
     // Display_confirm_continue();
     
-  } while (!EXIT);
+    } while (!EXIT);
   
  error:
   exit(EXIT_FAILURE);

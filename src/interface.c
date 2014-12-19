@@ -93,10 +93,10 @@ void Display_patient_lookup_menu()
   prt("LightEMR: Patient Look-up", CENTER);
   prt(THIN_LINE, LEFT);
   prt(BLANK_LINE, LEFT);
-  prt(" 1. Find by MRN         ", CENTER);
-  prt(" 2. Find by first name  ", CENTER);
-  prt(" 3. Find by last name   ", CENTER);
-  prt(" 4. Go back to main menu", CENTER);
+  prt(" 1. Find by MRN        ", CENTER);
+  prt(" 2. Find by First Name ", CENTER);
+  prt(" 3. Find by Last Name  ", CENTER);
+  prt(" 4. Back to Parent Menu", CENTER);
   prt(BLANK_LINE, LEFT);
   prt(THIN_LINE, LEFT);
   printf("Please enter your selection: ");
@@ -104,12 +104,21 @@ void Display_patient_lookup_menu()
   free(date);
 }
 
-int Process_patient_lookup(char *selection, Patient **pt, sqlite3 *db)
+int Process_patient_lookup(Patient **pt, sqlite3 *db)
 {
-  size_t nbytes = MAX_DATA; // for two chars max ('n' + '\x')
+  size_t nbytes = MAX_DATA;
   ssize_t rc = 0;
-  int selectionNum = 0;
-  
+  char *selection = malloc(sizeof(char) * nbytes);
+  selection[0] = '0';
+  //int selectionNum = 0;
+
+  while(selection[0] != '4' &&
+	selection[0] != 'q' &&
+  	selection[0] != 'Q' &&
+  	selection[0] != '2'){
+    if(*pt) Patient_destroy(*pt); *pt = NULL;
+    Display_patient_lookup_menu();
+    rc = modgetl(selection, &nbytes);
     // Lookup patient
     switch(selection[0]) {
       case '1': // Lookup by MRN
@@ -132,9 +141,11 @@ int Process_patient_lookup(char *selection, Patient **pt, sqlite3 *db)
 	if (rc != 0) *pt = Patient_lookup(db, selection, "LAST");
 	else printf("Error acquiring input.\n");
 	break;
-	
+
+    case 'q':
+    case 'Q':
     case '4': // Return to main menu
-      if(pt) Patient_destroy(*pt);
+      if(selection)free(selection); selection = NULL;
       return 1;
       break;
       
@@ -142,66 +153,19 @@ int Process_patient_lookup(char *selection, Patient **pt, sqlite3 *db)
       printf("Invalid entry.\n");
       break;
     }
-    // Print patient info
+    
+    // If we have a patient, go to the patient portal
     if(*pt) {
-      do {
-	fprintf(stdout, "\nMore detail on patient %s %s (Yes/No)? ",
-	       (*pt)->name->first, (*pt)->name->last);
-	rc = modgetl(selection, &nbytes);
-	switch(selection[0]) {
-	case 'Y':
-	case 'y':
-	  Patient_print_info(*pt);
-	  Display_confirm_continue();
-	  fprintf(stdout, "\n");
-	  break;
-	case 'N':
-	case 'n':
-	  break;
-	default:
-	  printf("Invalid selection.\n");
-	}
-      } while (selection[0] != 'Y' &&
-	     selection[0] != 'y' &&
-	     selection[0] != 'N' &&
-		 selection[0] != 'n');
-      // Enter the patient portal
-      if (rc != 0) {
-	while(selectionNum != 5){
-	  Display_patient_portal_menu(*pt);
-	  rc = modgetlatoi(&selectionNum, &nbytes);
-	  switch(selectionNum) {
-	  case 1:
-	    fprintf(stdout, "Option 1 not implemented yet.\n\n");
-	    Display_confirm_continue();
-	    break;
-	  case 2:
-	    fprintf(stdout, "Option 2 not implemented yet.\n\n");
-	    Display_confirm_continue();
-	    break;
-	  case 3:
-	    fprintf(stdout, "Option 3 not implemented yet.\n\n");
-	    Display_confirm_continue();
-	    break;
-	  case 4:
-	    Patient_print_info(*pt);
-	    Display_confirm_continue();
-	    break;
-	  case 5:
-	    break;
-	  default:
-	    fprintf(stdout, "Selection '%d' is not valid.\n\n", selectionNum);
-	    Display_confirm_continue();
-	    break;
-	  }
-	  fprintf(stdout, "\n");
-	}
-      }
+      Process_patient_portal_selection(*pt);
     } else {
-      fprintf(stdout, "ERROR: ");
+      // Allow user to see error before going to main.
+      Display_confirm_continue();
+      if(selection) free(selection); selection = NULL;
       return -1;
     }
+    }
 
+    if(selection) free(selection); selection = NULL;
     return 0;
 }
 
@@ -222,15 +186,67 @@ void Display_patient_portal_menu(Patient *pt)
 	  pt->mrn, pt->dob->day, pt->dob->month, pt->dob->year);
   prt(line, CENTER);
   prt(THICK_LINE, LEFT);
-  prt("1. Medical History", CENTER);
-  prt("2. Notes          ", CENTER);
-  prt("3. Laboratory Data", CENTER);
-  prt("4. Patient Info   ", CENTER);
-  prt("5. Main Menu      ", CENTER);
+  prt("1. Medical History    ", CENTER);
+  prt("2. Notes              ", CENTER);
+  prt("3. Laboratory Data    ", CENTER);
+  prt("4. Patient Info       ", CENTER);
+  prt("5. Back to Parent Menu", CENTER);
   prt(THIN_LINE, LEFT);
   fprintf(stdout, "%s", SELECTION_PROMPT_LONG);
 
   if(line) free(line); line = NULL;
+}
+
+int Process_patient_portal_selection(Patient *pt)
+{
+  size_t rc = 0, nbytes = 3;
+  char *selection = malloc(sizeof(char) * nbytes);
+  selection[0] = '\0';
+  
+  while(selection[0] != '5' &&
+	selection[0] != 'q' &&
+	selection[0] != 'Q'){
+    Display_patient_portal_menu(pt);
+    rc = modgetl(selection, &nbytes);
+    if(rc == 0) {
+      return -1;
+    }
+    switch(selection[0]) {
+    case '1':
+      fprintf(stdout, "Option 1 not implemented yet.\n\n");
+      Display_confirm_continue();
+      break;
+      
+    case '2':
+      fprintf(stdout, "Option 2 not implemented yet.\n\n");
+      Display_confirm_continue();
+      break;
+      
+    case '3':
+      fprintf(stdout, "Option 3 not implemented yet.\n\n");
+      Display_confirm_continue();
+      break;
+      
+    case '4':
+      Patient_print_info(pt);
+      Display_confirm_continue();
+      break;
+
+    case 'q':
+    case 'Q':
+    case '5':
+      break;
+      
+    default:
+      fprintf(stdout, "Selection '%c' is not valid.\n\n", selection[0]);
+      Display_confirm_continue();
+      break;
+    }
+    fprintf(stdout, "\n");
+  }
+  if(selection) free(selection); selection = NULL;
+
+  return 0;
 }
 
 /******************************************
