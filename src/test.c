@@ -45,6 +45,7 @@ int main()
   n = Note_lookup(db, "1", "MRN");
 
   // Print the results of the lookup
+  system("clear");
   if(n) {
     fprintf(stdout,
 	    "Patient MRN: %s\n"

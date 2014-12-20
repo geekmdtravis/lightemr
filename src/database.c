@@ -510,7 +510,6 @@ Note *Note_lookup(sqlite3 *db, char *identifier, char *field)
   int rc = 0, selection = 0;
 
   rc = sqlite3_exec(db, sqlQuery, Note_find_callback,  p_head, &error);
-  pn = p_head->note;
   if(sqlQuery) free(sqlQuery); sqlQuery = NULL;
   if(error) sqlite3_free(error); error = NULL;
 
@@ -525,21 +524,21 @@ Note *Note_lookup(sqlite3 *db, char *identifier, char *field)
     return pn;
   }
 
-
   selection = Process_note_lookup_results(p_head, identifier);
 
-  /*
-  // if patient is found by list, as identified by selection #, then
-  // copy it to new pt before destroying returned list.
+  // if note is found by list, as identified by selection #, then
+  // copy it to new note before destroying returned list.
   for(p_tmp = p_head; p_tmp->next; p_tmp = p_tmp->next) {
-    if(p_tmp->count == selection && p_tmp->pt) p_pt = Note_copy(p_tmp->note);
+    if(p_tmp->count == selection && p_tmp->note) {
+      pn = Note_copy(p_tmp->note);
+    }
   }
-  if(p_tmp->count == selection && p_tmp->pt) p_pt = Note_copy(p_tmp->note);
-  */
+  if(p_tmp->count == selection && p_tmp->note) {
+    pn = Note_copy(p_tmp->note);
+  }
+
   // Destroy the linked list of notes (a NQ_node)
   NQ_list_purge(p_head);
-  // Only temporary since we're not copying the note yet
-  pn = NULL;
 
   return pn;
 }

@@ -58,4 +58,19 @@ BOOL Note_destroy(Note *n)
 
   return (n == NULL) ? TRUE : FALSE;
 }
+
+Note *Note_copy(Note *n)
+{
+  Note *p_copy = Note_create("NULL");
+
+  strcpy(p_copy->mrn, n->mrn);
+  strcpy(p_copy->title, n->title);
+  strcpy(p_copy->author, n->author);
+  strcpy(p_copy->time, n->time);
+  p_copy->time_sec = n->time_sec;
+  strcpy(p_copy->replaced, n->replaced);
+  strcpy(p_copy->text, n->text);
+
+  return p_copy;
+}
 // eof: note.c
