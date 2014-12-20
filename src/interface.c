@@ -218,8 +218,7 @@ int Process_patient_portal_selection(Patient *pt)
       break;
       
     case '2': // notes
-      fprintf(stdout, "Option 2 not implemented yet.\n\n");
-      Display_confirm_continue();
+      Process_notes_selection(pt);
       break;
       
     case '3': // lab data
@@ -247,6 +246,116 @@ int Process_patient_portal_selection(Patient *pt)
   if(selection) free(selection); selection = NULL;
 
   return 0;
+}
+
+/******************************************
+ *             NOTES
+ *****************************************/
+void Display_notes_menu(Patient *pt)
+{
+  void (*prt)(char *input, align_t align) = Print_interface_line;
+  char *line = malloc(sizeof(char) * MAX_LINE_TEXT);
+    
+  system("clear");
+  prt(THIN_LINE, LEFT);
+  prt("Patient Notes", CENTER);
+  sprintf(line, "[ %s, %s %s ] [ MRN: %s ] [ DOB: %d/%d/%d ]",
+	  pt->name->last, pt->name->first, pt->name->middle,
+	  pt->mrn, pt->dob->day, pt->dob->month, pt->dob->year);
+  prt(line, CENTER);
+  prt(THICK_LINE, LEFT);
+  prt("1. Add note           ", CENTER);
+  prt("2. Review old notes   ", CENTER);
+  prt("3. Back to Parent Menu", CENTER);
+  prt(THIN_LINE, LEFT);
+  fprintf(stdout, "%s", SELECTION_PROMPT_LONG);
+
+  if(line) free(line); line = NULL;
+}
+
+int Process_notes_selection(Patient *pt)
+{
+  Note *n = NULL;
+  sqlite3 *db = NULL;
+  size_t rc = 0, nbytes = 3;
+  char *selection = malloc(sizeof(char) * nbytes);
+  selection[0] = '\0';
+  
+  while(selection[0] != '3' &&
+	selection[0] != 'q' &&
+	selection[0] != 'Q'){
+    Display_notes_menu(pt);
+    rc = modgetl(selection, &nbytes);
+    if(rc == 0) {
+      return -1;
+    }
+    switch(selection[0]) {
+    case '1': // add note
+      if(db) sqlite3_close(db); db = NULL;
+      rc = sqlite3_open(DB_NAME, &db);
+      if (rc == -1) fprintf(stdout, "Database couldn't be opened.\n\n");
+      fprintf(stdout, "Option 1 not implemented yet.\n\n");
+      Display_confirm_continue();
+      if(db) sqlite3_close(db); db = NULL;
+      break;
+      
+    case '2': // review notes
+      if(db) sqlite3_close(db); db = NULL;
+      rc = sqlite3_open(DB_NAME, &db);
+      if (rc == -1) fprintf(stdout, "Database couldn't be opened.\n\n");
+      n = Note_lookup(db, pt->mrn, "MRN");
+      Display_note(n, pt);
+      Display_confirm_continue();
+      if(db) sqlite3_close(db); db = NULL;
+      break;
+
+    case 'q': // previous menu
+    case 'Q':
+    case '3': // go back
+      break;
+      
+    default:
+      fprintf(stdout, "Selection '%c' is not valid.\n\n", selection[0]);
+      Display_confirm_continue();
+      break;
+    }
+    fprintf(stdout, "\n");
+  }
+  if(selection) free(selection); selection = NULL;
+  if(n) Note_destroy(n); n = NULL;
+
+  return 0;
+}
+
+void Display_note(Note *n, Patient *pt)
+{
+  void (*prt)(char *input, align_t align) = Print_interface_line;
+  char *line = malloc(sizeof(char) * MAX_LINE_TEXT);
+    
+  system("clear");
+  prt(THIN_LINE, LEFT);
+  sprintf(line, "[ Patient Note for: %s, %s, %s ]",
+	  pt->name->last, pt->name->first, pt->name->middle);
+  prt(line, CENTER);
+  prt(THICK_LINE, LEFT);
+  sprintf(line, "[ MRN: %s ] [ DOB: %d/%d/%d ]",
+	  pt->mrn, pt->dob->day, pt->dob->month, pt->dob->year);
+  prt(line, LEFT);
+  sprintf(line, "[ Author: %s ]", "Current User");
+  prt(line, LEFT);
+  sprintf(line, "[ Note type: %s ]", n->title);
+  prt(line, LEFT);
+  sprintf(line, "[ Note date: %s ]", n->time);
+
+  // Loop through the text field to format it
+
+  
+  prt(THIN_LINE, LEFT);
+  prt(BLANK_LINE, LEFT);
+  prt(BLANK_LINE, LEFT);
+  prt(THIN_LINE, LEFT);
+
+  //    n->text needs it's own line now.
 }
 
 /******************************************

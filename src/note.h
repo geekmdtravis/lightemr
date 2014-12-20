@@ -12,6 +12,7 @@
 
 char *Formatted_time(void);
 Note *Note_create(char *mrn);
+Note *Note_copy(Note *n);
 BOOL Note_destroy(Note *n);
 
 #endif

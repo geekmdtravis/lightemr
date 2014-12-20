@@ -20,6 +20,8 @@
 #define SELECTION_PROMPT_ABBREVIATED "Selection: "
 #define SELECTION_PROMPT_MINIMAL "::> "
 
+#define DB_NAME "lightemr.data"
+
 #define CLEAR_STRING(STR, INC, LEN) { for((INC) = 0; (INC) < (LEN); (INC)++) (STR)[(INC)] = '\0'; } 
 
 typedef int BOOL;

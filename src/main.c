@@ -19,7 +19,7 @@ int main()
   BOOL EXIT = FALSE;
 
   /* For use with Sqlite3 */
-  sqlite3 *db; 
+  sqlite3 *db = NULL; 
   char *query = NULL;
   char *sqlError = NULL;
 
@@ -36,11 +36,12 @@ int main()
      Likely, this will be moved into it's own function
      and multiple tables will be created at this point.
   */
-  rc = sqlite3_open("lightemr.data", &db); // 40 byte memleak here?
-  check(rc == SQLITE_OK, "Could not open database.");
+  // rc = sqlite3_open(DB_NAME, &db);
   // Create relevant tables
+  sqlite3_open(DB_NAME, &db);
   rc = Patient_demographics_table_create(db);
   rc = Patient_notes_table_create(db);
+  if(db); sqlite3_close(db); db = NULL;
 
   // MAIN PROGRAM LOOP
   do {
@@ -54,13 +55,20 @@ int main()
     switch(selection[0]) { // Select only first character.
     case '1': // PATIENT LOOKUP
       if(pt) Patient_destroy(pt);
+      if(db) sqlite3_close(db); db = NULL;
+      rc = sqlite3_open(DB_NAME, &db);
+      if(rc == -1) fprintf(stdout, "Database could not be opened.\n\n");
       rc = Process_patient_lookup(&pt, db);
       if(rc == -1) printf("No patient was returned.\n\n");
+      sqlite3_close(db);
       break;
 
     case '2': // PATIENT ADD
       Display_patient_add_menu();
       if(pt) Patient_destroy(pt); pt = NULL;
+      if(db) sqlite3_close(db); db = NULL;
+      rc = sqlite3_open(DB_NAME, &db);
+      if(rc == -1) fprintf(stdout, "Database could not be opened.\n\n");
       pt = Add_patient();
       rc = Patient_add_commit(pt);
       if(rc == 1) {
@@ -68,6 +76,7 @@ int main()
 	rc = sqlite3_exec(db, query, NULL, 0, &sqlError);
 	free(query);
       }
+      sqlite3_close(db);
       break;
       
     case '3': // PATIENT REMOVE
