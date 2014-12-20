@@ -13,7 +13,7 @@ void Print_interface_line(char *input, align_t align)
     line[i] = ' ';
   }
   line[0] = '|';
-  line[MAX_LINE_TEXT + 1] = '|';
+  line[MAX_LINE - 3] = '|';
   line[MAX_LINE - 2] = '\n';
   line[MAX_LINE - 1] = '\0';
 
