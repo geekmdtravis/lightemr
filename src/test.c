@@ -34,8 +34,12 @@ int main()
   rc = sqlite3_open("lightemr.data", &db); 
   sqlite3_exec(db, query, NULL, NULL, &error);
 
-  // Destroy the old note
+  // Destroy the old note, close, and reopen database
+  // to recieve updates
   if(n) Note_destroy(n); n = NULL;
+  sqlite3_close(db);
+  db = NULL;
+  rc = sqlite3_open("lightemr.data", &db); 
 
   // Lookup the note from the database
   n = Note_lookup(db, "1", "MRN");

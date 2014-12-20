@@ -736,8 +736,6 @@ int Lookup_notes_result_selection(NQ_node *head, char *identifier)
 	  curr->count,
 	  curr->note->time);
   prt(ptResult, LEFT);
-  
-  prt(ptResult, LEFT);
   prt(BLANK_LINE, LEFT);
   prt(THIN_LINE, LEFT);
 
