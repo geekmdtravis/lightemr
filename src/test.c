@@ -85,33 +85,60 @@ int main()
 
 Note *Note_lookup(sqlite3 *db, char *identifier, char *field)
 {
-  Note *n = NULL;
-  NQ_node *n_head = NQ_node_alloc();
+  NQ_node *p_head = NQ_node_alloc();
+  NQ_node *p_tmp = NULL;;
+  Note *pn = NULL;
   char *sqlQuery = Create_note_lookup_query(identifier, field);
   char *error = NULL;
-  int rc;
+  int rc = 0, selection = 0;
 
-  rc = sqlite3_exec(db, sqlQuery, Note_find_callback,  n_head, &error);
-  n = n_head->note;
+  rc = sqlite3_exec(db, sqlQuery, Note_find_callback,  p_head, &error);
+  pn = p_head->note;
   if(sqlQuery) free(sqlQuery); sqlQuery = NULL;
   if(error) sqlite3_free(error); error = NULL;
-  // if(n_head) NQ_list_purge(n_head);
 
-  return n;
+  if(p_head->next && rc == 0) {
+    NQ_list_pop(p_head);
+  } else {
+    NQ_list_purge(p_head);
+    pn = NULL;
+    // Would prefer to move this print statement outside of this
+    // file/function. #TODO
+    fprintf(stdout, "Identifier \"%s\" was not found.\n", identifier);
+    return pn;
+  }
+
+  /*
+  // selection = Process_note_lookup_results(pn, identifier);
+
+  // if patient is found by list, as identified by selection #, then
+  // copy it to new pt before destroying returned list.
+  for(p_tmp = p_head; p_tmp->next; p_tmp = p_tmp->next) {
+    if(p_tmp->count == selection && p_tmp->pt) p_pt = Patient_copy(p_tmp->pt);
+  }
+  if(p_tmp->count == selection && p_tmp->pt) p_pt = Patient_copy(p_tmp->pt);
+  */
+  // Destroy the linked list of patients (a PQ_node)
+  NQ_list_purge(p_head);
+
+  return pn;
 }
 
 int Note_find_callback(void *udp, int c_num, char *c_vals[], char *c_names[])
 {
+  NQ_node *tail = NQ_list_find_tail((NQ_node*)udp);
   
-  strcpy(((NQ_node*)udp)->note->mrn, c_vals[0]);
-  strcpy(((NQ_node*)udp)->note->title, c_vals[1]);
-  strcpy(((NQ_node*)udp)->note->author, c_vals[2]);
-  strcpy(((NQ_node*)udp)->note->time, c_vals[3]);
-  ((NQ_node*)udp)->note->time_sec = atoi(c_vals[4]);
-  strcpy(((NQ_node*)udp)->note->replaced, c_vals[5]);
-  strcpy(((NQ_node*)udp)->note->text, c_vals[6]);
+  strcpy(tail->note->mrn, c_vals[0]);
+  strcpy(tail->note->title, c_vals[1]);
+  strcpy(tail->note->author, c_vals[2]);
+  strcpy(tail->note->time, c_vals[3]);
+  tail->note->time_sec = atoi(c_vals[4]);
+  strcpy(tail->note->replaced, c_vals[5]);
+  strcpy(tail->note->text, c_vals[6]);
+
+  NQ_node_add(tail);
   
-  return 0;
+  return (strcmp(((NQ_node*)udp)->note->mrn, "NULL") == 0 ? -1 : 0);
 }
 
 char *Create_note_lookup_query(char *identifier, char *field)
@@ -166,15 +193,53 @@ BOOL NQ_node_add(NQ_node *n)
 
 BOOL NQ_list_pop(NQ_node *n)
 {
+  NQ_node *tail = NQ_list_find_tail(n);
+  NQ_node *newTail = (tail->prev) ? tail->prev : NULL;;
+
+  if(tail->note) {
+    Note_destroy(tail->note);
+    tail->note = NULL;
+  } else {
+    return FALSE;
+  }
+  if(tail) {
+    free(tail);
+    tail = NULL;
+  } else {
+    return FALSE;
+  }
+  if(newTail) {
+    newTail->next = NULL;
+  }
+  
   return TRUE;
 }
 
 BOOL NQ_list_purge(NQ_node *n)
 {
-  return TRUE;
+  NQ_node *p_head = n;
+  NQ_node *p_next = NULL;
+  NQ_node *p_curr = NULL;
+
+  p_curr = p_head;
+  while(p_curr->next){
+    if(p_curr->next) p_next = p_curr->next; p_curr->next = NULL;
+    if(p_curr->note) Note_destroy(p_curr->note); p_curr->note = NULL;
+    if(p_curr) free(p_curr); p_curr = NULL;
+    p_curr = p_next;
+  }
+  if(p_curr->note) Note_destroy(p_curr->note); p_curr->note = NULL;
+  if(p_curr) free(p_curr); p_curr = NULL;
+
+  return (!p_curr) ? TRUE : FALSE;
 }
 
 BOOL NQ_node_destroy(NQ_node *n)
 {
-  return TRUE;
+  if(n->note) Note_destroy(n->note);
+  if(n->note) n->note = NULL;
+  if(n) free(n);
+  n = NULL;
+
+  return (!n) ? TRUE : FALSE;
 }
