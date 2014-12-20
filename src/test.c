@@ -14,9 +14,9 @@ int main()
   int rc = 0;
 
   // Create a note
-  strcat(n->title, "History and Physical");
-  strcat(n->author, "Dr. Super Awesome");
-  strcat(n->text,
+  strcpy(n->title, "History and Physical");
+  strcpy(n->author, "Dr. Super Awesome");
+  strcpy(n->text,
 	 "S: This is a 40 yr M with "
 	 "DM2 here for follow up on his "
 	 "insulin regimen. He has good "
