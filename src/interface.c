@@ -623,7 +623,7 @@ void Display_default_warning(char selection)
                       DATABASE INTERFACE
  *****************************************************/
 
-// REturns selection # in addition to setting selection
+// Returns selection # in addition to setting selection
 // flag to true
 int Lookup_result_selection(PQ_node *head, char *identifier)
 {
@@ -687,6 +687,78 @@ int Lookup_result_selection(PQ_node *head, char *identifier)
 
   if (found == FALSE) {
     fprintf(stdout, "No patient was found with the \"identifier\" %s.\n", identifier);
+  }
+
+  return selection;
+}
+
+/*****************************************************
+              NOTE RESULTS SELECTION
+ *****************************************************/
+
+// Returns selection # in addition to setting selection
+// flag to true
+int Lookup_notes_result_selection(NQ_node *head, char *identifier)
+{
+  void (*prt)(char *input, align_t align) = Print_interface_line;
+  NQ_node *curr;
+  int selection, i, count;
+  size_t nbytes = 4;
+  char ptResult[MAX_LINE_TEXT];
+  BOOL found = FALSE;
+
+  system("clear");
+  prt(THIN_LINE, LEFT);
+  prt("LightEMR: Lookup Note", CENTER);
+  prt(THICK_LINE, LEFT);
+  prt("Multiple results returned. Select desired note.", CENTER);
+  prt(THIN_LINE, LEFT);
+
+  for(curr = head, count = 1; curr->next; curr = curr->next, ++count) {
+    if(count % 10 == 0) {
+      prt(THIN_LINE, LEFT);
+      Display_confirm_continue();
+      system("clear");
+      prt(THIN_LINE, LEFT);      
+      prt("LightEMR: Lookup Note", CENTER);
+      prt(THICK_LINE, LEFT);
+      prt("Multiple results returned. Select desired note.", CENTER);
+      prt(THIN_LINE, LEFT);
+    }
+   CLEAR_STRING(ptResult, i, MAX_LINE_TEXT);
+   sprintf(ptResult, "[ # %d] [ Date: %s ]  ",
+	   curr->count,
+	   (curr->note->time));
+   prt(ptResult, LEFT);
+  }
+  CLEAR_STRING(ptResult, i, MAX_LINE_TEXT);
+  sprintf(ptResult, "[ # %d] [ Date: %s ]  ",
+	  curr->count,
+	  curr->note->time);
+  prt(ptResult, LEFT);
+  
+  prt(ptResult, LEFT);
+  prt(BLANK_LINE, LEFT);
+  prt(THIN_LINE, LEFT);
+
+  fprintf(stdout, "%s", SELECTION_PROMPT_LONG);
+  modgetlatoi(&selection, &nbytes);
+
+  for(curr = head; curr->next; curr = curr->next) {
+    if (curr->count == selection) {
+      curr->selected = TRUE;
+      selection = curr->count;
+      found = TRUE;
+    }
+  }
+  if (curr->count == selection) {
+    curr->selected = TRUE;
+    selection = curr->count;
+    found = TRUE;
+  }
+
+  if (found == FALSE) {
+    fprintf(stdout, "No note was found with the \"identifier\" %s.\n", identifier);
   }
 
   return selection;

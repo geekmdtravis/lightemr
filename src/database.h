@@ -54,9 +54,34 @@ typedef struct Patient_query_node {
   struct Patient_query_node *prev;
 } PQ_node;
 
+/*****************************
+ * Similar to PQ_node, but for notes.
+ ****************************/
+typedef struct Note_query_node {
+  int count;
+  BOOL selected;
+  Note *note;
+  struct Note_query_node *next;
+  struct Note_query_node *prev;
+} NQ_node;
+  
+
+
 /******************************************************
               FORWARD DECLARATIONS
  *****************************************************/
+// need to sort and explain these
+NQ_node *NQ_node_alloc(void);
+Note *Note_lookup(sqlite3 *db, char *identifier, char *field);
+char *Create_note_lookup_query(char *identifier, char *field);
+int Note_find_callback(void *udp, int c_num, char *c_vals[], char *c_names[]);
+NQ_node *NQ_list_find_tail(NQ_node *n);
+BOOL NQ_node_add(NQ_node *n);
+BOOL NQ_list_pop(NQ_node *n);
+BOOL NQ_list_purge(NQ_node *n);
+BOOL NQ_node_destroy(NQ_node *n);
+
+
 
 /*****************************************************
  Patient_lookup(): takes a database, the identifier
@@ -125,6 +150,8 @@ int Patient_find_callback(void *upd, int num_c, char *c_vals[], char *c_names[])
 
  *****************************************************/
 int Process_lookup_results(PQ_node *n, char *last);
+
+int Process_note_lookup_results(NQ_node *head, char *identifier);
 
 
 /*****************************************************

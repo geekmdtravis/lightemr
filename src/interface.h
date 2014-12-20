@@ -19,6 +19,7 @@
 typedef struct Patient Patient;
 typedef struct Note Note;
 typedef struct Patient_query_node PQ_node;
+typedef struct Note_query_node NQ_node;
 
 typedef enum {LEFT, RIGHT, CENTER } align_t;
 
@@ -42,6 +43,7 @@ int Display_confirm_exit(void);
 void Evaluate_exit_signal(int exit);
 void Display_default_warning(char selection);
 int Lookup_result_selection(PQ_node *head, char *identifier);
+int Lookup_notes_result_selection(NQ_node *head, char *identifier);
   
 #endif
 
