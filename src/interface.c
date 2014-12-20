@@ -13,9 +13,9 @@ void Print_interface_line(char *input, align_t align)
     line[i] = ' ';
   }
   line[0] = '|';
-  line[77] = '|';
-  line[78] = '\n';
-  line[79] = '\0';
+  line[MAX_LINE_TEXT + 1] = '|';
+  line[MAX_LINE - 2] = '\n';
+  line[MAX_LINE - 1] = '\0';
 
   if (align == RIGHT) {
     offset = MAX_LINE_TEXT - len;
@@ -25,7 +25,7 @@ void Print_interface_line(char *input, align_t align)
     offset = 1;
   }
 
-  for (i = offset, j = 0; j < len && i < MAX_LINE_TEXT; j++, i++) {
+  for (i = offset, j = 0; j < len && i <= MAX_LINE_TEXT; j++, i++) {
     line[i] = input[j];
   }
 
@@ -346,11 +346,31 @@ void Display_note(Note *n, Patient *pt)
   sprintf(line, "[ Note type: %s ]", n->title);
   prt(line, LEFT);
   sprintf(line, "[ Note date: %s ]", n->time);
-
-  // Loop through the text field to format it
-
-  
   prt(THIN_LINE, LEFT);
+  prt(BLANK_LINE, LEFT);
+  // Loop through the text field to format it
+  // - track chars to MAX_LINE_TEXT
+  // - transform the text if needed to include \n
+  // - go until null term char
+  
+  int inc = 0, line_pos = 0, i;
+  CLEAR_STRING(line, i, MAX_LINE_TEXT);
+  while (n->text[inc] != '\0'){
+    if(line_pos < MAX_LINE_TEXT && n->text[inc] != '\n') {
+      line[line_pos] = n->text[inc];
+      ++line_pos;
+    } else {
+      if (n->text[inc] == '\n'){
+	line[line_pos] = '\0';
+      } else {
+	line[line_pos] = n->text[inc];
+      }
+      prt(line, LEFT);
+      CLEAR_STRING(line, i, MAX_LINE_TEXT);
+      line_pos = 0;
+    }
+    ++inc;
+  }
   prt(BLANK_LINE, LEFT);
   prt(BLANK_LINE, LEFT);
   prt(THIN_LINE, LEFT);
