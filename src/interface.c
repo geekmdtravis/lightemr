@@ -281,7 +281,8 @@ int Process_notes_selection(Patient *pt)
   char *selection = malloc(sizeof(char) * nbytes);
   selection[0] = '\0';
   
-  while(selection[0] != '3' &&
+  while(selection[0] != '1' &&
+	selection[0] != '3' &&
 	selection[0] != 'q' &&
 	selection[0] != 'Q'){
     Display_notes_menu(pt);
@@ -294,8 +295,14 @@ int Process_notes_selection(Patient *pt)
       if(db) sqlite3_close(db); db = NULL;
       rc = sqlite3_open(DB_NAME, &db);
       if (rc == -1) fprintf(stdout, "Database couldn't be opened.\n\n");
-      fprintf(stdout, "Option 1 not implemented yet.\n\n");
+      n = Note_add(pt);
+      char *noteQuery = malloc(sizeof(char) * MAX_QUERY);
+      char *sqlError = NULL;
+      sqlite3_exec(db, noteQuery, NULL, NULL, &sqlError);
       Display_confirm_continue();
+      if(noteQuery) free(noteQuery); noteQuery = NULL;
+      if(sqlError) sqlite3_free(sqlError); sqlError = NULL;
+      if(n) Note_destroy(n); n = NULL;
       if(db) sqlite3_close(db); db = NULL;
       break;
       

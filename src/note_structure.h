@@ -13,6 +13,7 @@ typedef struct Note {
   char *text;
 } Note;
 
+
 #endif
 
 // eof: note_structure.h

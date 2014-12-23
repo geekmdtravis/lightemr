@@ -29,7 +29,7 @@ Note *Note_create(char *mrn)
   // Allocate heap space for members of note struct
   n->mrn = malloc(sizeof(char) * MAX_ID);
   n->title = malloc(sizeof(char) * MAX_DATA);
-  n->author = malloc(sizeof(char) * MAX_NAME * 2);
+  n->author = malloc(sizeof(char) * MAX_DATA);
   n->time = Formatted_time();
   n->time_sec = time(NULL);
   n->replaced = malloc(sizeof(char) * 4);
@@ -73,4 +73,104 @@ Note *Note_copy(Note *n)
 
   return p_copy;
 }
+
+Note *Note_add(Patient *p)
+{
+  Note *n = NULL;
+  size_t nbytes = MAX_DATA; // changes this when at text segment to MAX_NOTE
+  ssize_t mr = 0;
+  char *selection = malloc(sizeof(char) * 6); // quit\n\0 = 6
+
+  // get mrn
+  n = Note_create(p->mrn);
+  // If there is no patient, return and avoid segfault
+  if(!n) return NULL;
+
+  enum Note_type { NEW_HPI = 1, FOLLOW_UP = 2, EVENT = 3} note_type;
+  note_type = 0;
+
+  while (note_type != NEW_HPI &&
+	 note_type != FOLLOW_UP &&
+	 note_type != EVENT){
+    system("clear");
+    // get title
+    Display_note_type();
+    mr = modgetl(selection, &nbytes);
+    
+    switch(selection[0]) {
+    case '1':
+      note_type = NEW_HPI;
+      strncpy(n->title, "New Patient H&P", MAX_DATA);
+      break;
+    case '2':
+      note_type = FOLLOW_UP;
+      strncpy(n->title, "Follow-up Note", MAX_DATA);
+      break;
+    case '3':
+      note_type = EVENT;
+      strncpy(n->title, "Event Note", MAX_DATA);
+      break;
+    case 'q':
+    case 'Q':
+    case '4':
+      break;
+    default:
+      fprintf(stdout, "Incorrect selection.\n");
+      break;
+    }
+  }
+  
+  // get author
+  strncpy(n->author, "Unspecified User", MAX_DATA);
+  
+  // get time (char)
+  // Auto-completing on creation
+  
+  // get time_sec (time_t)
+  // Auto-completing on creation
+  
+  // get replaced (char)
+  // Not yet implemented
+
+  // Setup for note entry
+  void (*prt)(char *input, align_t align) = Print_interface_line;
+  prt(THIN_LINE, LEFT);
+  prt("Please type your note below.", CENTER);
+  prt(THICK_LINE, LEFT);
+  fprintf(stdout, "\n::> ");
+  // reallocate to selection
+  if(selection) free(selection); selection = NULL;
+  selection = malloc(sizeof(char) * MAX_NOTE);
+  
+  // get text; nbytes = MAX_NOTE
+  nbytes = MAX_NOTE;
+  mr = modgetl(selection, &nbytes);
+  strncpy(n->text, selection, MAX_NOTE);
+
+  // Clean up before exit
+  if(selection) free(selection); selection = NULL;
+  
+  // reset nbytes
+  nbytes = MAX_DATA;
+
+  return n;
+}
+
+void Display_note_type()
+{
+  void (*prt)(char *input, align_t align) = Print_interface_line;
+    // Display_note_type();
+  prt(THIN_LINE, LEFT);
+  prt("Select Note Type", CENTER);
+  prt(THICK_LINE, LEFT);
+  prt(BLANK_LINE, LEFT);
+  prt("1. New Patient H&P    ", CENTER);
+  prt("2. Follow-up Note     ", CENTER);
+  prt("3. Event Note         ", CENTER);
+  prt("4. Back to parent menu", CENTER);
+  prt(BLANK_LINE, LEFT);
+  prt(THIN_LINE, LEFT);
+  prt(SELECTION_PROMPT_LONG, LEFT);
+}
+
 // eof: note.c

@@ -445,8 +445,8 @@ Patient *Add_patient()
 {
   Patient *p = Patient_create();
   size_t nbytes = MAX_DATA;
-  ssize_t mr;
-  char *selection = malloc(sizeof(char) * MAX_DATA);
+  ssize_t mr = NULL;
+  char *selection = malloc(sizeof(char) * 6); // quit\n\0 = 6
 
 
   check(p != NULL, "Patient was not created.");

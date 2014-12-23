@@ -33,6 +33,7 @@ int Process_patient_portal_selection(Patient *pt);
 void Display_notes_menu(Patient *pt);
 int Process_notes_selection(Patient *pt);
 void Display_note(Note *n, Patient *pt);
+void Display_note_type(void);
 int Patient_add_commit(Patient *p);
 void Display_patient_add_menu(void);
 void Display_patient_remove_menu(void);
