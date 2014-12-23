@@ -1,8 +1,12 @@
 #include "interface.h"
 
-// Each line of text output to the interface, with a few exceptions
-// where I'm limited by need to acquire user input, should be filtered
-// through this function. This allows for uniformity in presentation.
+/****************************************************
+ * Print_interface_line(char *input, align_t align)
+ ****************************************************
+ * A formatted line of max 80 chars wide used as a
+ * simple method to standardize the display interface.
+ * Nothing is returned.
+****************************************************/
 void Print_interface_line(char *input, align_t align)
 {
   int len = strlen(input);
@@ -32,7 +36,13 @@ void Print_interface_line(char *input, align_t align)
   fprintf(stdout, "%s", line);
 }
 
-// This returns a string of a formtted current date
+/************************************************
+ * Formatted_date()
+ ************************************************
+ * Return a string literal with the date formatted
+ * as MO/DY/YR HR:MIN:SEC
+ * This is on the heap and needs to be freed later
+ ***********************************************/
 char *Formatted_date()
 {
   time_t t = time(NULL);
@@ -52,6 +62,11 @@ char *Formatted_date()
 /**********************************
          MAIN MENU
  *********************************/
+/***************************************************
+ * Display_main_menu(void)
+ ***************************************************
+ * Just as it sounds, displays the main menu. No return.
+ **************************************************/
 void Display_main_menu()
 {
   char *date = Formatted_date();  
@@ -75,12 +90,18 @@ void Display_main_menu()
   prt(THIN_LINE, LEFT);
   fprintf(stdout, "%s", SELECTION_PROMPT_LONG);
 
-  free(date);
+  if(date) free(date); date = NULL;
 }
 
 /****************************************
-          PATIENT LOOKUP
-*****************************************/
+ *          PATIENT LOOKUP
+ ****************************************
+ * Display_patient_lookup_menu()
+ ****************************************
+ * As it suggests, displays the menu
+ * for the patient lookup function.
+ ****************************************/
+
 void Display_patient_lookup_menu()
 {
   char *date = Formatted_date();
@@ -101,9 +122,16 @@ void Display_patient_lookup_menu()
   prt(THIN_LINE, LEFT);
   printf("Please enter your selection: ");
 
-  free(date);
+  if(date) free(date); date = NULL;
 }
 
+/***************************************************
+ * Process_patient_lookup(Patient **pt, sqlite *db)
+ ***************************************************
+ * Called from main when user selects option to
+ * initiate the process of looking up a patient.
+ * Returns 0 for success and -1 for no patient found.
+ ***************************************************/
 int Process_patient_lookup(Patient **pt, sqlite3 *db)
 {
   size_t nbytes = MAX_DATA;
@@ -172,6 +200,13 @@ int Process_patient_lookup(Patient **pt, sqlite3 *db)
 
 /******************************************
             PATIENT_PORTAL
+ *****************************************
+ * Display_patient_portal_menu(Patient *pt)
+ *****************************************
+ * After a patient is selected, the user
+ * is directed to the patient portal. This,
+ * as it suggests, is to show the menu for
+ * the user.
  *****************************************/
 void Display_patient_portal_menu(Patient *pt)
 {
@@ -197,6 +232,19 @@ void Display_patient_portal_menu(Patient *pt)
   if(line) free(line); line = NULL;
 }
 
+/***********************************************
+ * Process_patient_portal_selection(Patient *pt)
+ ***********************************************
+ * Once patient is at the Patient Portal, this
+ * is where the patient selects what they would
+ * like to do with this patients medical record.
+ * Calls the functions necessary to go to the
+ * next step into the patient portal. E.g.
+ * to add a note, or lookup a note.
+ * Returns -1 if patient makes in inappropriate
+ * selection, 0 after successful selection
+ * is made.
+ **********************************************/
 int Process_patient_portal_selection(Patient *pt)
 {
   size_t rc = 0, nbytes = 3;
@@ -465,7 +513,7 @@ void Display_patient_add_menu()
   prt(THIN_LINE, LEFT);
   fprintf(stdout, "%s", "\n");
 
-  free(date);
+  if(date) free(date); date = NULL;
   
 }
 

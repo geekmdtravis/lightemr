@@ -2,6 +2,17 @@
 
 #include "note.h"
 
+
+/**********************************************
+ * Formatted_time()
+ **********************************************
+ * This function returns a date and time string
+ * literal. The Note n->time object is where
+ * this is primarily intended to be used. However
+ * it might have uses in different places.
+ * TODO: consider moving this to a different
+ * file.
+ *********************************************/
 char *Formatted_time(void)
 {
   char *timeStr = malloc(sizeof(char) * MAX_DATE);
@@ -20,7 +31,14 @@ char *Formatted_time(void)
 
   return timeStr;
 }
-  
+
+
+/****************************************
+ *Note_create(char *mrn)
+ ****************************************
+ * Initialize a note object and return it.
+ * All field objects are defined.
+ ***************************************/
 Note *Note_create(char *mrn)
 {
   // Allocate heap space for note struct
@@ -46,19 +64,19 @@ Note *Note_create(char *mrn)
   return n;
 }
 
-BOOL Note_destroy(Note *n)
-{
-  if(n->mrn) free(n->mrn); n->mrn = NULL;
-  if(n->title) free(n->title); n->title = NULL;
-  if(n->author) free(n->author); n->author = NULL;
-  if(n->time) free(n->time); n->time = NULL;
-  if(n->replaced) free(n->replaced); n->replaced = NULL;
-  if(n->text) free(n->text); n-> text = NULL;
-  if(n) free(n); n = NULL;
-
-  return (n == NULL) ? TRUE : FALSE;
-}
-
+/****************************************
+ * Note_copy()
+ ****************************************
+ * Returns a note object. This is primarily
+ * utilized when a note is found in the
+ * database and we need to extract a single
+ * note from the liked list of Note_query
+ * nodes. Was having difficulty plucking
+ * it from the linked list and destroying
+ * the object so created the copy function
+ * for both the patient and the note
+ * to circumvent that problem.
+ ***************************************/
 Note *Note_copy(Note *n)
 {
   Note *p_copy = Note_create("NULL");
@@ -74,6 +92,15 @@ Note *Note_copy(Note *n)
   return p_copy;
 }
 
+/***************************************
+ * Note_add(Patient *p)
+ **************************************
+ * Create a new note and initialize the
+ * values to the patient where appropriate.
+ * Note type and text content of the note
+ * will be input by user.
+ * Return value is a note object.
+ **************************************/
 Note *Note_add(Patient *p)
 {
   Note *n = NULL;
@@ -86,9 +113,13 @@ Note *Note_add(Patient *p)
   // If there is no patient, return and avoid segfault
   if(!n) return NULL;
 
+  // Enumate the three different note types
   enum Note_type { NEW_HPI = 1, FOLLOW_UP = 2, EVENT = 3} note_type;
   note_type = 0;
 
+  // while the user has not made a valid decision
+  // ask user to select appropriate note type from
+  // the three options below.
   while (note_type != NEW_HPI &&
 	 note_type != FOLLOW_UP &&
 	 note_type != EVENT &&
@@ -99,7 +130,8 @@ Note *Note_add(Patient *p)
     // get title
     Display_note_type();
     mr = modgetl(selection, &nbytes);
-    
+
+    // Initialize the note title
     switch(selection[0]) {
     case '1':
       note_type = NEW_HPI;
@@ -126,16 +158,14 @@ Note *Note_add(Patient *p)
   // get author
   strncpy(n->author, "Unspecified User", MAX_DATA);
   
-  // get time (char)
-  // Auto-completing on creation
-  
-  // get time_sec (time_t)
-  // Auto-completing on creation
-  
-  // get replaced (char)
-  // Not yet implemented
+  // get time (char): Auto-completing on creation
+  // get time_sec (time_t): Auto-completing on creation
+  // get replaced (char): Not yet implemented; defaults to 'no'
 
-  // Setup for note entry
+  // Setup for note entry; ask user to write note
+  // #TODO: This needs to have a text editor function;
+  // presently there is no ability to create newlines, tabs,
+  // delete, etc. 
   void (*prt)(char *input, align_t align) = Print_interface_line;
   system("clear");
   prt(THIN_LINE, LEFT);
@@ -145,12 +175,12 @@ Note *Note_add(Patient *p)
   prt(THIN_LINE, LEFT);
   fprintf(stdout, "\n\n "
 	  SELECTION_PROMPT_MINIMAL);
-  // reallocate to selection
+  // reallocate to selection such that it's appropriately
+  // sized for the note
   if(selection) free(selection); selection = NULL;
   selection = malloc(sizeof(char) * MAX_NOTE);
-  
-  // get text; nbytes = MAX_NOTE
   nbytes = MAX_NOTE;
+  // Get the text entry for the note.
   mr = modgetl(selection, &nbytes);
   strncpy(n->text, selection, MAX_NOTE);
 
@@ -162,5 +192,26 @@ Note *Note_add(Patient *p)
 
   return n;
 }
+
+/*********************************************
+ * Note_destroy(Note *n)
+ *********************************************
+ * Clean up the heap where the note was
+ * previously located.
+ * Returns true on success;
+ ********************************************/
+BOOL Note_destroy(Note *n)
+{
+  if(n->mrn) free(n->mrn); n->mrn = NULL;
+  if(n->title) free(n->title); n->title = NULL;
+  if(n->author) free(n->author); n->author = NULL;
+  if(n->time) free(n->time); n->time = NULL;
+  if(n->replaced) free(n->replaced); n->replaced = NULL;
+  if(n->text) free(n->text); n-> text = NULL;
+  if(n) free(n); n = NULL;
+
+  return (n == NULL) ? TRUE : FALSE;
+}
+
 
 // eof: note.c
