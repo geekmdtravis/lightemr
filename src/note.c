@@ -91,7 +91,10 @@ Note *Note_add(Patient *p)
 
   while (note_type != NEW_HPI &&
 	 note_type != FOLLOW_UP &&
-	 note_type != EVENT){
+	 note_type != EVENT &&
+	 selection[0] != 'q' &&
+	 selection[0] != 'Q' &&
+	 selection[0] != '4'){
     system("clear");
     // get title
     Display_note_type();
@@ -134,10 +137,14 @@ Note *Note_add(Patient *p)
 
   // Setup for note entry
   void (*prt)(char *input, align_t align) = Print_interface_line;
+  system("clear");
   prt(THIN_LINE, LEFT);
-  prt("Please type your note below.", CENTER);
+  prt("PATIENT NOTE ENTRY", CENTER);
   prt(THICK_LINE, LEFT);
-  fprintf(stdout, "\n::> ");
+  prt("[ 8000 character maximum. ]", CENTER);
+  prt(THIN_LINE, LEFT);
+  fprintf(stdout, "\n\n "
+	  SELECTION_PROMPT_MINIMAL);
   // reallocate to selection
   if(selection) free(selection); selection = NULL;
   selection = malloc(sizeof(char) * MAX_NOTE);
@@ -154,23 +161,6 @@ Note *Note_add(Patient *p)
   nbytes = MAX_DATA;
 
   return n;
-}
-
-void Display_note_type()
-{
-  void (*prt)(char *input, align_t align) = Print_interface_line;
-    // Display_note_type();
-  prt(THIN_LINE, LEFT);
-  prt("Select Note Type", CENTER);
-  prt(THICK_LINE, LEFT);
-  prt(BLANK_LINE, LEFT);
-  prt("1. New Patient H&P    ", CENTER);
-  prt("2. Follow-up Note     ", CENTER);
-  prt("3. Event Note         ", CENTER);
-  prt("4. Back to parent menu", CENTER);
-  prt(BLANK_LINE, LEFT);
-  prt(THIN_LINE, LEFT);
-  prt(SELECTION_PROMPT_LONG, LEFT);
 }
 
 // eof: note.c

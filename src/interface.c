@@ -273,6 +273,27 @@ void Display_notes_menu(Patient *pt)
   if(line) free(line); line = NULL;
 }
 
+
+void Display_note_type()
+{
+  void (*prt)(char *input, align_t align) = Print_interface_line;
+    // Display_note_type();
+  prt(THIN_LINE, LEFT);
+  prt("Select Note Type", CENTER);
+  prt(THICK_LINE, LEFT);
+  prt(BLANK_LINE, LEFT);
+  prt("1. New Patient H&P    ", CENTER);
+  prt("2. Follow-up Note     ", CENTER);
+  prt("3. Event Note         ", CENTER);
+  prt("4. Back to parent menu", CENTER);
+  prt(BLANK_LINE, LEFT);
+  prt(THIN_LINE, LEFT);
+  fprintf(stdout, SELECTION_PROMPT_LONG);
+}
+
+// TODO: this is not a refined function. the add note
+// selection should be broken up into smaller functions
+// also need much more documentation.
 int Process_notes_selection(Patient *pt)
 {
   Note *n = NULL;
