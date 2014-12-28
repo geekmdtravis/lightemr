@@ -60,7 +60,7 @@ int main()
       if(rc == -1) fprintf(stdout, "Database could not be opened.\n\n");
       rc = Process_patient_lookup(&pt, db);
       if(rc == -1) printf("No patient was returned.\n\n");
-      sqlite3_close(db);
+      if(db) sqlite3_close(db); db = NULL;
       break;
 
     case '2': // PATIENT ADD
@@ -76,7 +76,7 @@ int main()
 	rc = sqlite3_exec(db, query, NULL, 0, &sqlError);
 	free(query);
       }
-      sqlite3_close(db);
+      if(db) sqlite3_close(db); db = NULL;
       break;
       
     case '3': // PATIENT REMOVE
@@ -122,8 +122,7 @@ int main()
 	if(selection)free(selection); selection = NULL;
 	if(pt) Patient_destroy(pt); pt = NULL;
 	if(sqlError) sqlite3_free(sqlError); sqlError = NULL;
-	sqlite3_close(db);
-	db = NULL;
+	if(db) sqlite3_close(db); db = NULL;
 	exit(EXIT_SUCCESS);
       }
       break;

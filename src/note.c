@@ -107,6 +107,7 @@ Note *Note_add(Patient *p)
   size_t nbytes = MAX_DATA; // changes this when at text segment to MAX_NOTE
   ssize_t mr = 0;
   char *selection = malloc(sizeof(char) * 6); // quit\n\0 = 6
+  selection[0] = '\0';
 
   // get mrn
   n = Note_create(p->mrn);

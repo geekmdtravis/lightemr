@@ -365,7 +365,7 @@ int Process_notes_selection(Patient *pt)
       rc = sqlite3_open(DB_NAME, &db);
       if (rc == -1) fprintf(stdout, "Database couldn't be opened.\n\n");
       n = Note_add(pt);
-      char *noteQuery = malloc(sizeof(char) * MAX_QUERY);
+      char *noteQuery = NULL;
       noteQuery = Create_add_note_query(n);
       char *sqlError = NULL;
       sqlite3_exec(db, noteQuery, NULL, NULL, &sqlError);
@@ -452,6 +452,8 @@ void Display_note(Note *n, Patient *pt)
   prt(BLANK_LINE, LEFT);
   prt(BLANK_LINE, LEFT);
   prt(THIN_LINE, LEFT);
+
+  if(line) free(line); line = NULL;
 
   //    n->text needs it's own line now.
 }
