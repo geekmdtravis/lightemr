@@ -933,15 +933,19 @@ int Lookup_notes_result_selection(NQ_node *head, char *identifier)
       prt(THIN_LINE, LEFT);
     }
    CLEAR_STRING(ptResult, i, MAX_LINE_TEXT);
-   sprintf(ptResult, "[ # %d] [ Date: %s ]  ",
+   sprintf(ptResult, "[%d] (%s) %s by %s",
 	   curr->count,
-	   (curr->note->time));
+	   curr->note->time,
+	   curr->note->title,
+	   curr->note->author);
    prt(ptResult, LEFT);
   }
   CLEAR_STRING(ptResult, i, MAX_LINE_TEXT);
-  sprintf(ptResult, "[ # %d] [ Date: %s ]  ",
+  sprintf(ptResult, "[%d] (%s) %s by %s",
 	  curr->count,
-	  curr->note->time);
+	  curr->note->time,
+	  curr->note->title,
+	  curr->note->author);
   prt(ptResult, LEFT);
   prt(BLANK_LINE, LEFT);
   prt(THIN_LINE, LEFT);

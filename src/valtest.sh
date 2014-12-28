@@ -24,14 +24,12 @@ then
     valgrind --leak-check=full ./lightemr < ./code_testing/valgrind/tests/add_patients.test 2> ./code_testing/valgrind/output/add_patients.txt  
     # Add  patients to the database with out of bounds requests
     echo "TEST: Add patients to database."
-    valgrind --leak-check=full ./lightemr < ./code_testing/valgrind/tests/add_patients_oob.test 2> ./code_testing/valgrind/output/add_patients_oob.txt  
-    # Lookup patients from the database
-    echo "TEST: Lookup patients from database withOUT out of bounds requests."
-    valgrind --leak-check=full ./lightemr < ./code_testing/valgrind/tests/lookup_patients.test 2> ./code_testing/valgrind/output/lookup_patient.txt
-    # Lookup patients from the database with out of bounds requests
-    echo "TEST: Lookup patients from database WITH out of bounds requests."
-    valgrind --leak-check=full ./lightemr < ./code_testing/valgrind/tests/lookup_patients_oob.test 2> ./code_testing/valgrind/output/lookup_patient_oob.txt
-        # Calculate an anion gap x 2
+    valgrind --leak-check=full ./lightemr < ./code_testing/valgrind/tests/add_patients_oob.test 2> ./code_testing/valgrind/output/add_patients_oob.txt
+    # Lookup a patient, view a note, then add a new note to database.
+    echo "TEST: Lookup a patient, view the note, and then add a note to database."
+    valgrind --leak-check=full ./lightemr < ./code_testing/valgrind/tests/lookup_viewnote_addnote.test 2> ./code_testing/valgrind/output/lookup_viewnote_addnote.txt
+
+    # Calculate an anion gap x 2
     echo "TEST: Calculating the anion gap withOUT out of bounds values."
     valgrind --leak-check=full ./lightemr < ./code_testing/valgrind/tests/aniongap.test 2> ./code_testing/valgrind/output/aniongap.txt
         # Calculate an anion gap with out of bounds requests

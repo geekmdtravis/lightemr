@@ -1,16 +1,2567 @@
-==6120== Memcheck, a memory error detector
-==6120== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
-==6120== Using Valgrind-3.10.0 and LibVEX; rerun with -h for copyright info
-==6120== Command: ./lightemr
-==6120== 
+==8572== Memcheck, a memory error detector
+==8572== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==8572== Using Valgrind-3.10.0 and LibVEX; rerun with -h for copyright info
+==8572== Command: ./lightemr
+==8572== 
 SQL Error: table PATIENTS already exists
 SQL Error: table NOTES already exists
-==6120== 
-==6120== HEAP SUMMARY:
-==6120==     in use at exit: 0 bytes in 0 blocks
-==6120==   total heap usage: 298 allocs, 298 frees, 135,091 bytes allocated
-==6120== 
-==6120== All heap blocks were freed -- no leaks are possible
-==6120== 
-==6120== For counts of detected and suppressed errors, rerun with: -v
-==6120== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==8572== Conditional jump or move depends on uninitialised value(s)
+==8572==    at 0x4C2E129: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==8572==    by 0x4063C9: trim (modstring.c:97)
+==8572==    by 0x4061F8: modgetlatoi (modstring.c:53)
+==8572==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==8572==    by 0x40136F: main (main.c:105)
+==8572== 
+==8572== Invalid write of size 1
+==8572==    at 0x4063D5: trim (modstring.c:97)
+==8572==    by 0x4061F8: modgetlatoi (modstring.c:53)
+==8572==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==8572==    by 0x40136F: main (main.c:105)
+==8572==  Address 0x59091ff is 1 bytes before a block of size 100 alloc'd
+==8572==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==8572==    by 0x4061BF: modgetlatoi (modstring.c:49)
+==8572==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==8572==    by 0x40136F: main (main.c:105)
+==8572== 
+==8572== Use of uninitialised value of size 8
+==8572==    at 0x5137A67: ____strtol_l_internal (strtol_l.c:298)
+==8572==    by 0x513429F: atoi (atoi.c:27)
+==8572==    by 0x406204: modgetlatoi (modstring.c:54)
+==8572==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==8572==    by 0x40136F: main (main.c:105)
+==8572== 
+==8572== Conditional jump or move depends on uninitialised value(s)
+==8572==    at 0x5137A88: ____strtol_l_internal (strtol_l.c:300)
+==8572==    by 0x513429F: atoi (atoi.c:27)
+==8572==    by 0x406204: modgetlatoi (modstring.c:54)
+==8572==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==8572==    by 0x40136F: main (main.c:105)
+==8572== 
+[ERROR] (modstring.c:55: errno: No such file or directory) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+==11249== 
+==11249== HEAP SUMMARY:
+==11249==     in use at exit: 131,900 bytes in 1,319 blocks
+==11249==   total heap usage: 1,615 allocs, 296 frees, 267,418 bytes allocated
+==11249== 
+==11249== 131,800 bytes in 1,318 blocks are definitely lost in loss record 2 of 2
+==11249==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==11249==    by 0x4061BF: modgetlatoi (modstring.c:49)
+==11249==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==11249==    by 0x40136F: main (main.c:105)
+==11249== 
+==11249== LEAK SUMMARY:
+==11249==    definitely lost: 131,800 bytes in 1,318 blocks
+==11249==    indirectly lost: 0 bytes in 0 blocks
+==11249==      possibly lost: 0 bytes in 0 blocks
+==11249==    still reachable: 100 bytes in 1 blocks
+==11249==         suppressed: 0 bytes in 0 blocks
+==11249== Reachable blocks (those to which a pointer was found) are not shown.
+==11249== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==11249== 
+==11249== For counts of detected and suppressed errors, rerun with: -v
+==11249== Use --track-origins=yes to see where uninitialised values come from
+==11249== ERROR SUMMARY: 5273 errors from 5 contexts (suppressed: 0 from 0)
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+==11568== 
+==11568== HEAP SUMMARY:
+==11568==     in use at exit: 147,900 bytes in 1,479 blocks
+==11568==   total heap usage: 1,775 allocs, 296 frees, 283,418 bytes allocated
+==11568== 
+==11568== 147,800 bytes in 1,478 blocks are definitely lost in loss record 2 of 2
+==11568==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==11568==    by 0x4061BF: modgetlatoi (modstring.c:49)
+==11568==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==11568==    by 0x40136F: main (main.c:105)
+==11568== 
+==11568== LEAK SUMMARY:
+==11568==    definitely lost: 147,800 bytes in 1,478 blocks
+==11568==    indirectly lost: 0 bytes in 0 blocks
+==11568==      possibly lost: 0 bytes in 0 blocks
+==11568==    still reachable: 100 bytes in 1 blocks
+==11568==         suppressed: 0 bytes in 0 blocks
+==11568== Reachable blocks (those to which a pointer was found) are not shown.
+==11568== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==11568== 
+==11568== For counts of detected and suppressed errors, rerun with: -v
+==11568== Use --track-origins=yes to see where uninitialised values come from
+==11568== ERROR SUMMARY: 5913 errors from 5 contexts (suppressed: 0 from 0)
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+==11769== 
+==11769== HEAP SUMMARY:
+==11769==     in use at exit: 158,000 bytes in 1,580 blocks
+==11769==   total heap usage: 1,876 allocs, 296 frees, 293,518 bytes allocated
+==11769== 
+==11769== 157,900 bytes in 1,579 blocks are definitely lost in loss record 2 of 2
+==11769==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==11769==    by 0x4061BF: modgetlatoi (modstring.c:49)
+==11769==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==11769==    by 0x40136F: main (main.c:105)
+==11769== 
+==11769== LEAK SUMMARY:
+==11769==    definitely lost: 157,900 bytes in 1,579 blocks
+==11769==    indirectly lost: 0 bytes in 0 blocks
+==11769==      possibly lost: 0 bytes in 0 blocks
+==11769==    still reachable: 100 bytes in 1 blocks
+==11769==         suppressed: 0 bytes in 0 blocks
+==11769== Reachable blocks (those to which a pointer was found) are not shown.
+==11769== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==11769== 
+==11769== For counts of detected and suppressed errors, rerun with: -v
+==11769== Use --track-origins=yes to see where uninitialised values come from
+==11769== ERROR SUMMARY: 6317 errors from 5 contexts (suppressed: 0 from 0)
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+==11774== 
+==11774== HEAP SUMMARY:
+==11774==     in use at exit: 158,300 bytes in 1,583 blocks
+==11774==   total heap usage: 1,879 allocs, 296 frees, 293,818 bytes allocated
+==11774== 
+==11774== 158,200 bytes in 1,582 blocks are definitely lost in loss record 2 of 2
+==11774==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==11774==    by 0x4061BF: modgetlatoi (modstring.c:49)
+==11774==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==11774==    by 0x40136F: main (main.c:105)
+==11774== 
+==11774== LEAK SUMMARY:
+==11774==    definitely lost: 158,200 bytes in 1,582 blocks
+==11774==    indirectly lost: 0 bytes in 0 blocks
+==11774==      possibly lost: 0 bytes in 0 blocks
+==11774==    still reachable: 100 bytes in 1 blocks
+==11774==         suppressed: 0 bytes in 0 blocks
+==11774== Reachable blocks (those to which a pointer was found) are not shown.
+==11774== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==11774== 
+==11774== For counts of detected and suppressed errors, rerun with: -v
+==11774== Use --track-origins=yes to see where uninitialised values come from
+==11774== ERROR SUMMARY: 6329 errors from 5 contexts (suppressed: 0 from 0)
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+==11777== 
+==11777== HEAP SUMMARY:
+==11777==     in use at exit: 158,500 bytes in 1,585 blocks
+==11777==   total heap usage: 1,881 allocs, 296 frees, 294,018 bytes allocated
+==11777== 
+==11777== 158,400 bytes in 1,584 blocks are definitely lost in loss record 2 of 2
+==11777==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==11777==    by 0x4061BF: modgetlatoi (modstring.c:49)
+==11777==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==11777==    by 0x40136F: main (main.c:105)
+==11777== 
+==11777== LEAK SUMMARY:
+==11777==    definitely lost: 158,400 bytes in 1,584 blocks
+==11777==    indirectly lost: 0 bytes in 0 blocks
+==11777==      possibly lost: 0 bytes in 0 blocks
+==11777==    still reachable: 100 bytes in 1 blocks
+==11777==         suppressed: 0 bytes in 0 blocks
+==11777== Reachable blocks (those to which a pointer was found) are not shown.
+==11777== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==11777== 
+==11777== For counts of detected and suppressed errors, rerun with: -v
+==11777== Use --track-origins=yes to see where uninitialised values come from
+==11777== ERROR SUMMARY: 6337 errors from 5 contexts (suppressed: 0 from 0)
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+==11780== 
+==11780== HEAP SUMMARY:
+==11780==     in use at exit: 158,700 bytes in 1,587 blocks
+==11780==   total heap usage: 1,883 allocs, 296 frees, 294,218 bytes allocated
+==11780== 
+==11780== 158,600 bytes in 1,586 blocks are definitely lost in loss record 2 of 2
+==11780==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==11780==    by 0x4061BF: modgetlatoi (modstring.c:49)
+==11780==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==11780==    by 0x40136F: main (main.c:105)
+==11780== 
+==11780== LEAK SUMMARY:
+==11780==    definitely lost: 158,600 bytes in 1,586 blocks
+==11780==    indirectly lost: 0 bytes in 0 blocks
+==11780==      possibly lost: 0 bytes in 0 blocks
+==11780==    still reachable: 100 bytes in 1 blocks
+==11780==         suppressed: 0 bytes in 0 blocks
+==11780== Reachable blocks (those to which a pointer was found) are not shown.
+==11780== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==11780== 
+==11780== For counts of detected and suppressed errors, rerun with: -v
+==11780== Use --track-origins=yes to see where uninitialised values come from
+==11780== ERROR SUMMARY: 6345 errors from 5 contexts (suppressed: 0 from 0)
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+==11785== 
+==11785== HEAP SUMMARY:
+==11785==     in use at exit: 159,000 bytes in 1,590 blocks
+==11785==   total heap usage: 1,886 allocs, 296 frees, 294,518 bytes allocated
+==11785== 
+==11785== 158,900 bytes in 1,589 blocks are definitely lost in loss record 2 of 2
+==11785==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==11785==    by 0x4061BF: modgetlatoi (modstring.c:49)
+==11785==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==11785==    by 0x40136F: main (main.c:105)
+==11785== 
+==11785== LEAK SUMMARY:
+==11785==    definitely lost: 158,900 bytes in 1,589 blocks
+==11785==    indirectly lost: 0 bytes in 0 blocks
+==11785==      possibly lost: 0 bytes in 0 blocks
+==11785==    still reachable: 100 bytes in 1 blocks
+==11785==         suppressed: 0 bytes in 0 blocks
+==11785== Reachable blocks (those to which a pointer was found) are not shown.
+==11785== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==11785== 
+==11785== For counts of detected and suppressed errors, rerun with: -v
+==11785== Use --track-origins=yes to see where uninitialised values come from
+==11785== ERROR SUMMARY: 6357 errors from 5 contexts (suppressed: 0 from 0)
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+==11788== 
+==11788== HEAP SUMMARY:
+==11788==     in use at exit: 159,200 bytes in 1,592 blocks
+==11788==   total heap usage: 1,888 allocs, 296 frees, 294,718 bytes allocated
+==11788== 
+==11788== 159,100 bytes in 1,591 blocks are definitely lost in loss record 2 of 2
+==11788==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==11788==    by 0x4061BF: modgetlatoi (modstring.c:49)
+==11788==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==11788==    by 0x40136F: main (main.c:105)
+==11788== 
+==11788== LEAK SUMMARY:
+==11788==    definitely lost: 159,100 bytes in 1,591 blocks
+==11788==    indirectly lost: 0 bytes in 0 blocks
+==11788==      possibly lost: 0 bytes in 0 blocks
+==11788==    still reachable: 100 bytes in 1 blocks
+==11788==         suppressed: 0 bytes in 0 blocks
+==11788== Reachable blocks (those to which a pointer was found) are not shown.
+==11788== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==11788== 
+==11788== For counts of detected and suppressed errors, rerun with: -v
+==11788== Use --track-origins=yes to see where uninitialised values come from
+==11788== ERROR SUMMARY: 6365 errors from 5 contexts (suppressed: 0 from 0)
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+==11806== 
+==11806== HEAP SUMMARY:
+==11806==     in use at exit: 160,200 bytes in 1,602 blocks
+==11806==   total heap usage: 1,898 allocs, 296 frees, 295,718 bytes allocated
+==11806== 
+==11806== 160,100 bytes in 1,601 blocks are definitely lost in loss record 2 of 2
+==11806==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==11806==    by 0x4061BF: modgetlatoi (modstring.c:49)
+==11806==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==11806==    by 0x40136F: main (main.c:105)
+==11806== 
+==11806== LEAK SUMMARY:
+==11806==    definitely lost: 160,100 bytes in 1,601 blocks
+==11806==    indirectly lost: 0 bytes in 0 blocks
+==11806==      possibly lost: 0 bytes in 0 blocks
+==11806==    still reachable: 100 bytes in 1 blocks
+==11806==         suppressed: 0 bytes in 0 blocks
+==11806== Reachable blocks (those to which a pointer was found) are not shown.
+==11806== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==11806== 
+==11806== For counts of detected and suppressed errors, rerun with: -v
+==11806== Use --track-origins=yes to see where uninitialised values come from
+==11806== ERROR SUMMARY: 6405 errors from 5 contexts (suppressed: 0 from 0)
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+==11809== 
+==11809== HEAP SUMMARY:
+==11809==     in use at exit: 160,400 bytes in 1,604 blocks
+==11809==   total heap usage: 1,900 allocs, 296 frees, 295,918 bytes allocated
+==11809== 
+==11809== 160,300 bytes in 1,603 blocks are definitely lost in loss record 2 of 2
+==11809==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==11809==    by 0x4061BF: modgetlatoi (modstring.c:49)
+==11809==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==11809==    by 0x40136F: main (main.c:105)
+==11809== 
+==11809== LEAK SUMMARY:
+==11809==    definitely lost: 160,300 bytes in 1,603 blocks
+==11809==    indirectly lost: 0 bytes in 0 blocks
+==11809==      possibly lost: 0 bytes in 0 blocks
+==11809==    still reachable: 100 bytes in 1 blocks
+==11809==         suppressed: 0 bytes in 0 blocks
+==11809== Reachable blocks (those to which a pointer was found) are not shown.
+==11809== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==11809== 
+==11809== For counts of detected and suppressed errors, rerun with: -v
+==11809== Use --track-origins=yes to see where uninitialised values come from
+==11809== ERROR SUMMARY: 6413 errors from 5 contexts (suppressed: 0 from 0)
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+==11812== 
+==11812== HEAP SUMMARY:
+==11812==     in use at exit: 160,600 bytes in 1,606 blocks
+==11812==   total heap usage: 1,902 allocs, 296 frees, 296,118 bytes allocated
+==11812== 
+==11812== 160,500 bytes in 1,605 blocks are definitely lost in loss record 2 of 2
+==11812==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==11812==    by 0x4061BF: modgetlatoi (modstring.c:49)
+==11812==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==11812==    by 0x40136F: main (main.c:105)
+==11812== 
+==11812== LEAK SUMMARY:
+==11812==    definitely lost: 160,500 bytes in 1,605 blocks
+==11812==    indirectly lost: 0 bytes in 0 blocks
+==11812==      possibly lost: 0 bytes in 0 blocks
+==11812==    still reachable: 100 bytes in 1 blocks
+==11812==         suppressed: 0 bytes in 0 blocks
+==11812== Reachable blocks (those to which a pointer was found) are not shown.
+==11812== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==11812== 
+==11812== For counts of detected and suppressed errors, rerun with: -v
+==11812== Use --track-origins=yes to see where uninitialised values come from
+==11812== ERROR SUMMARY: 6421 errors from 5 contexts (suppressed: 0 from 0)
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+==11817== 
+==11817== HEAP SUMMARY:
+==11817==     in use at exit: 160,900 bytes in 1,609 blocks
+==11817==   total heap usage: 1,905 allocs, 296 frees, 296,418 bytes allocated
+==11817== 
+==11817== 160,800 bytes in 1,608 blocks are definitely lost in loss record 2 of 2
+==11817==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==11817==    by 0x4061BF: modgetlatoi (modstring.c:49)
+==11817==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==11817==    by 0x40136F: main (main.c:105)
+==11817== 
+==11817== LEAK SUMMARY:
+==11817==    definitely lost: 160,800 bytes in 1,608 blocks
+==11817==    indirectly lost: 0 bytes in 0 blocks
+==11817==      possibly lost: 0 bytes in 0 blocks
+==11817==    still reachable: 100 bytes in 1 blocks
+==11817==         suppressed: 0 bytes in 0 blocks
+==11817== Reachable blocks (those to which a pointer was found) are not shown.
+==11817== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==11817== 
+==11817== For counts of detected and suppressed errors, rerun with: -v
+==11817== Use --track-origins=yes to see where uninitialised values come from
+==11817== ERROR SUMMARY: 6433 errors from 5 contexts (suppressed: 0 from 0)
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+==11822== 
+==11822== HEAP SUMMARY:
+==11822==     in use at exit: 161,200 bytes in 1,612 blocks
+==11822==   total heap usage: 1,908 allocs, 296 frees, 296,718 bytes allocated
+==11822== 
+==11822== 161,100 bytes in 1,611 blocks are definitely lost in loss record 2 of 2
+==11822==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==11822==    by 0x4061BF: modgetlatoi (modstring.c:49)
+==11822==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==11822==    by 0x40136F: main (main.c:105)
+==11822== 
+==11822== LEAK SUMMARY:
+==11822==    definitely lost: 161,100 bytes in 1,611 blocks
+==11822==    indirectly lost: 0 bytes in 0 blocks
+==11822==      possibly lost: 0 bytes in 0 blocks
+==11822==    still reachable: 100 bytes in 1 blocks
+==11822==         suppressed: 0 bytes in 0 blocks
+==11822== Reachable blocks (those to which a pointer was found) are not shown.
+==11822== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==11822== 
+==11822== For counts of detected and suppressed errors, rerun with: -v
+==11822== Use --track-origins=yes to see where uninitialised values come from
+==11822== ERROR SUMMARY: 6445 errors from 5 contexts (suppressed: 0 from 0)
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+==11827== 
+==11827== HEAP SUMMARY:
+==11827==     in use at exit: 161,500 bytes in 1,615 blocks
+==11827==   total heap usage: 1,911 allocs, 296 frees, 297,018 bytes allocated
+==11827== 
+==11827== 161,400 bytes in 1,614 blocks are definitely lost in loss record 2 of 2
+==11827==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==11827==    by 0x4061BF: modgetlatoi (modstring.c:49)
+==11827==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==11827==    by 0x40136F: main (main.c:105)
+==11827== 
+==11827== LEAK SUMMARY:
+==11827==    definitely lost: 161,400 bytes in 1,614 blocks
+==11827==    indirectly lost: 0 bytes in 0 blocks
+==11827==      possibly lost: 0 bytes in 0 blocks
+==11827==    still reachable: 100 bytes in 1 blocks
+==11827==         suppressed: 0 bytes in 0 blocks
+==11827== Reachable blocks (those to which a pointer was found) are not shown.
+==11827== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==11827== 
+==11827== For counts of detected and suppressed errors, rerun with: -v
+==11827== Use --track-origins=yes to see where uninitialised values come from
+==11827== ERROR SUMMARY: 6457 errors from 5 contexts (suppressed: 0 from 0)
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+==11832== 
+==11832== HEAP SUMMARY:
+==11832==     in use at exit: 161,800 bytes in 1,618 blocks
+==11832==   total heap usage: 1,914 allocs, 296 frees, 297,318 bytes allocated
+==11832== 
+==11832== 161,700 bytes in 1,617 blocks are definitely lost in loss record 2 of 2
+==11832==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==11832==    by 0x4061BF: modgetlatoi (modstring.c:49)
+==11832==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==11832==    by 0x40136F: main (main.c:105)
+==11832== 
+==11832== LEAK SUMMARY:
+==11832==    definitely lost: 161,700 bytes in 1,617 blocks
+==11832==    indirectly lost: 0 bytes in 0 blocks
+==11832==      possibly lost: 0 bytes in 0 blocks
+==11832==    still reachable: 100 bytes in 1 blocks
+==11832==         suppressed: 0 bytes in 0 blocks
+==11832== Reachable blocks (those to which a pointer was found) are not shown.
+==11832== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==11832== 
+==11832== For counts of detected and suppressed errors, rerun with: -v
+==11832== Use --track-origins=yes to see where uninitialised values come from
+==11832== ERROR SUMMARY: 6469 errors from 5 contexts (suppressed: 0 from 0)
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+==12387== 
+==12387== HEAP SUMMARY:
+==12387==     in use at exit: 189,600 bytes in 1,896 blocks
+==12387==   total heap usage: 2,192 allocs, 296 frees, 325,118 bytes allocated
+==12387== 
+==12387== 189,500 bytes in 1,895 blocks are definitely lost in loss record 2 of 2
+==12387==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12387==    by 0x4061BF: modgetlatoi (modstring.c:49)
+==12387==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==12387==    by 0x40136F: main (main.c:105)
+==12387== 
+==12387== LEAK SUMMARY:
+==12387==    definitely lost: 189,500 bytes in 1,895 blocks
+==12387==    indirectly lost: 0 bytes in 0 blocks
+==12387==      possibly lost: 0 bytes in 0 blocks
+==12387==    still reachable: 100 bytes in 1 blocks
+==12387==         suppressed: 0 bytes in 0 blocks
+==12387== Reachable blocks (those to which a pointer was found) are not shown.
+==12387== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==12387== 
+==12387== For counts of detected and suppressed errors, rerun with: -v
+==12387== Use --track-origins=yes to see where uninitialised values come from
+==12387== ERROR SUMMARY: 7581 errors from 5 contexts (suppressed: 0 from 0)
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+==12392== 
+==12392== HEAP SUMMARY:
+==12392==     in use at exit: 189,900 bytes in 1,899 blocks
+==12392==   total heap usage: 2,195 allocs, 296 frees, 325,418 bytes allocated
+==12392== 
+==12392== 189,800 bytes in 1,898 blocks are definitely lost in loss record 2 of 2
+==12392==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12392==    by 0x4061BF: modgetlatoi (modstring.c:49)
+==12392==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==12392==    by 0x40136F: main (main.c:105)
+==12392== 
+==12392== LEAK SUMMARY:
+==12392==    definitely lost: 189,800 bytes in 1,898 blocks
+==12392==    indirectly lost: 0 bytes in 0 blocks
+==12392==      possibly lost: 0 bytes in 0 blocks
+==12392==    still reachable: 100 bytes in 1 blocks
+==12392==         suppressed: 0 bytes in 0 blocks
+==12392== Reachable blocks (those to which a pointer was found) are not shown.
+==12392== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==12392== 
+==12392== For counts of detected and suppressed errors, rerun with: -v
+==12392== Use --track-origins=yes to see where uninitialised values come from
+==12392== ERROR SUMMARY: 7593 errors from 5 contexts (suppressed: 0 from 0)
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+==12397== 
+==12397== HEAP SUMMARY:
+==12397==     in use at exit: 190,200 bytes in 1,902 blocks
+==12397==   total heap usage: 2,198 allocs, 296 frees, 325,718 bytes allocated
+==12397== 
+==12397== 190,100 bytes in 1,901 blocks are definitely lost in loss record 2 of 2
+==12397==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12397==    by 0x4061BF: modgetlatoi (modstring.c:49)
+==12397==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==12397==    by 0x40136F: main (main.c:105)
+==12397== 
+==12397== LEAK SUMMARY:
+==12397==    definitely lost: 190,100 bytes in 1,901 blocks
+==12397==    indirectly lost: 0 bytes in 0 blocks
+==12397==      possibly lost: 0 bytes in 0 blocks
+==12397==    still reachable: 100 bytes in 1 blocks
+==12397==         suppressed: 0 bytes in 0 blocks
+==12397== Reachable blocks (those to which a pointer was found) are not shown.
+==12397== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==12397== 
+==12397== For counts of detected and suppressed errors, rerun with: -v
+==12397== Use --track-origins=yes to see where uninitialised values come from
+==12397== ERROR SUMMARY: 7605 errors from 5 contexts (suppressed: 0 from 0)
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+==12402== 
+==12402== HEAP SUMMARY:
+==12402==     in use at exit: 190,500 bytes in 1,905 blocks
+==12402==   total heap usage: 2,201 allocs, 296 frees, 326,018 bytes allocated
+==12402== 
+==12402== 190,400 bytes in 1,904 blocks are definitely lost in loss record 2 of 2
+==12402==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12402==    by 0x4061BF: modgetlatoi (modstring.c:49)
+==12402==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==12402==    by 0x40136F: main (main.c:105)
+==12402== 
+==12402== LEAK SUMMARY:
+==12402==    definitely lost: 190,400 bytes in 1,904 blocks
+==12402==    indirectly lost: 0 bytes in 0 blocks
+==12402==      possibly lost: 0 bytes in 0 blocks
+==12402==    still reachable: 100 bytes in 1 blocks
+==12402==         suppressed: 0 bytes in 0 blocks
+==12402== Reachable blocks (those to which a pointer was found) are not shown.
+==12402== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==12402== 
+==12402== For counts of detected and suppressed errors, rerun with: -v
+==12402== Use --track-origins=yes to see where uninitialised values come from
+==12402== ERROR SUMMARY: 7617 errors from 5 contexts (suppressed: 0 from 0)
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+==12407== 
+==12407== HEAP SUMMARY:
+==12407==     in use at exit: 190,800 bytes in 1,908 blocks
+==12407==   total heap usage: 2,204 allocs, 296 frees, 326,318 bytes allocated
+==12407== 
+==12407== 190,700 bytes in 1,907 blocks are definitely lost in loss record 2 of 2
+==12407==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12407==    by 0x4061BF: modgetlatoi (modstring.c:49)
+==12407==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==12407==    by 0x40136F: main (main.c:105)
+==12407== 
+==12407== LEAK SUMMARY:
+==12407==    definitely lost: 190,700 bytes in 1,907 blocks
+==12407==    indirectly lost: 0 bytes in 0 blocks
+==12407==      possibly lost: 0 bytes in 0 blocks
+==12407==    still reachable: 100 bytes in 1 blocks
+==12407==         suppressed: 0 bytes in 0 blocks
+==12407== Reachable blocks (those to which a pointer was found) are not shown.
+==12407== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==12407== 
+==12407== For counts of detected and suppressed errors, rerun with: -v
+==12407== Use --track-origins=yes to see where uninitialised values come from
+==12407== ERROR SUMMARY: 7629 errors from 5 contexts (suppressed: 0 from 0)
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+==12412== 
+==12412== HEAP SUMMARY:
+==12412==     in use at exit: 191,100 bytes in 1,911 blocks
+==12412==   total heap usage: 2,207 allocs, 296 frees, 326,618 bytes allocated
+==12412== 
+==12412== 191,000 bytes in 1,910 blocks are definitely lost in loss record 2 of 2
+==12412==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12412==    by 0x4061BF: modgetlatoi (modstring.c:49)
+==12412==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==12412==    by 0x40136F: main (main.c:105)
+==12412== 
+==12412== LEAK SUMMARY:
+==12412==    definitely lost: 191,000 bytes in 1,910 blocks
+==12412==    indirectly lost: 0 bytes in 0 blocks
+==12412==      possibly lost: 0 bytes in 0 blocks
+==12412==    still reachable: 100 bytes in 1 blocks
+==12412==         suppressed: 0 bytes in 0 blocks
+==12412== Reachable blocks (those to which a pointer was found) are not shown.
+==12412== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==12412== 
+==12412== For counts of detected and suppressed errors, rerun with: -v
+==12412== Use --track-origins=yes to see where uninitialised values come from
+==12412== ERROR SUMMARY: 7641 errors from 5 contexts (suppressed: 0 from 0)
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+==12417== 
+==12417== HEAP SUMMARY:
+==12417==     in use at exit: 191,400 bytes in 1,914 blocks
+==12417==   total heap usage: 2,210 allocs, 296 frees, 326,918 bytes allocated
+==12417== 
+==12417== 191,300 bytes in 1,913 blocks are definitely lost in loss record 2 of 2
+==12417==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12417==    by 0x4061BF: modgetlatoi (modstring.c:49)
+==12417==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==12417==    by 0x40136F: main (main.c:105)
+==12417== 
+==12417== LEAK SUMMARY:
+==12417==    definitely lost: 191,300 bytes in 1,913 blocks
+==12417==    indirectly lost: 0 bytes in 0 blocks
+==12417==      possibly lost: 0 bytes in 0 blocks
+==12417==    still reachable: 100 bytes in 1 blocks
+==12417==         suppressed: 0 bytes in 0 blocks
+==12417== Reachable blocks (those to which a pointer was found) are not shown.
+==12417== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==12417== 
+==12417== For counts of detected and suppressed errors, rerun with: -v
+==12417== Use --track-origins=yes to see where uninitialised values come from
+==12417== ERROR SUMMARY: 7653 errors from 5 contexts (suppressed: 0 from 0)
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+==12422== 
+==12422== HEAP SUMMARY:
+==12422==     in use at exit: 191,700 bytes in 1,917 blocks
+==12422==   total heap usage: 2,213 allocs, 296 frees, 327,218 bytes allocated
+==12422== 
+==12422== 191,600 bytes in 1,916 blocks are definitely lost in loss record 2 of 2
+==12422==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12422==    by 0x4061BF: modgetlatoi (modstring.c:49)
+==12422==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==12422==    by 0x40136F: main (main.c:105)
+==12422== 
+==12422== LEAK SUMMARY:
+==12422==    definitely lost: 191,600 bytes in 1,916 blocks
+==12422==    indirectly lost: 0 bytes in 0 blocks
+==12422==      possibly lost: 0 bytes in 0 blocks
+==12422==    still reachable: 100 bytes in 1 blocks
+==12422==         suppressed: 0 bytes in 0 blocks
+==12422== Reachable blocks (those to which a pointer was found) are not shown.
+==12422== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==12422== 
+==12422== For counts of detected and suppressed errors, rerun with: -v
+==12422== Use --track-origins=yes to see where uninitialised values come from
+==12422== ERROR SUMMARY: 7665 errors from 5 contexts (suppressed: 0 from 0)
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+==12427== 
+==12427== HEAP SUMMARY:
+==12427==     in use at exit: 192,000 bytes in 1,920 blocks
+==12427==   total heap usage: 2,216 allocs, 296 frees, 327,518 bytes allocated
+==12427== 
+==12427== 191,900 bytes in 1,919 blocks are definitely lost in loss record 2 of 2
+==12427==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12427==    by 0x4061BF: modgetlatoi (modstring.c:49)
+==12427==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==12427==    by 0x40136F: main (main.c:105)
+==12427== 
+==12427== LEAK SUMMARY:
+==12427==    definitely lost: 191,900 bytes in 1,919 blocks
+==12427==    indirectly lost: 0 bytes in 0 blocks
+==12427==      possibly lost: 0 bytes in 0 blocks
+==12427==    still reachable: 100 bytes in 1 blocks
+==12427==         suppressed: 0 bytes in 0 blocks
+==12427== Reachable blocks (those to which a pointer was found) are not shown.
+==12427== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==12427== 
+==12427== For counts of detected and suppressed errors, rerun with: -v
+==12427== Use --track-origins=yes to see where uninitialised values come from
+==12427== ERROR SUMMARY: 7677 errors from 5 contexts (suppressed: 0 from 0)
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+==12432== 
+==12432== HEAP SUMMARY:
+==12432==     in use at exit: 192,300 bytes in 1,923 blocks
+==12432==   total heap usage: 2,219 allocs, 296 frees, 327,818 bytes allocated
+==12432== 
+==12432== 192,200 bytes in 1,922 blocks are definitely lost in loss record 2 of 2
+==12432==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12432==    by 0x4061BF: modgetlatoi (modstring.c:49)
+==12432==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==12432==    by 0x40136F: main (main.c:105)
+==12432== 
+==12432== LEAK SUMMARY:
+==12432==    definitely lost: 192,200 bytes in 1,922 blocks
+==12432==    indirectly lost: 0 bytes in 0 blocks
+==12432==      possibly lost: 0 bytes in 0 blocks
+==12432==    still reachable: 100 bytes in 1 blocks
+==12432==         suppressed: 0 bytes in 0 blocks
+==12432== Reachable blocks (those to which a pointer was found) are not shown.
+==12432== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==12432== 
+==12432== For counts of detected and suppressed errors, rerun with: -v
+==12432== Use --track-origins=yes to see where uninitialised values come from
+==12432== ERROR SUMMARY: 7689 errors from 5 contexts (suppressed: 0 from 0)
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+[ERROR] (modstring.c:55: errno: None) Failed to acquire input.
+==8572== 
+==8572== HEAP SUMMARY:
+==8572==     in use at exit: 193,200 bytes in 1,932 blocks
+==8572==   total heap usage: 2,228 allocs, 296 frees, 328,718 bytes allocated
+==8572== 
+==8572== 193,000 bytes in 1,930 blocks are definitely lost in loss record 3 of 3
+==8572==    at 0x4C2ABA0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==8572==    by 0x4061BF: modgetlatoi (modstring.c:49)
+==8572==    by 0x402A8F: Process_clinical_tools_menu (interface.c:582)
+==8572==    by 0x40136F: main (main.c:105)
+==8572== 
+==8572== LEAK SUMMARY:
+==8572==    definitely lost: 193,000 bytes in 1,930 blocks
+==8572==    indirectly lost: 0 bytes in 0 blocks
+==8572==      possibly lost: 0 bytes in 0 blocks
+==8572==    still reachable: 200 bytes in 2 blocks
+==8572==         suppressed: 0 bytes in 0 blocks
+==8572== Reachable blocks (those to which a pointer was found) are not shown.
+==8572== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==8572== 
+==8572== For counts of detected and suppressed errors, rerun with: -v
+==8572== Use --track-origins=yes to see where uninitialised values come from
+==8572== ERROR SUMMARY: 7725 errors from 5 contexts (suppressed: 0 from 0)
