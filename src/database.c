@@ -246,7 +246,8 @@ Patient *Patient_lookup(sqlite3 *db, char *identifier, char *field)
     p_pt = NULL;
     // Would prefer to move this print statement outside of this
     // file/function. #TODO
-    fprintf(stdout, "Identifier \"%s\" was not found.\n", identifier);
+    fprintf(stdout, "Patient query identifier \"%s\" was not found.\n"
+	    "May not exist in database.\n", identifier);
     return p_pt;
   }
 
@@ -520,7 +521,8 @@ Note *Note_lookup(sqlite3 *db, char *identifier, char *field)
     pn = NULL;
     // Would prefer to move this print statement outside of this
     // file/function. #TODO
-    fprintf(stdout, "Identifier \"%s\" was not found.\n", identifier);
+    fprintf(stdout, "Note query identifier \"%s\" was not found.\n"
+	    "May not exist in database.\n", identifier);
     return pn;
   }
 

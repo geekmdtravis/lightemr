@@ -381,7 +381,12 @@ int Process_notes_selection(Patient *pt)
       rc = sqlite3_open(DB_NAME, &db);
       if (rc == -1) fprintf(stdout, "Database couldn't be opened.\n\n");
       n = Note_lookup(db, pt->mrn, "MRN");
-      Display_note(n, pt);
+      if (!n) {
+	fprintf(stderr, "Unable to locate any notes for patient %s, %s.\n\n",
+		pt->name->last, pt->name->first);
+      } else {
+	Display_note(n, pt);
+      }
       Display_confirm_continue();
       if(db) sqlite3_close(db); db = NULL;
       break;
